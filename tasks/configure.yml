@@ -1,0 +1,28 @@
+---
+- name: Copy global MariaDB configuration
+  template:
+    src: my.cnf.j2
+    dest: "{{ mariadb_config_file }}"
+    owner: root
+    group: root
+    mode: 0644
+    force: "{{ mariadb_overwrite_global_config_file }}"
+  notify: restart mariadb
+
+- name: Create datadir if it does not exist
+  file:
+    path: "{{ mariadb_datadir }}"
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: 0755
+
+- name: Ensure MariaDB is started and enabled on boot
+  service:
+    name: mariadb
+    state: started
+    enabled: "{{ mariadb_enabled_on_startup }}"
+
+# immediately restart mariadb
+# this is necessary for replication setup
+- meta: flush_handlers

@@ -1,0 +1,36 @@
+---
+- name: Install cron package
+  apt:
+    package:
+      - cron
+    state: present
+
+- name: Deploy DB dump script
+  copy:
+    src: mariadb_dump_db.sh
+    dest: /usr/local/bin/mariadb_dump_db.sh
+    owner: root
+    group: root
+    mode: 0744
+    validate: "bash -n %s"
+
+- name: Ensure backup dir exists
+  file:
+    path: "{{ mariadb_backup_db_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Deploy crontab file
+  cron:
+    name: "Dump MariaBD databases"
+    minute: "{{ mariadb_backup_db_cron_min }}"
+    hour: "{{ mariadb_backup_db_cron_hour }}"
+    job: "/usr/local/bin/mariadb_dump_db.sh \
+      -d \"{{ mariadb_backup_db_dir }}\" \
+      -l \"{{ mariadb_backup_db_name|join(',') }}\" \
+      -k {{ mariadb_backup_db_rotation }} \
+      >{{ mariadb_backup_db_dir }}/mariadb_dump_db.log 2>&1"
+    cron_file: mariadb_dump_db
+    user: root

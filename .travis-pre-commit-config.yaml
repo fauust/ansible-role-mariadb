@@ -1,0 +1,66 @@
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-yaml
+        name: Check yaml files
+      - id: debug-statements
+        name: Check for Python debug statements
+      - id: trailing-whitespace
+        name: Check trailing whitespace
+        args: [--markdown-linebreak-ext=md]
+  - repo: https://gitlab.com/pycqa/flake8.git
+    rev: 3.7.9
+    hooks:
+      - id: flake8
+        name: Check python (flake8)
+        args: ["--ignore=E501"]
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.23.0
+    hooks:
+      - id: yamllint
+        name: Check yaml files (yamllint)
+  - repo: https://github.com/ansible/ansible-lint.git
+    rev: v4.3.0a0
+    hooks:
+      - id: ansible-lint
+        name: Check yaml files (ansible-lint)
+        args: ["-x", "602"]
+        types: [yaml]
+  - repo: local
+    hooks:
+      - id: docker-markdownlint
+        name: Run markdownlint with docker
+        entry: markdownlint/markdownlint -r "~MD013"
+        language: docker_image
+        types: [markdown]
+      - id: docker-shell-shfmt
+        name: Run shfmt with docker
+        entry: mvdan/shfmt:latest -d -i 2 -ci
+        language: docker_image
+        types: [shell]
+      - id: docker-shell-lint
+        name: Run shellcheck with docker
+        language: docker_image
+        entry: koalaman/shellcheck:stable
+        types: [shell]
+      - id: docker-prettier
+        name: Run prettier with docker
+        entry: tmknom/prettier:latest -l
+        language: docker_image
+        files: "\\.(\
+          css|less|scss\
+          |graphql|gql\
+          |html\
+          |js|jsx\
+          |json\
+          |md|markdown|mdown|mkdn\
+          |mdx\
+          |ts|tsx\
+          |vue\
+          |yaml|yml\
+          )$"
