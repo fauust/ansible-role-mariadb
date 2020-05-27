@@ -2,7 +2,7 @@
 
 [![travis build status](https://img.shields.io/travis/fauust/ansible-role-mariadb?logo=travis)](https://travis-ci.org/fauust/ansible-role-mariadb)
 
-Install and configure MariaDB server on Debian/Ubuntu.
+Install and configure MariaDB Server on Debian/Ubuntu.
 
 Optionally, this role also permits to:
 
@@ -46,7 +46,7 @@ deploy the version packaged by the MariaDB Foundation.
 You will find the repositories URL here:
 <https://downloads.mariadb.org/mariadb/repositories/>
 
-By default we deploy the MariaDB Server version that comes with the distribution.
+By default, we deploy the MariaDB Server version that comes with the distribution.
 
 ### MariaDB service activation and restart
 
@@ -56,7 +56,7 @@ mariadb_can_restart: true
 ```
 
 **Warning:** you may consider setting `mariadb_can_restart` to `false` on
-production systems to prevent ansible runs to restart the MariaDB server.
+production systems to prevent ansible runs to restart the MariaDB Server.
 
 ### General configuration
 
@@ -64,15 +64,13 @@ To populate the MariaDB Server configuration file, we use almost only raw
 variables. This permits more flexibility and a very simple
 [`templates/my.cnf.j2`](./templates/my.cnf.j2) file.
 
-By default, some common and standard options are deployed.
+By default, some common and standard options are deployed based on MariaDB
+Foundation package and it should be easy to change all of them.
 
 #### Basic settings
 
-The following variables are also needed by playbooks so we can not use raw
-variables.
-
 ```yaml
-mariadb_config_file: /etc/mysql/my.cnf
+mariadb_config_file: "/etc/mysql/my.cnf"
 mariadb_datadir: "/var/lib/mysql"
 mariadb_port: "3306"
 mariadb_bind_address: "127.0.0.1"
@@ -224,10 +222,10 @@ mariadb_backup_db_name: []
 Database dump is done serially and compression (`gzip`) is done at the end to
 avoid too long locks.
 
-## Example Playbook
+## Example playbook
 
 ```yaml
-- hosts: database
+- hosts: db
   roles:
     - fauust.mariadb
 ```
