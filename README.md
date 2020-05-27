@@ -16,7 +16,7 @@ The role use
 and
 [`mysql_db`](https://docs.ansible.com/ansible/latest/modules/mysql_db_module.html)
 ansible modules that depends on [PyMySQL](https://github.com/PyMySQL/PyMySQL) so
-the following Python 2.7 or Python 3.X versions are needed.
+Python 2.7 or Python 3.X versions are needed.
 
 For older Python versions, you may use
 [MySQLdb](http://mysql-python.sourceforge.net/MySQLdb.html) but then the role
@@ -65,7 +65,7 @@ variables. This permits more flexibility and a very simple
 [`templates/my.cnf.j2`](./templates/my.cnf.j2) file.
 
 By default, some common and standard options are deployed based on MariaDB
-Foundation package and it should be easy to change all of them (see
+Foundation package and it should be easy to change them all (see
 [`my.cnf`](./my.cnf)).
 
 #### Basic settings
@@ -150,7 +150,6 @@ mariadb_mysqldump_raw: |
 ### Databases management
 
 ```yaml
-# Databases.
 mariadb_databases: []
 #   - name: db1
 #     collation: utf8_general_ci
@@ -163,7 +162,6 @@ See: <https://docs.ansible.com/ansible/latest/modules/mysql_db_module.html>
 ### Users management
 
 ```yaml
-# Users.
 mariadb_users: []
 #   - name: user
 #     host: 100.64.200.10
@@ -220,7 +218,7 @@ mariadb_backup_db_name: []
 #   - db2
 ```
 
-Database dump is done serially and compression (`gzip`) is done at the end to
+Database dump is done serially and compression step (`gzip`) is done after to
 avoid too long locks.
 
 ## Example playbook
