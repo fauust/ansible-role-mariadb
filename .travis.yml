@@ -31,7 +31,6 @@ script:
   - export ANSIBLE_STRATEGY_PLUGINS=${VIRTUAL_ENV}/lib/python${TRAVIS_PYTHON_VERSION}/site-packages/ansible_mitogen/plugins/strategy
   - molecule --version
   - molecule test
-#
-# //TEMP import later to galaxy
-# notifications:
-#  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
