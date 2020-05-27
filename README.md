@@ -25,8 +25,8 @@ may not be idempotent (not tested).
 ## Fact gathering (performance)
 
 Unless you want to use the MariaDB official repository (and then need
-`ansible_distribution_version`, see [`tasks/setup.yml`](./tasks/setup.yml)) this
-role does not require fact gathering.
+`ansible_distribution_version`, see [`tasks/setup.yml`](./tasks/setup.yml#L18))
+this role does not require fact gathering.
 
 ## Role variables
 
