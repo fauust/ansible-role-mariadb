@@ -66,7 +66,7 @@ variables. This permits more flexibility and a very simple
 
 By default, some common and standard options are deployed based on MariaDB
 Foundation package and it should be easy to change all of them (see
-[`my.cnf`](./my.cnf).
+[`my.cnf`](./my.cnf)).
 
 #### Basic settings
 
