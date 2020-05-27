@@ -65,7 +65,8 @@ variables. This permits more flexibility and a very simple
 [`templates/my.cnf.j2`](./templates/my.cnf.j2) file.
 
 By default, some common and standard options are deployed based on MariaDB
-Foundation package and it should be easy to change all of them.
+Foundation package and it should be easy to change all of them (see
+[`my.cnf`](./my.cnf).
 
 #### Basic settings
 
