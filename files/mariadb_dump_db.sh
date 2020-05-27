@@ -9,6 +9,10 @@ err() {
   echo >&2 "[$(date +'%Y-%m-%dT%H:%M:%S%z')] ERROR: $*"
 }
 
+echo_date() {
+  echo -e "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*"
+}
+
 usage() {
   cat >&2 <<-EOF
 Usage : $0 -d <directory> -l <db_name>
@@ -72,7 +76,7 @@ for cmd in mysqldump gzip; do
 done
 
 for db in ${VAR_DB_LIST_ARGS//,/ }; do
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: start $db dump."
+  echo_date "start $db dump."
   typeset DUMP_FILE=$VAR_DUMPS_DST_DIR/$db.$(date +%F_%H%M%S).sql
   mysqldump --single-transaction --quick --routines "$db" >"$DUMP_FILE"
   # shellcheck disable=SC2181
@@ -80,16 +84,16 @@ for db in ${VAR_DB_LIST_ARGS//,/ }; do
     err "unable do dump $db"
     exit 1
   fi
-  echo -e "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: done.\n"
+  echo_date "done.\n"
 done
 
 for sql in "$VAR_DUMPS_DST_DIR/"*.sql; do
-  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: compress $sql."
+  echo_date "compress $sql."
   gzip -- "$sql" || {
     err "gzip $sql"
     exit 1
   }
-  echo -e "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: done.\n"
+  echo_date "done.\n"
 done
 
 if [[ -n $VAR_ROTATION_DAYS_ARGS ]]; then
