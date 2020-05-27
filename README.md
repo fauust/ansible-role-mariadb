@@ -31,7 +31,7 @@ role does not require fact gathering.
 ## Role variables
 
 Available variables are listed below, along with default values (see
-[`defaults/main.yml`](./defaults/main.yml)):
+[`defaults/main.yml`](./defaults/main.yml)).
 
 ### MariaDB version
 
