@@ -5,5 +5,5 @@
     collation: "{{ item.collation | default('utf8_general_ci') }}"
     encoding: "{{ item.encoding | default('utf8') }}"
     state: "{{ item.state | default('present') }}"
-    login_unix_socket: "{{ mariadb_unix_socket | default ('/run/mysqld/mysqld.sock') }}"
+    login_unix_socket: "{{ mariadb_unix_socket }}"
   with_items: "{{ mariadb_databases }}"
