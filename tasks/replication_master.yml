@@ -1,0 +1,12 @@
+---
+- name: Ensure replication user exists on master
+  mysql_user:
+    name: "{{ item.name }}"
+    host: "{{ item.host | default('%') }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv | default('*.*:REPLICATION SLAVE') }}"
+    state: present
+    login_unix_socket: "{{ mariadb_unix_socket }}"
+  with_items: "{{ mariadb_replication_user }}"
+  when: not ansible_check_mode
+  no_log: true

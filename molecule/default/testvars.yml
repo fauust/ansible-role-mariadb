@@ -1,0 +1,47 @@
+---
+mariadb_server_id: 1
+mariadb_bind_address: 0.0.0.0
+mariadb_replication_role: master
+
+mariadb_innodb_raw: |
+  innodb_buffer_pool_size = 512M
+  innodb_log_file_size  = 64M
+  innodb_file_per_table = 1
+
+mariadb_databases:
+  - name: db1
+    collation: latin1_swedish_ci
+    encoding: latin1
+    state: present
+  - name: db2
+    state: present
+    replicate: true
+
+mariadb_users:
+  - name: user1
+    host: "%"
+    password: user1passwd
+    priv: "db2.*:SELECT"
+    state: present
+  - name: user2
+    host: 100.64.10.3
+    password: user2passwd
+    priv: "db2.*:ALL"
+    state: present
+
+mariadb_replication_user:
+  - name: ReplicationUser
+    host: 100.64.10.33
+    password: ReplicationPassword
+    state: present
+
+# backup
+mariadb_backup_db: true
+mariadb_backup_db_cron_min: "50"
+mariadb_backup_db_cron_hour: "00"
+mariadb_backup_db_dir: "/mnt/backup"
+mariadb_backup_db_rotation: "15"
+
+mariadb_backup_db_name:
+  - db1
+  - db2

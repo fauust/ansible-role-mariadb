@@ -1,0 +1,20 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-10}"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    command: /lib/systemd/systemd
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_GATHERING: explicit
+    ANSIBLE_FORCE_COLOR: true
+    ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
+verifier:
+  name: testinfra

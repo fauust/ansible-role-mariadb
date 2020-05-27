@@ -1,0 +1,110 @@
+---
+# Configure the following to use official MariaDB repository
+# see: https://downloads.mariadb.org/mariadb/repositories
+mariadb_use_official_repo: false
+mariadb_use_official_repo_url: "http://ftp.igh.cnrs.fr/pub/mariadb/repo"
+mariadb_use_official_repo_version: "10.4"
+
+mariadb_enabled_on_startup: true
+# The following is set to true by default but you may consider setting it to
+# false on production servers to prevent ansible from restarting mariadb server.
+mariadb_can_restart: true
+
+# Whether global conf file should be updated on every run
+mariadb_overwrite_global_config_file: true
+
+# MariaDB configuration file
+mariadb_config_file: /etc/mysql/my.cnf
+# Basic settings
+mariadb_datadir: "/var/lib/mysql"
+mariadb_port: "3306"
+mariadb_bind_address: "127.0.0.1"
+mariadb_unix_socket: "/run/mysqld/mysqld.sock"
+mariadb_basic_settings_raw: |
+  user                  = mysql
+  pid-file              = /run/mysqld/mysqld.pid
+  socket                = {{ mariadb_unix_socket }}
+  basedir               = /usr
+  datadir               = {{ mariadb_datadir }}
+  tmpdir                = /tmp
+  lc-messages-dir       = /usr/share/mysql
+  lc_messages           = en_US
+  skip-external-locking
+  port                  = {{ mariadb_port }}
+  bind-address          = {{ mariadb_bind_address }}
+
+# Fine tuning
+mariadb_fine_tuning_raw: |
+  max_connections         = 100
+  connect_timeout         = 5
+  wait_timeout            = 600
+  max_allowed_packet      = 16M
+  thread_cache_size       = 128
+  sort_buffer_size        = 4M
+  bulk_insert_buffer_size = 16M
+  tmp_table_size          = 32M
+  max_heap_table_size     = 32M
+
+# Query cache
+mariadb_query_cache_raw: |
+  query_cache_size        = 16M
+
+# Logging
+mariadb_logging_raw: |
+  log_error = /var/log/mysql/error.log
+
+# Character sets
+mariadb_character_sets_raw: |
+  character-set-server = utf8mb4
+  collation-server     = utf8mb4_general_ci
+
+# InnoDB
+mariadb_innodb_raw: |
+  # InnoDB is enabled by default with a 10MB datafile in /var/lib/mysql/.
+  # Read the manual for more InnoDB related options. There are many!
+
+# mariadbdump
+mariadb_mysqldump_raw: |
+  quick
+  quote-names
+  max_allowed_packet = 16M
+
+# Databases
+mariadb_databases: []
+#   - name: db1
+#     collation: utf8_general_ci
+#     encoding: utf8
+#     replicate: true|false
+
+# Users
+mariadb_users: []
+#   - name: user
+#     host: 100.64.200.10
+#     password: password
+#     priv: "*.*:USAGE/db1.*:ALL"
+#     state: present|absent
+
+# Replication
+# replication is only enabled if mariadb_replication_role has values
+mariadb_replication_role: "" # master|slave
+mariadb_replication_master_ip: ""
+mariadb_max_binlog_size: "100M"
+mariadb_binlog_format: "MIXED"
+mariadb_expire_logs_days: "10"
+
+# Replication users
+# same keys as mariadb_users above
+# priv is set to "*.*:REPLICATION SLAVE" by default
+mariadb_replication_user: []
+
+# Backups
+mariadb_backup_db: false
+mariadb_backup_db_cron_min: "50"
+mariadb_backup_db_cron_hour: "00"
+mariadb_backup_db_dir: "/opt/backup"
+mariadb_backup_db_rotation: "15"
+
+# DB to backup
+mariadb_backup_db_name: []
+#   - db1
+#   - db2

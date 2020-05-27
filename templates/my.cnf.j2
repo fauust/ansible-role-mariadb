@@ -1,0 +1,49 @@
+# {{ ansible_managed }}
+
+[mariadb]
+
+# Basic settings
+{{ mariadb_basic_settings_raw }}
+# Fine tuning
+{{ mariadb_fine_tuning_raw }}
+# Logging
+{{ mariadb_logging_raw }}
+# Query cache
+{{ mariadb_query_cache_raw }}
+# Character sets
+{{ mariadb_character_sets_raw }}
+# InnoDB
+{{ mariadb_innodb_raw }}
+
+{% if mariadb_replication_role != '' %}
+# Replication
+server-id = {{ mariadb_server_id }}
+log-basename = mariadb
+
+{% if mariadb_replication_role == 'master' %}
+log_bin
+expire_logs_days = {{ mariadb_expire_logs_days }}
+max_binlog_size = {{ mariadb_max_binlog_size }}
+binlog_format = {{mariadb_binlog_format}}
+# the following permits to simplify the process of moving a slave to a master
+# role by ensuring that replication is not started on master
+skip-slave-start
+
+{% for db in mariadb_databases %}
+{% if db.replicate|default(false) %}
+binlog_do_db = {{ db.name }}
+{% else %}
+binlog_ignore_db = {{ db.name }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if mariadb_replication_role == 'slave' %}
+read_only
+relay-log = relay-bin
+relay-log-index = relay-bin.index
+{% endif %}
+{% endif -%}
+
+[mysqldump]
+{{ mariadb_mysqldump_raw }}

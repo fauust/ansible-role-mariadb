@@ -1,0 +1,8 @@
+---
+- name: restart mariadb
+  service:
+    name: mariadb
+    state: restarted
+  when:
+    - mariadb_can_restart
+    - not ansible_check_mode

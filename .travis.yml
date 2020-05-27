@@ -1,0 +1,37 @@
+---
+language: python
+services: docker
+
+env:
+  global:
+    - ROLE_NAME: mariadb
+  matrix:
+    - MOLECULE_DISTRO: debian-10
+    - MOLECULE_DISTRO: debian-sid
+    - MOLECULE_DISTRO: ubuntu-18.04
+    - MOLECULE_DISTRO: ubuntu-20.04
+
+cache:
+  directories:
+    - $HOME/.cache/pre-commit
+
+install:
+  - pip3 install -r requirements.txt
+
+jobs:
+  include:
+    - name: lint with pre-commit
+      install: skip
+      script:
+        - pip3 install pre-commit
+        - pre-commit run -c .travis-pre-commit-config.yaml -a
+
+script:
+  - export ANSIBLE_STRATEGY=mitogen_linear
+  - export ANSIBLE_STRATEGY_PLUGINS=${VIRTUAL_ENV}/lib/python${TRAVIS_PYTHON_VERSION}/site-packages/ansible_mitogen/plugins/strategy
+  - molecule --version
+  - molecule test
+#
+# //TEMP import later to galaxy
+# notifications:
+#  webhooks: https://galaxy.ansible.com/api/v1/notifications/

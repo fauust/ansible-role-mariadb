@@ -1,0 +1,8 @@
+ansible-lint==4.2.0
+ansible==2.9.9
+docker==4.2.0
+flake8==3.8.1
+mitogen==0.2.9
+molecule==3.0.4
+testinfra==5.0.0
+yamllint==1.23.0
