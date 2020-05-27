@@ -1,7 +1,5 @@
 # Ansible role: MariaDB
 
-## test
-
 [![travis build status](https://img.shields.io/travis/fauust/ansible-role-mariadb?logo=travis)](https://travis-ci.org/fauust/ansible-role-mariadb)
 
 Install and configure MariaDB Server on Debian/Ubuntu.
