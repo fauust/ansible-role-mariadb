@@ -1,25 +1,25 @@
 ---
-- name: Check slave replication status
+- name: Check replica replication status
   mysql_replication:
     mode: getslave
     login_unix_socket: "{{ mariadb_unix_socket }}"
-  register: slave
+  register: replica
   no_log: true
 
 # For the moment, we have to use a sql command.
 # In ansible 2.10, we should be able to use mysql_replication module.
 # See https://github.com/ansible/ansible/pull/62648 (and below)
-- name: Configure replication on the slave
+- name: Configure replication on the replica
   command: |
     /usr/bin/mariadb -e "CHANGE MASTER TO master_host='{{ mariadb_replication_master_ip }}',
     master_user='{{ item.name }}', master_password='{{ item.password }}', master_use_gtid=slave_pos"
   with_items: "{{ mariadb_replication_user }}"
   when:
-    - not slave.Is_Slave
+    - not replica.Is_Slave
   no_log: true
 
 # # Following (not tested) should work on ansible 2.10
-# - name: Configure replication on the slave
+# - name: Configure replication on the replica
 #   mysql_replication:
 #     mode: changemaster
 #     master_host: "{{ mariadb_replication_master_ip }}"
@@ -29,26 +29,26 @@
 #     login_unix_socket: "{{ mariadb_unix_socket }}"
 #   with_items: "{{ mariadb_replication_user }}"
 #   when:
-#     - not slave.Is_Slave
+#     - not replica.Is_Slave
 #   no_log: true
 
-- name: Reset slave replication
+- name: Reset replica replication
   mysql_replication:
     mode: resetslave
     login_unix_socket: "{{ mariadb_unix_socket }}"
   when:
-    - not slave.Is_Slave
+    - not replica.Is_Slave
 
-- name: Check slave replication status (second time)
+- name: Check replica replication status (second time)
   mysql_replication:
     mode: getslave
     login_unix_socket: "{{ mariadb_unix_socket }}"
-  register: slave2
+  register: replica2
   no_log: true
 
-- name: Start slave replication
+- name: Start replica replication
   mysql_replication:
     mode: startslave
     login_unix_socket: "{{ mariadb_unix_socket }}"
   when:
-    - slave2.Slave_IO_Running == "No"
+    - replica2.Slave_IO_Running == "No"

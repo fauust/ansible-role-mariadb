@@ -9,23 +9,23 @@
   include_tasks: databases.yml
   when:
     - mariadb_databases is defined
-    - mariadb_replication_role != "slave"
+    - mariadb_replication_role != "replica"
 
 - name: include task users.yml
   include_tasks: users.yml
   when:
     - mariadb_users is defined
-    - mariadb_replication_role != "slave"
+    - mariadb_replication_role != "replica"
 
 - name: include task replication_master.yml
   include_tasks: replication_master.yml
   when: mariadb_replication_role == "master"
 
-- name: include task replication_slave.yml
-  include_tasks: replication_slave.yml
+- name: include task replication_replica.yml
+  include_tasks: replication_replica.yml
   when:
     - not ansible_check_mode
-    - mariadb_replication_role == "slave"
+    - mariadb_replication_role == "replica"
 
 - name: include task backup.yml
   include_tasks: backup.yml
