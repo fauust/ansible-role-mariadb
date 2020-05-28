@@ -4,18 +4,18 @@
 
 Install and configure MariaDB Server on Debian/Ubuntu.
 
-Optionally, this role also permits to:
+Optionally, this role also permits one to:
 
 - deploy a master/slave cluster;
 - setup backups and rotation of the dumps.
 
 ## Requirements
 
-The role use
+The role uses
 [`mysql_user`](https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html)
 and
 [`mysql_db`](https://docs.ansible.com/ansible/latest/modules/mysql_db_module.html)
-ansible modules that depends on [PyMySQL](https://github.com/PyMySQL/PyMySQL) so
+ansible modules that depend on [PyMySQL](https://github.com/PyMySQL/PyMySQL) so
 Python 2.7 or Python 3.X versions are needed.
 
 For older Python versions, you may use
@@ -56,7 +56,7 @@ mariadb_can_restart: true
 ```
 
 **Warning:** you may consider setting `mariadb_can_restart` to `false` on
-production systems to prevent ansible runs to restart the MariaDB Server.
+production systems to prevent ansible runs from restarting the MariaDB Server.
 
 ### General configuration
 
@@ -64,7 +64,7 @@ To populate the MariaDB Server configuration file, we use almost only raw
 variables. This permits more flexibility and a very simple
 [`templates/my.cnf.j2`](./templates/my.cnf.j2) file.
 
-By default, some common and standard options are deployed based on MariaDB
+By default, some common and standard options are deployed based on the MariaDB
 Foundation package and it should be easy to change them all (see
 [`my.cnf`](./my.cnf)).
 
@@ -147,7 +147,7 @@ mariadb_mysqldump_raw: |
   max_allowed_packet = 16M
 ```
 
-### Databases management
+### Database management
 
 ```yaml
 mariadb_databases: []
@@ -159,7 +159,7 @@ mariadb_databases: []
 
 See: <https://docs.ansible.com/ansible/latest/modules/mysql_db_module.html>
 
-### Users management
+### User management
 
 ```yaml
 mariadb_users: []
@@ -177,7 +177,7 @@ See: <https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html>
 Replication is only enabled if `mariadb_replication_role` has a value (`master` or
 `slave`).
 
-The replication setup on the slave use the GTID autopositionning
+The replication setup on the slave use the GTID autopositioning
 `master_use_gtid=slave_pos`. See:
 <https://mariadb.com/kb/en/library/change-master-to/#master_use_gtid>
 
@@ -218,8 +218,8 @@ mariadb_backup_db_name: []
 #   - db2
 ```
 
-Database dump is done serially and compression step (`gzip`) is done after to
-avoid too long locks.
+Database dumps are done serially and the compression step (`gzip`) is done after to
+avoid lengthy locks.
 
 ## Example playbook
 
