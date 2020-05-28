@@ -6,7 +6,7 @@ Install and configure MariaDB Server on Debian/Ubuntu.
 
 Optionally, this role also permits one to:
 
-- deploy a master/slave cluster;
+- deploy a master/replica cluster;
 - setup backups and rotation of the dumps.
 
 ## Requirements
@@ -175,9 +175,9 @@ See: <https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html>
 ### Replication (optional)
 
 Replication is only enabled if `mariadb_replication_role` has a value (`master` or
-`slave`).
+`replica`).
 
-The replication setup on the slave use the GTID autopositioning
+The replication setup on the replica use the GTID autopositioning
 `master_use_gtid=slave_pos`. See:
 <https://mariadb.com/kb/en/library/change-master-to/#master_use_gtid>
 
@@ -185,11 +185,11 @@ For the moment, we use an `SQL` command but in ansible 2.10, we should be able
 to use the
 [`mysql_replication`](https://docs.ansible.com/ansible/latest/modules/mysql_replication_module.html)
 module (see
-[`tasks/replication_slave.yml`](./tasks/replication_slave.yml#L09-L33) and
+[`tasks/replication_replica.yml`](./tasks/replication_replica.yml#L09-L33) and
 <https://github.com/ansible/ansible/pull/62648>).
 
 ```yaml
-mariadb_replication_role: "" # master|slave
+mariadb_replication_role: "" # master|replica
 mariadb_replication_master_ip: ""
 mariadb_server_id: "1"
 mariadb_max_binlog_size: "100M"

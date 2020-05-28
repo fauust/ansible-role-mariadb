@@ -25,7 +25,7 @@ log_bin
 expire_logs_days = {{ mariadb_expire_logs_days }}
 max_binlog_size = {{ mariadb_max_binlog_size }}
 binlog_format = {{mariadb_binlog_format}}
-# the following permits to simplify the process of moving a slave to a master
+# the following permits to simplify the process of moving a replica to a master
 # role by ensuring that replication is not started on master
 skip-slave-start
 
@@ -38,7 +38,7 @@ binlog_ignore_db = {{ db.name }}
 {% endfor %}
 {% endif %}
 
-{% if mariadb_replication_role == 'slave' %}
+{% if mariadb_replication_role == 'replica' %}
 read_only
 relay-log = relay-bin
 relay-log-index = relay-bin.index
