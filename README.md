@@ -188,17 +188,30 @@ module (see
 [`tasks/replication_replica.yml`](./tasks/replication_replica.yml#L09-L33) and
 <https://github.com/ansible/ansible/pull/62648>).
 
+#### Common vars
+
 ```yaml
-mariadb_replication_role: "" # master|replica
-mariadb_replication_master_ip: ""
+# Same keys as `mariadb_users` above.
+# priv is set to "*.*:REPLICATION SLAVE" by default
+mariadb_replication_user: []
+```
+
+#### Master variables
+
+```yaml
+mariadb_replication_role: "master"
 mariadb_server_id: "1"
 mariadb_max_binlog_size: "100M"
 mariadb_binlog_format: "MIXED"
 mariadb_expire_logs_days: "10"
+```
 
-# Same keys as `mariadb_users` above.
-# priv is set to "*.*:REPLICATION SLAVE" by default
-mariadb_replication_user: []
+#### Replica variables
+
+```yaml
+mariadb_replication_role: "replica"
+mariadb_server_id: "1"
+mariadb_replication_master_ip: "IP"
 ```
 
 ### Backups (optional)
