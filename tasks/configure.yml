@@ -23,6 +23,5 @@
     state: started
     enabled: "{{ mariadb_enabled_on_startup }}"
 
-# immediately restart mariadb
-# this is necessary for replication setup
-- meta: flush_handlers
+- name: Immediately restart MariaDB (necessary for replication)
+  meta: flush_handlers

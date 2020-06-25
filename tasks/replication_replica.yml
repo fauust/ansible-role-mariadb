@@ -13,7 +13,7 @@
   command: |
     /usr/bin/mariadb -e "CHANGE MASTER TO master_host='{{ mariadb_replication_master_ip }}',
     master_user='{{ item.name }}', master_password='{{ item.password }}', master_use_gtid=slave_pos"
-  with_items: "{{ mariadb_replication_user }}"
+  loop: "{{ mariadb_replication_user }}"
   when:
     - not replica.Is_Slave
   no_log: true
@@ -27,7 +27,7 @@
 #     master_password: "{{ item.password }}"
 #     master_use_gtid: "{{ mariadb_replication_gtid | default('slave_pos') }}
 #     login_unix_socket: "{{ mariadb_unix_socket }}"
-#   with_items: "{{ mariadb_replication_user }}"
+#   loop: "{{ mariadb_replication_user }}"
 #   when:
 #     - not replica.Is_Slave
 #   no_log: true

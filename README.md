@@ -37,8 +37,8 @@ Available variables are listed below, along with default values (see
 
 ```yaml
 mariadb_use_official_repo: false
-mariadb_use_official_repo_url: "http://ftp.igh.cnrs.fr/pub/mariadb/repo"
-mariadb_use_official_repo_version: "10.4"
+mariadb_use_official_repo_url: http://ftp.igh.cnrs.fr/pub/mariadb/repo
+mariadb_use_official_repo_version: 10.4
 ```
 
 You may deploy the MariaDB Server version that comes with your distribution (Debian/Ubuntu) or
@@ -71,11 +71,11 @@ Foundation package and it should be easy to change them all (see
 #### Basic settings
 
 ```yaml
-mariadb_config_file: "/etc/mysql/my.cnf"
-mariadb_datadir: "/var/lib/mysql"
-mariadb_port: "3306"
-mariadb_bind_address: "127.0.0.1"
-mariadb_unix_socket: "/run/mysqld/mysqld.sock"
+mariadb_config_file: /etc/mysql/my.cnf
+mariadb_datadir: /var/lib/mysql
+mariadb_port: 3306
+mariadb_bind_address: 127.0.0.1
+mariadb_unix_socket: /run/mysqld/mysqld.sock
 ```
 
 ```yaml
@@ -199,19 +199,19 @@ mariadb_replication_user: []
 #### Master variables
 
 ```yaml
-mariadb_replication_role: "master"
-mariadb_server_id: "1"
-mariadb_max_binlog_size: "100M"
-mariadb_binlog_format: "MIXED"
-mariadb_expire_logs_days: "10"
+mariadb_replication_role: master
+mariadb_server_id: 1
+mariadb_max_binlog_size: 100M
+mariadb_binlog_format: MIXED
+mariadb_expire_logs_days: 10
 ```
 
 #### Replica variables
 
 ```yaml
-mariadb_replication_role: "replica"
-mariadb_server_id: "1"
-mariadb_replication_master_ip: "IP"
+mariadb_replication_role: replica
+mariadb_server_id: 1
+mariadb_replication_master_ip: IP
 ```
 
 ### Backups (optional)
@@ -219,10 +219,10 @@ mariadb_replication_master_ip: "IP"
 ```yaml
 # db dumps backup
 mariadb_backup_db: false
-mariadb_backup_db_cron_min: "50"
-mariadb_backup_db_cron_hour: "00"
-mariadb_backup_db_dir: "/mnt/backup"
-mariadb_backup_db_rotation: "15"
+mariadb_backup_db_cron_min: 50
+mariadb_backup_db_cron_hour: 00
+mariadb_backup_db_dir: /mnt/backup
+mariadb_backup_db_rotation: 15
 
 # name of the database to dump
 # (mandatory if mariadb_backup_db is set to true)
