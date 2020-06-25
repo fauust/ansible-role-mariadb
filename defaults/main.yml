@@ -2,8 +2,8 @@
 # Configure the following to use official MariaDB repository
 # see: https://downloads.mariadb.org/mariadb/repositories
 mariadb_use_official_repo: false
-mariadb_use_official_repo_url: "http://ftp.igh.cnrs.fr/pub/mariadb/repo"
-mariadb_use_official_repo_version: "10.4"
+mariadb_use_official_repo_url: http://ftp.igh.cnrs.fr/pub/mariadb/repo
+mariadb_use_official_repo_version: 10.4
 
 mariadb_enabled_on_startup: true
 # The following is set to true by default but you may consider setting it to
@@ -16,10 +16,10 @@ mariadb_overwrite_global_config_file: true
 # MariaDB configuration file
 mariadb_config_file: /etc/mysql/my.cnf
 # Basic settings
-mariadb_datadir: "/var/lib/mysql"
-mariadb_port: "3306"
-mariadb_bind_address: "127.0.0.1"
-mariadb_unix_socket: "/run/mysqld/mysqld.sock"
+mariadb_datadir: /var/lib/mysql
+mariadb_port: 3306
+mariadb_bind_address: 127.0.0.1
+mariadb_unix_socket: /run/mysqld/mysqld.sock
 mariadb_basic_settings_raw: |
   user                  = mysql
   pid-file              = /run/mysqld/mysqld.pid
@@ -86,11 +86,11 @@ mariadb_users: []
 
 # Replication
 # replication is only enabled if mariadb_replication_role has values
-mariadb_replication_role: "" # master|replica
+mariadb_replication_role: ""
 mariadb_replication_master_ip: ""
-mariadb_max_binlog_size: "100M"
-mariadb_binlog_format: "MIXED"
-mariadb_expire_logs_days: "10"
+mariadb_max_binlog_size: 100M
+mariadb_binlog_format: MIXED
+mariadb_expire_logs_days: 10
 
 # Replication users
 # same keys as mariadb_users above
@@ -99,10 +99,10 @@ mariadb_replication_user: []
 
 # Backups
 mariadb_backup_db: false
-mariadb_backup_db_cron_min: "50"
-mariadb_backup_db_cron_hour: "00"
-mariadb_backup_db_dir: "/opt/backup"
-mariadb_backup_db_rotation: "15"
+mariadb_backup_db_cron_min: 50
+mariadb_backup_db_cron_hour: 00
+mariadb_backup_db_dir: /opt/backup
+mariadb_backup_db_rotation: 15
 
 # DB to backup
 mariadb_backup_db_name: []
