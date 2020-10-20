@@ -3,6 +3,6 @@ ansible==2.9.*
 docker
 flake8
 mitogen
-molecule
+molecule==3.0.*
 testinfra
 yamllint

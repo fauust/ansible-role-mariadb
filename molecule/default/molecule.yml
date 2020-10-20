@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: ${DRIVER_NAME:-podman}
 platforms:
   - name: instance
     image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-10}"
