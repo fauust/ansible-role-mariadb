@@ -5,6 +5,7 @@ services: docker
 env:
   global:
     - ROLE_NAME: mariadb
+    - DRIVER_NAME: docker
   matrix:
     - MOLECULE_DISTRO: debian-10
     - MOLECULE_DISTRO: debian-sid
