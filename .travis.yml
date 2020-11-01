@@ -11,6 +11,7 @@ env:
     - MOLECULE_DISTRO: debian-sid
     - MOLECULE_DISTRO: ubuntu-18.04
     - MOLECULE_DISTRO: ubuntu-20.04
+    - MOLECULE_DISTRO: ubuntu-20.10
 
 before_install:
   - |
