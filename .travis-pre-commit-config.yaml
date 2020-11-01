@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.1.0
+    rev: v3.3.0
     hooks:
       - id: check-ast
       - id: check-case-conflict
@@ -18,18 +18,17 @@ repos:
     hooks:
       - id: flake8
         name: Check python (flake8)
-        args: ["--ignore=E501"]
+        args: ["--ignore=E501,E226"]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.23.0
+    rev: v1.25.0
     hooks:
       - id: yamllint
         name: Check yaml files (yamllint)
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: v4.3.4
+    rev: v4.3.6
     hooks:
       - id: ansible-lint
         name: Check yaml files (ansible-lint)
-        args: ["-x", "602"]
         types: [yaml]
   - repo: local
     hooks:
