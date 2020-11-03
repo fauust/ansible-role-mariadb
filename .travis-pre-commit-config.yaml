@@ -39,7 +39,7 @@ repos:
         types: [markdown]
       - id: docker-shell-shfmt
         name: Run shfmt with docker
-        entry: mvdan/shfmt:latest -d -i 2 -ci
+        entry: mvdan/shfmt:v3.2.0 -d -i 2 -ci
         language: docker_image
         types: [shell]
       - id: docker-shell-lint

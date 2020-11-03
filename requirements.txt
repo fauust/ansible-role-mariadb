@@ -1,8 +1,5 @@
-ansible-lint
 ansible==2.9.*
 docker
-flake8
 mitogen
 molecule==3.0.*
 testinfra
-yamllint
