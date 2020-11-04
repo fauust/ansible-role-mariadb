@@ -5,6 +5,7 @@
       - software-properties-common
       - dirmngr
     state: present
+    update_cache: true
   when: mariadb_use_official_repo
 
 - name: Install mariadb repository key
