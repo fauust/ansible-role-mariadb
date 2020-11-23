@@ -1,5 +1,6 @@
 ansible==2.9.*
 docker
 mitogen
-molecule==3.0.*
-testinfra
+molecule==3.1.*
+molecule-docker
+pytest-testinfra
