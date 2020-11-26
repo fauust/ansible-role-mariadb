@@ -14,7 +14,7 @@ repos:
         name: Check trailing whitespace
         args: [--markdown-linebreak-ext=md]
   - repo: https://gitlab.com/pycqa/flake8.git
-    rev: 3.7.9
+    rev: 3.8.4
     hooks:
       - id: flake8
         name: Check python (flake8)
