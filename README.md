@@ -223,6 +223,8 @@ mariadb_backup_db_cron_min: 50
 mariadb_backup_db_cron_hour: 00
 mariadb_backup_db_dir: /mnt/backup
 mariadb_backup_db_rotation: 15
+# set to "1>" to get only STDERR on cron
+mariadb_backup_cron_std_output: "2>&1 | tee"
 
 # name of the database to dump
 # (mandatory if mariadb_backup_db is set to true)
