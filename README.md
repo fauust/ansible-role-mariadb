@@ -41,10 +41,10 @@ mariadb_use_official_repo_url: http://ftp.igh.cnrs.fr/pub/mariadb/repo
 mariadb_use_official_repo_version: 10.4
 ```
 
-You may deploy the MariaDB Server version that comes with your distribution (Debian/Ubuntu) or
-deploy the version packaged by the MariaDB Foundation.
-You will find the repositories URL here:
-<https://downloads.mariadb.org/mariadb/repositories/>
+You may deploy the MariaDB Server version that comes with your distribution
+(Debian/Ubuntu) or deploy the version packaged by the MariaDB Foundation.
+You can use the MariaDB Foundation repository configuration tool:
+<https://mariadb.org/download/#mariadb-repositories>
 
 By default, we deploy the MariaDB Server version that comes with the distribution.
 
