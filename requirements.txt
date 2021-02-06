@@ -1,6 +1,7 @@
 ansible==2.9.*
-docker
+#ansible==2.10.*
 mitogen
-molecule==3.1.*
+#https://github.com/mitogen-hq/mitogen/archive/v0.3.0-rc.0.tar.gz
+molecule==3.2.*
 molecule-docker
 pytest-testinfra
