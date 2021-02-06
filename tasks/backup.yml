@@ -24,7 +24,7 @@
 
 - name: Deploy crontab file
   cron:
-    name: "Dump MariaBD databases"
+    name: "Dump MariaDB databases"
     minute: "{{ mariadb_backup_db_cron_min }}"
     hour: "{{ mariadb_backup_db_cron_hour }}"
     job: "/usr/local/bin/mariadb_dump_db.sh \
