@@ -4,7 +4,10 @@
   gather_facts: true
   vars:
     ansible_python_interpreter: /usr/bin/python3
-  vars_files: testvars.yml
+  vars_files:
+    - testvars.yml
 
-  roles:
-    - role: ansible-role-mariadb
+  tasks:
+    - name: "Include role ansible-role-mariadb"
+      include_role:
+        name: "ansible-role-mariadb"
