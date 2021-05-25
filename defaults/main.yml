@@ -3,7 +3,7 @@
 # see: https://downloads.mariadb.org/mariadb/repositories
 mariadb_use_official_repo: false
 mariadb_use_official_repo_url: http://ftp.igh.cnrs.fr/pub/mariadb/repo
-mariadb_use_official_repo_version: 10.4
+mariadb_use_official_repo_version: 10.5
 
 mariadb_enabled_on_startup: true
 # The following is set to true by default but you may consider setting it to
