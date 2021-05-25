@@ -1,0 +1,7 @@
+skip_list:
+  - 'empty-string-compare'
+  - 'braces'
+  - 'yaml'
+
+exclude_paths:
+- molecule/

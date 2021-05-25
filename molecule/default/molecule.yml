@@ -16,5 +16,7 @@ provisioner:
     ANSIBLE_GATHERING: explicit
     ANSIBLE_FORCE_COLOR: true
     ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 verifier:
   name: testinfra

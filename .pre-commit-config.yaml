@@ -1,11 +1,13 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.3.0
+    rev: v4.0.1
     hooks:
+      - id: check-added-large-files
       - id: check-ast
       - id: check-case-conflict
       - id: check-executables-have-shebangs
+      - id: check-merge-conflict
       - id: check-yaml
         name: Check yaml files
       - id: debug-statements
@@ -14,21 +16,25 @@ repos:
         name: Check trailing whitespace
         args: [--markdown-linebreak-ext=md]
   - repo: https://gitlab.com/pycqa/flake8.git
-    rev: 3.8.4
+    rev: 3.9.2
     hooks:
       - id: flake8
         name: Check python (flake8)
         args: ["--ignore=E501,E226"]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.25.0
+    rev: v1.26.1
     hooks:
       - id: yamllint
         name: Check yaml files (yamllint)
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: v4.3.7
+    rev: v5.0.11
     hooks:
       - id: ansible-lint
-        name: Check yaml files (ansible-lint)
+        name: Check ansible files (ansible-lint)
+        # https://github.com/ansible/ansible-lint/issues/1066
+        always_run: false
+        # args: ["-x", "602"]
+        exclude_types: [markdown, shell]
         types: [yaml]
   - repo: local
     hooks:
@@ -39,7 +45,7 @@ repos:
         types: [markdown]
       - id: docker-shell-shfmt
         name: Run shfmt with docker
-        entry: mvdan/shfmt:v3.2.0 -d -i 2 -ci
+        entry: mvdan/shfmt:v3.3.0 -d -i 2 -ci
         language: docker_image
         types: [shell]
       - id: docker-shell-lint

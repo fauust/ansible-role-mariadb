@@ -1,6 +1,7 @@
 # Ansible role: MariaDB
 
-[![travis build status](https://img.shields.io/travis/fauust/ansible-role-mariadb?logo=travis)](https://travis-ci.com/fauust/ansible-role-mariadb)
+[![GitHub Actions](https://github.com/fauust/ansible-role-mariadb/workflows/pre-commit/badge.svg?branch=master)](https://github.com/fauust/ansible-role-mariadb/actions?query=workflow%3A%22pre-commit%22)
+[![GitHub Actions](https://github.com/fauust/ansible-role-mariadb/workflows/build/badge.svg?branch=master)](https://github.com/fauust/ansible-role-mariadb/actions?query=workflow%3A%22molecule%22)
 
 Install and configure MariaDB Server on Debian/Ubuntu.
 
@@ -38,7 +39,7 @@ Available variables are listed below, along with default values (see
 ```yaml
 mariadb_use_official_repo: false
 mariadb_use_official_repo_url: http://ftp.igh.cnrs.fr/pub/mariadb/repo
-mariadb_use_official_repo_version: 10.4
+mariadb_use_official_repo_version: 10.5
 ```
 
 You may deploy the MariaDB Server version that comes with your distribution
