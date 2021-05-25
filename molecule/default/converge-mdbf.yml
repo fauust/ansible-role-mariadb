@@ -4,6 +4,9 @@
   gather_facts: true
   vars:
     ansible_python_interpreter: /usr/bin/python3
+    mariadb_use_official_repo: true
+    mariadb_use_official_repo_url: https://ftp.igh.cnrs.fr/pub/mariadb/repo
+    mariadb_use_official_repo_version: 10.5
   vars_files: vars/testvars.yml
 
   roles:

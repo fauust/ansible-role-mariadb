@@ -1,0 +1,49 @@
+---
+name: molecule
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 5 * * 2"
+
+jobs:
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - distro: ubuntu-18.04
+            playbook: converge.yml
+          - distro: ubuntu-18.04
+            playbook: converge-mdbf.yml
+          - distro: ubuntu-20.04
+            playbook: converge.yml
+          - distro: ubuntu-20.04
+            playbook: converge-mdbf.yml
+          - distro: ubuntu-20.10
+            playbook: converge.yml
+          - distro: ubuntu-20.10
+            playbook: converge-mdbf.yml
+          - distro: debian-10
+            playbook: converge.yml
+          - distro: debian-10
+            playbook: converge-mdbf.yml
+          - distro: debian-sid
+            playbook: converge.yml
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip3 install -r requirements.txt
+
+      - name: Run molecule
+        run: molecule test
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
+          DRIVER_NAME: "docker"
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
