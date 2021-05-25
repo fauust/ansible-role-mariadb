@@ -1,7 +1,7 @@
 # Ansible role: MariaDB
 
-[![GitHub Actions](https://github.com/fauust/ansible-role-mariadb/workflows/pre-commit/badge.svg?branch=master)](https://github.com/fauust/ansible-role-mariadb/actions?query=workflow%3A%22pre-commit%22)
-[![GitHub Actions](https://github.com/fauust/ansible-role-mariadb/workflows/build/badge.svg?branch=master)](https://github.com/fauust/ansible-role-mariadb/actions?query=workflow%3A%22molecule%22)
+[![pre-commit](https://github.com/fauust/ansible-role-mariadb/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/pre-commit.yml)
+[![molecule](https://github.com/fauust/ansible-role-mariadb/actions/workflows/molecule.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/molecule.yml)
 
 Install and configure MariaDB Server on Debian/Ubuntu.
 
