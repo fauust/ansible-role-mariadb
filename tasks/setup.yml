@@ -16,7 +16,7 @@
 
 - name: Setup mariadb repository sourcelist entry
   apt_repository:
-    repo: deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/debian {{ ansible_distribution_release }} main
+    repo: deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_os_family|lower() }} {{ ansible_distribution_release }} main
     filename: mariadb
     state: present
   when: mariadb_use_official_repo
