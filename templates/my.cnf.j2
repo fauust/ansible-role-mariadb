@@ -7,7 +7,12 @@
 # Fine tuning
 {{ mariadb_fine_tuning_raw }}
 # Logging
+{% if mariadb_replication_role != '' %}
+# warning log-basename is defined later for replication
+# some log option may be ignored.
+# see: https://mariadb.com/kb/en/mysqld-options/#-log-basename
 {{ mariadb_logging_raw }}
+{% endif %}
 # Query cache
 {{ mariadb_query_cache_raw }}
 # Character sets
