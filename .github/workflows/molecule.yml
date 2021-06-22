@@ -12,6 +12,7 @@ jobs:
     name: Molecule
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         include:
           - distro: ubuntu-18.04
@@ -34,16 +35,19 @@ jobs:
             playbook: converge.yml
 
     steps:
+      # see https://github.com/actions/virtual-environments/issues/3536#issuecomment-858433636)
+      # - name: Set rights for podman
+      #   run: sudo chmod o+rwx -R /sys/fs/cgroup/systemd
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
       - name: Install requirements
-        run: pip3 install -r requirements.txt
-
+        run: |
+          sudo python3 -m pip install --upgrade pip
+          sudo python3 -m pip install -r requirements.txt
       - name: Run molecule
-        run: molecule test
+        # using sudo see https://github.com/actions/virtual-environments/issues/3536
+        run: sudo molecule test
         env:
           PY_COLORS: "1"
           ANSIBLE_FORCE_COLOR: "1"
-          DRIVER_NAME: "docker"
           MOLECULE_DISTRO: ${{ matrix.distro }}
           MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
