@@ -63,16 +63,16 @@ production systems to prevent ansible runs from restarting the MariaDB Server.
 
 To populate the MariaDB Server configuration file, we use almost only raw
 variables. This permits more flexibility and a very simple
-[`templates/my.cnf.j2`](./templates/my.cnf.j2) file.
+[`templates/mariadb.cnf.j2`](./templates/mariadb.cnf.j2) file.
 
 By default, some common and standard options are deployed based on the MariaDB
 Foundation package and it should be easy to change them all (see
-[`my.cnf`](./my.cnf)).
+[`mariadb.cnf`](./mariadb.cnf)).
 
 #### Basic settings
 
 ```yaml
-mariadb_config_file: /etc/mysql/my.cnf
+mariadb_config_file: /etc/mysql/mariadb.cnf
 mariadb_datadir: /var/lib/mysql
 mariadb_port: 3306
 mariadb_bind_address: 127.0.0.1

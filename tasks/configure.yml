@@ -1,7 +1,7 @@
 ---
 - name: Copy global MariaDB configuration
   template:
-    src: my.cnf.j2
+    src: mariadb.cnf.j2
     dest: "{{ mariadb_config_file }}"
     owner: root
     group: root

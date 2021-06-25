@@ -29,7 +29,7 @@ def test_mariadb_enabled_and_running(host):
 
 
 def test_ensure_custom_config_is_applied(host):
-    config = host.file("/etc/mysql/my.cnf")
+    config = host.file("/etc/mysql/mariadb.cnf")
     assert config.contains("datadir")
     assert config.user == "root"
     assert config.group == "root"

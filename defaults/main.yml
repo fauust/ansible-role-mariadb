@@ -14,7 +14,7 @@ mariadb_can_restart: true
 mariadb_overwrite_global_config_file: true
 
 # MariaDB configuration file
-mariadb_config_file: /etc/mysql/my.cnf
+mariadb_config_file: /etc/mysql/mariadb.cnf
 # Basic settings
 mariadb_datadir: /var/lib/mysql
 mariadb_port: 3306
@@ -44,6 +44,7 @@ mariadb_fine_tuning_raw: |
   bulk_insert_buffer_size = 16M
   tmp_table_size          = 32M
   max_heap_table_size     = 32M
+  skip-name-resolve       = 1
 
 # Query cache
 mariadb_query_cache_raw: |
