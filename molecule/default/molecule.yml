@@ -6,7 +6,8 @@ platforms:
     image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-10}"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: "/lib/systemd/systemd"
+    override_command: false
+    pre_build_image: true
 provisioner:
   name: ansible
   env:
