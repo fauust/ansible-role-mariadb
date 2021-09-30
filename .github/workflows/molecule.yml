@@ -23,13 +23,17 @@ jobs:
             playbook: converge.yml
           - distro: ubuntu-20.04
             playbook: converge-mdbf.yml
-          - distro: ubuntu-20.10
+          - distro: ubuntu-21.04
             playbook: converge.yml
-          - distro: ubuntu-20.10
+          - distro: ubuntu-21.04
             playbook: converge-mdbf.yml
           - distro: debian-10
             playbook: converge.yml
           - distro: debian-10
+            playbook: converge-mdbf.yml
+          - distro: debian-11
+            playbook: converge.yml
+          - distro: debian-11
             playbook: converge-mdbf.yml
           - distro: debian-sid
             playbook: converge.yml
