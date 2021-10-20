@@ -38,7 +38,7 @@ Available variables are listed below, along with default values (see
 
 ```yaml
 mariadb_use_official_repo: false
-mariadb_use_official_repo_url: http://ftp.igh.cnrs.fr/pub/mariadb/repo
+mariadb_use_official_repo_url: http://ftp.osuosl.org/pub/mariadb/repo
 mariadb_use_official_repo_version: 10.5
 ```
 
