@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Galaxy
-        uses: robertdebock/galaxy-action@1.1.0
+        uses: robertdebock/galaxy-action@1.1.1
         with:
           galaxy_api_key: ${{ secrets.galaxy_api_key }}
