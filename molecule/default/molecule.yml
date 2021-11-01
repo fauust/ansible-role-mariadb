@@ -3,7 +3,7 @@ driver:
   name: podman
 platforms:
   - name: instance
-    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-10}"
+    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     override_command: false

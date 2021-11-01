@@ -24,7 +24,7 @@ install-pip-packages: ## Install python3 requirements
 	)
 
 upgrade-pip-packages: ## Upgrade python3 requirements
-	$(shell command -v pip3) -U -r requirements.txt
+	$(shell command -v pip3) install -U -r requirements.txt
 
 clean: ## Clean venv
 	[[ ! -d $(VENV_DIR) ]] || rm -rf $(VENV_DIR)
