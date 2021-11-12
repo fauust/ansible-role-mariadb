@@ -77,7 +77,7 @@ done
 
 for db in ${VAR_DB_LIST_ARGS//,/ }; do
   echo_date "start $db dump."
-  typeset DUMP_FILE=$VAR_DUMPS_DST_DIR/$db.$(date +%F_%H%M%S).sql
+  DUMP_FILE=$VAR_DUMPS_DST_DIR/$db.$(date +%F_%H%M%S).sql
   mysqldump --single-transaction --quick --routines "$db" >"$DUMP_FILE"
   # shellcheck disable=SC2181
   if (($? != 0)); then
