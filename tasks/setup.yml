@@ -30,7 +30,7 @@
 
 - name: Determine required MariaDB Python libraries
   set_fact:
-    deb_mariadb_python_package: "{% if 'python3' in ansible_python_interpreter|default('') %}python3-pymysql{% else %}python-pymysql{% endif %}"
+    deb_mariadb_python_package: "{% if 'python3' in discovered_interpreter_python|default('') %}python3-pymysql{% else %}python-pymysql{% endif %}"
 
 - name: Install python mariadb driver
   apt:
