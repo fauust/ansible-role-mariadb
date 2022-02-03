@@ -1,7 +1,7 @@
 ---
 - name: Check replica replication status
   mysql_replication:
-    mode: getslave
+    mode: getreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   register: replica
   no_log: true
@@ -15,7 +15,7 @@
     master_user='{{ item.name }}', master_password='{{ item.password }}', master_use_gtid=slave_pos"
   loop: "{{ mariadb_replication_user }}"
   when:
-    - not replica.Is_Slave
+    - not replica.Is_Replica
   no_log: true
 
 # # Following (not tested) should work on ansible 2.10
@@ -34,21 +34,21 @@
 
 - name: Reset replica replication
   mysql_replication:
-    mode: resetslave
+    mode: resetreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   when:
-    - not replica.Is_Slave
+    - not replica.Is_Replica
 
 - name: Check replica replication status (second time)
   mysql_replication:
-    mode: getslave
+    mode: getreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   register: replica2
   no_log: true
 
 - name: Start replica replication
   mysql_replication:
-    mode: startslave
+    mode: startreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   when:
     - replica2.Slave_IO_Running == "No"
