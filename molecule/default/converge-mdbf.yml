@@ -4,7 +4,7 @@
   gather_facts: true
   vars:
     mariadb_use_official_repo: true
-    mariadb_use_official_repo_url: https://archive.mariadb.org/mirror/repo
+    mariadb_use_official_repo_url: https://deb.mariadb.org/repo
     mariadb_use_official_repo_version: 10.5
   vars_files: vars/testvars.yml
 
