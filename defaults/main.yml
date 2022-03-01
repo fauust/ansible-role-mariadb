@@ -2,7 +2,7 @@
 # Configure the following to use official MariaDB repository
 # see: https://downloads.mariadb.org/mariadb/repositories
 mariadb_use_official_repo: false
-mariadb_use_official_repo_url: https://archive.mariadb.org/mirror/repo
+mariadb_use_official_repo_url: https://deb.mariadb.org/repo
 mariadb_use_official_repo_version: 10.5
 
 mariadb_enabled_on_startup: true
