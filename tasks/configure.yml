@@ -1,6 +1,6 @@
 ---
 - name: Copy global MariaDB configuration
-  template:
+  ansible.builtin.template:
     src: mariadb.cnf.j2
     dest: "{{ mariadb_config_file }}"
     owner: root
@@ -10,7 +10,7 @@
   notify: restart mariadb
 
 - name: Create datadir if it does not exist
-  file:
+  ansible.builtin.file:
     path: "{{ mariadb_datadir }}"
     state: directory
     owner: mysql
@@ -18,10 +18,10 @@
     mode: 0755
 
 - name: Ensure MariaDB is started and enabled on boot
-  service:
+  ansible.builtin.service:
     name: mariadb
     state: started
     enabled: "{{ mariadb_enabled_on_startup }}"
 
 - name: Immediately restart MariaDB (necessary for replication)
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers

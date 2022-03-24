@@ -1,6 +1,6 @@
 ---
 - name: Check replica replication status
-  mysql_replication:
+  community.mysql.mysql_replication:
     mode: getreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   register: replica
@@ -10,7 +10,7 @@
 # In ansible 2.10, we should be able to use mysql_replication module.
 # See https://github.com/ansible/ansible/pull/62648 (and below)
 - name: Configure replication on the replica
-  command: |
+  ansible.builtin.command: |
     /usr/bin/mariadb -e "CHANGE MASTER TO master_host='{{ mariadb_replication_master_ip }}',
     master_user='{{ item.name }}', master_password='{{ item.password }}', master_use_gtid=slave_pos"
   loop: "{{ mariadb_replication_user }}"
@@ -33,21 +33,21 @@
 #   no_log: true
 
 - name: Reset replica replication
-  mysql_replication:
+  community.mysql.mysql_replication:
     mode: resetreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   when:
     - not replica.Is_Replica
 
 - name: Check replica replication status (second time)
-  mysql_replication:
+  community.mysql.mysql_replication:
     mode: getreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   register: replica2
   no_log: true
 
 - name: Start replica replication
-  mysql_replication:
+  community.mysql.mysql_replication:
     mode: startreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   when:

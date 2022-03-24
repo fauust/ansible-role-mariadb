@@ -1,12 +1,12 @@
 ---
 - name: Install cron package
-  apt:
+  ansible.builtin.apt:
     package:
       - cron
     state: present
 
 - name: Deploy DB dump script
-  copy:
+  ansible.builtin.copy:
     src: mariadb_dump_db.sh
     dest: /usr/local/bin/mariadb_dump_db.sh
     owner: root
@@ -15,7 +15,7 @@
     validate: "bash -n %s"
 
 - name: Ensure backup dir exists
-  file:
+  ansible.builtin.file:
     path: "{{ mariadb_backup_db_dir }}"
     state: directory
     owner: root
@@ -23,7 +23,7 @@
     mode: 0755
 
 - name: Deploy crontab file
-  cron:
+  ansible.builtin.cron:
     name: "Dump MariaDB databases"
     minute: "{{ mariadb_backup_db_cron_min }}"
     hour: "{{ mariadb_backup_db_cron_hour }}"

@@ -1,6 +1,6 @@
 ---
 - name: Install mariadb repo necessary packages
-  apt:
+  ansible.builtin.apt:
     package:
       - software-properties-common
       - dirmngr
@@ -9,30 +9,30 @@
   when: mariadb_use_official_repo
 
 - name: Install mariadb repository key
-  apt_key:
+  ansible.builtin.apt_key:
     keyserver: keyserver.ubuntu.com
     id: "0xF1656F24C74CD1D8"
   when: mariadb_use_official_repo
 
 - name: Setup mariadb repository sourcelist entry
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution|lower() }} {{ ansible_distribution_release }} main
     filename: mariadb
     state: present
   when: mariadb_use_official_repo
 
 - name: Install mariadb
-  apt:
+  ansible.builtin.apt:
     package:
       - mariadb-server
     state: present
     update_cache: true
 
 - name: Determine required MariaDB Python libraries
-  set_fact:
+  ansible.builtin.set_fact:
     deb_mariadb_python_package: "{% if 'python3' in discovered_interpreter_python|default('') %}python3-pymysql{% else %}python-pymysql{% endif %}"
 
 - name: Install python mariadb driver
-  apt:
+  ansible.builtin.apt:
     name: "{{ deb_mariadb_python_package }}"
     state: present
