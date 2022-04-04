@@ -7,10 +7,12 @@ galaxy_info:
   description: MariaDB server for Debian/Ubuntu.
   license: license GPL-3.0-only
   min_ansible_version: 2.8
+  github_branch: main
   platforms:
     - name: Debian
       versions:
         - buster
+        - bullseye
     - name: Ubuntu
       versions:
         - bionic
