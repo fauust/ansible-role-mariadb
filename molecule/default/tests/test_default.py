@@ -37,34 +37,34 @@ def test_ensure_custom_config_is_applied(host):
 
 
 def test_ensure_innodb_is_enabled(host):
-    assert host.run("mariadb -Bse 'SHOW ENGINES' |\
+    assert host.run("mysql -Bse 'SHOW ENGINES' |\
             grep -qE '^InnoDB.DEFAULT.*YES.YES.YES$'").rc == 0
 
 
 def test_ensure_system_db_exist(host):
-    assert host.run("mariadb -Bse 'SHOW DATABASES' |\
+    assert host.run("mysql -Bse 'SHOW DATABASES' |\
             grep -q '^mysql$'").rc == 0
-    assert host.run("mariadb -Bse 'SHOW DATABASES' |\
+    assert host.run("mysql -Bse 'SHOW DATABASES' |\
             grep -q '^information_schema$'").rc == 0
-    assert host.run("mariadb -Bse 'SHOW DATABASES' |\
+    assert host.run("mysql -Bse 'SHOW DATABASES' |\
             grep -q '^performance_schema$'").rc == 0
 
 
 def test_ensure_test_db_exist(host):
-    assert host.run("mariadb -Bse 'SHOW DATABASES' |\
+    assert host.run("mysql -Bse 'SHOW DATABASES' |\
             grep -q '^db1'").rc == 0
-    assert host.run("mariadb -Bse 'SHOW DATABASES' |\
+    assert host.run("mysql -Bse 'SHOW DATABASES' |\
             grep -q '^db2'").rc == 0
 
 
 def test_some_sql_queries(host):
-    assert host.run("mariadb -e 'CREATE DATABASE db'").rc == 0
-    assert host.run("mariadb -e 'CREATE TABLE\
+    assert host.run("mysql -e 'CREATE DATABASE db'").rc == 0
+    assert host.run("mysql -e 'CREATE TABLE\
             db.t_innodb(a1 SERIAL, c1 CHAR(8)) ENGINE=InnoDB;\
             INSERT INTO db.t_innodb VALUES (1,\"foo\"),(2,\"bar\")'").rc == 0
-    assert host.run("mariadb -e 'CREATE FUNCTION db.f()\
+    assert host.run("mysql -e 'CREATE FUNCTION db.f()\
             RETURNS INT DETERMINISTIC RETURN 1'").rc == 0
-    assert host.run("mariadb -e 'SHOW TABLES IN db'").rc == 0
-    assert host.run("mariadb -e 'SELECT * FROM db.t_innodb;\
+    assert host.run("mysql -e 'SHOW TABLES IN db'").rc == 0
+    assert host.run("mysql -e 'SELECT * FROM db.t_innodb;\
             INSERT INTO db.t_innodb VALUES (3,\"foo\"),(4,\"bar\")'").rc == 0
-    assert host.run("mariadb -e 'SELECT db.f()'").rc == 0
+    assert host.run("mysql -e 'SELECT db.f()'").rc == 0

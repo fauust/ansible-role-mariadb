@@ -8,39 +8,106 @@ on:
     - cron: "0 5 * * 2"
 
 jobs:
-  molecule:
+  molecule-distrib-pkg:
     name: Molecule
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - distro: ubuntu-18.04
-            playbook: converge.yml
-          - distro: ubuntu-18.04
-            playbook: converge-mdbf.yml
-          - distro: ubuntu-20.04
-            playbook: converge.yml
-          - distro: ubuntu-20.04
-            playbook: converge-mdbf.yml
+        distro:
+          - ubuntu-18.04
+          - ubuntu-20.04
+          - ubuntu-21.04
+          - ubuntu-22.04
+          - debian-10
+          - debian-11
+          - debian-sid
+        playbook:
+          - converge.yml
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install requirements
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+        # This is necessary on GH Actions to allow running systemd in rootless containers
+        # see: https://github.com/actions/virtual-environments/issues/3536
+        # see: https://github.com/ansible-community/molecule/discussions/3155
+      - name: Start systemd user service
+        run: |
+          loginctl enable-linger $(whoami)
+          sleep 1
+      - name: Run molecule
+        run: molecule test
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
+
+  molecule-mdbf-pkg:
+    name: Molecule (MDBF)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - ubuntu-18.04
+          - ubuntu-20.04
+          - ubuntu-21.04
+          - ubuntu-22.04
+          - debian-10
+          - debian-11
+          - debian-sid
+        playbook:
+          - converge-mdbf.yml
+        mariadb-version:
+          - 10.3
+          - 10.4
+          - 10.5
+          - 10.6
+          - 10.7
+          - 10.8
+          - 10.9
+        exclude:
           - distro: ubuntu-21.04
-            playbook: converge.yml
+            mariadb-version: 10.3
           - distro: ubuntu-21.04
-            playbook: converge-mdbf.yml
+            mariadb-version: 10.4
+          - distro: ubuntu-21.04
+            mariadb-version: 10.8
+          - distro: ubuntu-21.04
+            mariadb-version: 10.9
           - distro: ubuntu-22.04
-            playbook: converge.yml
+            mariadb-version: 10.3
           - distro: ubuntu-22.04
-            playbook: converge-mdbf.yml
-          - distro: debian-10
-            playbook: converge.yml
-          - distro: debian-10
-            playbook: converge-mdbf.yml
+            mariadb-version: 10.4
+          - distro: ubuntu-22.04
+            mariadb-version: 10.5
+          # //TEMP remove below for next release
+          - distro: ubuntu-22.04
+            mariadb-version: 10.6
+          - distro: ubuntu-22.04
+            mariadb-version: 10.7
+          # //TEMP remove above for next release
           - distro: debian-11
-            playbook: converge.yml
+            mariadb-version: 10.3
           - distro: debian-11
-            playbook: converge-mdbf.yml
+            mariadb-version: 10.4
           - distro: debian-sid
-            playbook: converge.yml
+            mariadb-version: 10.3
+          - distro: debian-sid
+            mariadb-version: 10.4
+          - distro: debian-sid
+            mariadb-version: 10.5
+          - distro: debian-sid
+            mariadb-version: 10.6
+          - distro: debian-sid
+            mariadb-version: 10.7
+          - distro: debian-sid
+            mariadb-version: 10.8
+          - distro: debian-sid
+            mariadb-version: 10.9
 
     steps:
       - uses: actions/checkout@v3
@@ -62,3 +129,4 @@ jobs:
           ANSIBLE_FORCE_COLOR: "1"
           MOLECULE_DISTRO: ${{ matrix.distro }}
           MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
+          MARIADB_VERSION: ${{ matrix.mariadb-version }}
