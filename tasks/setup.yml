@@ -2,8 +2,8 @@
 - name: Install mariadb repo necessary packages
   ansible.builtin.apt:
     package:
-      - software-properties-common
-      - dirmngr
+      - apt-transport-https
+      - gnupg2
     state: present
     update_cache: true
   when: mariadb_use_official_repo
