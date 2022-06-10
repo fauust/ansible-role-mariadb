@@ -29,7 +29,7 @@
     hour: "{{ mariadb_backup_db_cron_hour }}"
     job: "/usr/local/bin/mariadb_dump_db.sh \
       -d \"{{ mariadb_backup_db_dir }}\" \
-      -l \"{{ mariadb_backup_db_name|join(',') }}\" \
+      -l \"{{ mariadb_backup_db_name | join(',') }}\" \
       -k {{ mariadb_backup_db_rotation }} \
       {{ mariadb_backup_cron_std_output }} {{ mariadb_backup_db_dir }}/mariadb_dump_db.log"
     cron_file: mariadb_dump_db

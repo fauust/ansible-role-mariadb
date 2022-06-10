@@ -16,7 +16,7 @@
 
 - name: Setup mariadb repository sourcelist entry
   ansible.builtin.apt_repository:
-    repo: deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution|lower() }} {{ ansible_distribution_release }} main
+    repo: deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ ansible_distribution_release }} main
     filename: mariadb
     state: present
   when: mariadb_use_official_repo
@@ -30,7 +30,7 @@
 
 - name: Determine required MariaDB Python libraries
   ansible.builtin.set_fact:
-    deb_mariadb_python_package: "{% if 'python3' in discovered_interpreter_python|default('') %}python3-pymysql{% else %}python-pymysql{% endif %}"
+    deb_mariadb_python_package: "{% if 'python3' in discovered_interpreter_python | default('') %}python3-pymysql{% else %}python-pymysql{% endif %}"
 
 - name: Install python mariadb driver
   ansible.builtin.apt:
