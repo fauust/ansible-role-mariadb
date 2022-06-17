@@ -1,4 +1,4 @@
 ansible
-molecule==3.6.*
+molecule==4.0.*
 molecule-podman
 pytest-testinfra
