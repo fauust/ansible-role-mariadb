@@ -17,7 +17,6 @@ jobs:
         distro:
           - ubuntu-18.04
           - ubuntu-20.04
-          - ubuntu-21.04
           - ubuntu-22.04
           - debian-10
           - debian-11
@@ -54,7 +53,6 @@ jobs:
         distro:
           - ubuntu-18.04
           - ubuntu-20.04
-          - ubuntu-21.04
           - ubuntu-22.04
           - debian-10
           - debian-11
@@ -70,14 +68,6 @@ jobs:
           - 10.8
           - 10.9
         exclude:
-          - distro: ubuntu-21.04
-            mariadb-version: 10.3
-          - distro: ubuntu-21.04
-            mariadb-version: 10.4
-          - distro: ubuntu-21.04
-            mariadb-version: 10.8
-          - distro: ubuntu-21.04
-            mariadb-version: 10.9
           - distro: ubuntu-22.04
             mariadb-version: 10.3
           - distro: ubuntu-22.04
