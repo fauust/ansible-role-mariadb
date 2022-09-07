@@ -28,11 +28,7 @@
     state: present
     update_cache: true
 
-- name: Determine required MariaDB Python libraries
-  ansible.builtin.set_fact:
-    deb_mariadb_python_package: "{% if 'python3' in discovered_interpreter_python | default('') %}python3-pymysql{% else %}python-pymysql{% endif %}"
-
 - name: Install python mariadb driver
   ansible.builtin.apt:
-    name: "{{ deb_mariadb_python_package }}"
+    name: python3-pymysql
     state: present
