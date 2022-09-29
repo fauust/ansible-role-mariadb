@@ -60,26 +60,27 @@ jobs:
         playbook:
           - converge-mdbf.yml
         mariadb-version:
-          - 10.3
-          - 10.4
-          - 10.5
-          - 10.6
-          - 10.7
-          - 10.8
-          - 10.9
+          - "10.3"
+          - "10.4"
+          - "10.5"
+          - "10.6"
+          - "10.7"
+          - "10.8"
+          - "10.9"
+          - "10.10"
         exclude:
+          - distro: ubuntu-18.04
+            mariadb-version: 10.3
+          - distro: ubuntu-20.04
+            mariadb-version: 10.3
           - distro: ubuntu-22.04
             mariadb-version: 10.3
           - distro: ubuntu-22.04
             mariadb-version: 10.4
           - distro: ubuntu-22.04
             mariadb-version: 10.5
-          # //TEMP remove below for next release
-          - distro: ubuntu-22.04
-            mariadb-version: 10.6
-          - distro: ubuntu-22.04
-            mariadb-version: 10.7
-          # //TEMP remove above for next release
+          - distro: debian-10
+            mariadb-version: 10.3
           - distro: debian-11
             mariadb-version: 10.3
           - distro: debian-11
@@ -98,6 +99,8 @@ jobs:
             mariadb-version: 10.8
           - distro: debian-sid
             mariadb-version: 10.9
+          - distro: debian-sid
+            mariadb-version: 10.10
 
     steps:
       - uses: actions/checkout@v3
