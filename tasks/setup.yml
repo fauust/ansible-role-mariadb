@@ -9,26 +9,27 @@
   when: mariadb_use_official_repo
 
 - name: Install mariadb repository key
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: "0xF1656F24C74CD1D8"
+  ansible.builtin.get_url:
+    url: "https://mariadb.org/mariadb_release_signing_key.asc"
+    dest: "/etc/apt/trusted.gpg.d/mariadb.asc"
+    # //TEMP todo
+    # checksum: sha256:http://example.com/path/sha256sum.txt
+    owner: root
+    group: root
+    mode: "0644"
   when: mariadb_use_official_repo
 
 - name: Setup mariadb repository sourcelist entry
-  ansible.builtin.apt_repository:
-    repo: deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ ansible_distribution_release }} main
-    filename: mariadb
-    state: present
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/mariadb.list
+    content: |
+      deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ ansible_distribution_release }} main
   when: mariadb_use_official_repo
 
-- name: Install mariadb
+- name: Install packages
   ansible.builtin.apt:
     package:
       - mariadb-server
+      - python3-pymysql
     state: present
     update_cache: true
-
-- name: Install python mariadb driver
-  ansible.builtin.apt:
-    name: python3-pymysql
-    state: present
