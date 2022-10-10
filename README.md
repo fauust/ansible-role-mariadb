@@ -71,21 +71,24 @@ Foundation package and it should be easy to change them all (see
 
 #### Basic settings
 
+`default value depends on OS` means that the value is overrided at OS level, see
+[`vars`](./vars).
+
 ```yaml
-mariadb_config_file: /etc/mysql/mariadb.cnf
-mariadb_datadir: /var/lib/mysql
+mariadb_config_file: "default value depends on OS"
+mariadb_data_dir: "default value depends on OS"
 mariadb_port: 3306
 mariadb_bind_address: 127.0.0.1
-mariadb_unix_socket: /run/mysqld/mysqld.sock
+mariadb_unix_socket: "default value depends on OS"
 ```
 
 ```yaml
 mariadb_basic_settings_raw: |
   user                  = mysql
-  pid-file              = /run/mysqld/mysqld.pid
+  pid-file              = {{ mariadb_pid_file }}
   socket                = {{ mariadb_unix_socket }}
   basedir               = /usr
-  datadir               = {{ mariadb_datadir }}
+  datadir               = {{ mariadb_data_dir }}
   tmpdir                = /tmp
   lc-messages-dir       = /usr/share/mysql
   lc_messages           = en_US
@@ -120,7 +123,7 @@ mariadb_query_cache_raw: |
 
 ```yaml
 mariadb_logging_raw: |
-  log_error = /var/log/mysql/error.log
+  log_error = "default value depends on OS"
 ```
 
 #### Character sets

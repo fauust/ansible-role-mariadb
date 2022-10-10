@@ -1,8 +1,7 @@
 ---
 - name: Install cron package
-  ansible.builtin.apt:
-    package:
-      - cron
+  ansible.builtin.package:
+    name: "{{ mariadb_cron_package_name }}"
     state: present
 
 - name: Deploy DB dump script

@@ -1,0 +1,9 @@
+---
+mariadb_user: mysql
+mariadb_config_file: "/etc/mysql/mariadb.cnf"
+mariadb_data_dir: "/var/lib/mysql"
+mariadb_pid_file: "/run/mysqld/mysqld.pid"
+mariadb_unix_socket: "/run/mysqld/mysqld.sock"
+mariadb_log_dir: "/var/log/mysql"
+mariadb_log_error_file: "{{ mariadb_log_dir }}/error.log"
+mariadb_cron_package_name: "cron"

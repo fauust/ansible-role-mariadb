@@ -1,0 +1,42 @@
+---
+# //TEMP find a way to handle multiarch (see mirror.mariadb.org).
+- name: Setup mariadb repository
+  ansible.builtin.copy:
+    dest: /etc/yum.repos.d/MariaDB.repo
+    content: |
+      # https://mariadb.org/download/
+      [mariadb]
+      name = MariaDB
+      {% if ansible_distribution == "Fedora" %}
+      baseurl = https://yum.mariadb.org/{{ mariadb_use_official_repo_version }}/fedora{{ ansible_distribution_major_version }}-amd64
+      {% else %}
+      baseurl = https://yum.mariadb.org/{{ mariadb_use_official_repo_version }}/rhel{{ ansible_distribution_major_version }}-amd64
+      {% endif %}
+      gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+      module_hotfixes = 1
+      gpgcheck = 1
+    owner: root
+    group: root
+    mode: "0644"
+  when: mariadb_use_official_repo
+
+- name: Install packages
+  ansible.builtin.dnf:
+    name:
+      - mariadb-server
+      - python3-PyMySQL
+    state: present
+
+- name: Check if mariadb command exists
+  ansible.builtin.stat:
+    path: /usr/bin/mariadb
+  register: mariadb_cmd
+
+- name: Make sure that mariadb command exists
+  ansible.builtin.file:
+    src: /usr/bin/mysql
+    dest: /usr/bin/mariadb
+    owner: root
+    group: root
+    state: link
+  when: mariadb_cmd.stat.exists is false

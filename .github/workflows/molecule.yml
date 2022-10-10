@@ -9,7 +9,7 @@ on:
 
 jobs:
   molecule-distrib-pkg:
-    name: Molecule
+    name: Default
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -21,6 +21,12 @@ jobs:
           - debian-10
           - debian-11
           - debian-sid
+          - fedora-36
+          - fedora-37
+          - almalinux-8
+          - almalinux-9
+          - rockylinux-8
+          - rockylinux-9
         playbook:
           - converge.yml
     steps:
@@ -45,7 +51,7 @@ jobs:
           MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
 
   molecule-mdbf-pkg:
-    name: Molecule (MDBF)
+    name: MDBF
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -57,8 +63,14 @@ jobs:
           - debian-10
           - debian-11
           - debian-sid
+          - fedora-36
+          # - fedora-37
+          - almalinux-8
+          - almalinux-9
+          - rockylinux-8
+          - rockylinux-9
         playbook:
-          - converge-mdbf.yml
+          - mdbf.yml
         mariadb-version:
           - "10.3"
           - "10.4"
@@ -89,18 +101,20 @@ jobs:
             mariadb-version: 10.3
           - distro: debian-sid
             mariadb-version: 10.4
-          - distro: debian-sid
+          - distro: fedora-36
+            mariadb-version: 10.3
+          - distro: fedora-36
+            mariadb-version: 10.4
+          - distro: fedora-36
             mariadb-version: 10.5
-          - distro: debian-sid
-            mariadb-version: 10.6
-          - distro: debian-sid
-            mariadb-version: 10.7
-          - distro: debian-sid
-            mariadb-version: 10.8
-          - distro: debian-sid
-            mariadb-version: 10.9
-          - distro: debian-sid
-            mariadb-version: 10.10
+          - distro: almalinux-9
+            mariadb-version: 10.3
+          - distro: almalinux-9
+            mariadb-version: 10.4
+          - distro: rockylinux-9
+            mariadb-version: 10.3
+          - distro: rockylinux-9
+            mariadb-version: 10.4
 
     steps:
       - uses: actions/checkout@v3

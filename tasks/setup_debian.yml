@@ -19,11 +19,32 @@
     mode: "0644"
   when: mariadb_use_official_repo
 
+- name: Determine distribution name (Debian sid pb)
+  ansible.builtin.set_fact:
+    distribution: "{% if 'n/a' in ansible_distribution_release %}sid{% else %}{{ ansible_distribution_release }}{% endif %}"
+
 - name: Setup mariadb repository sourcelist entry
   ansible.builtin.copy:
     dest: /etc/apt/sources.list.d/mariadb.list
     content: |
-      deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ ansible_distribution_release }} main
+      # Ansible managed
+      deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ distribution }} main
+    owner: root
+    group: root
+    mode: "0644"
+  when: mariadb_use_official_repo
+
+- name: Prefer MariaDB repo over Debian repo
+  ansible.builtin.copy:
+    dest: /etc/apt/preferences.d/release
+    content: |
+      # Ansible managed
+      Package: *
+      Pin: origin {{ mariadb_use_official_repo_url | urlsplit('hostname') }}
+      Pin-Priority: 1000
+    owner: root
+    group: root
+    mode: "0644"
   when: mariadb_use_official_repo
 
 - name: Install packages

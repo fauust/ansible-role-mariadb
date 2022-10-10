@@ -16,4 +16,10 @@ provisioner:
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 verifier:
-  name: testinfra
+  name: ansible
+scenario:
+  test_sequence:
+    - create
+    - converge
+    - idempotence
+    - verify
