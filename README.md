@@ -21,7 +21,26 @@ ansible modules that depend on [PyMySQL](https://github.com/PyMySQL/PyMySQL).
 Only Python 3.X versions are supported and tested. Python 2.7 is probalbly
 working but not tested.
 
-## Testing (Molecule)
+### pre-commit
+
+Any code submitted to this project is checked with the
+[pre-commit](https://pre-commit.com/) framework. To make sure that your
+code will pass the checks, you can execute the pre-commit checks locally before
+"git pushing" your code.
+
+Here is how:
+
+```console
+make venv
+source .venv/bin/activate
+make install-pre-commit
+make pre-commit-run
+```
+
+You can also [install](https://pre-commit.com/#install) the pre-commit tool so
+that any commit will be checked automatically.
+
+### Testing (Molecule)
 
 The role is tested with the [Molecule
 project](https://molecule.readthedocs.io/en/latest/index.html). By default this
