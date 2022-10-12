@@ -32,9 +32,9 @@
     - mariadb_users is defined
     - mariadb_replication_role != "replica"
 
-- name: Include task replication_master.yml
-  ansible.builtin.import_tasks: replication_master.yml
-  when: mariadb_replication_role == "master"
+- name: Include task replication_primary.yml
+  ansible.builtin.import_tasks: replication_primary.yml
+  when: mariadb_replication_role == "primary"
 
 - name: Include task replication_replica.yml
   ansible.builtin.import_tasks: replication_replica.yml

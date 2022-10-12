@@ -94,7 +94,7 @@ mariadb_users: []
 # Replication
 # replication is only enabled if mariadb_replication_role has values
 mariadb_replication_role: ""
-mariadb_replication_master_ip: ""
+mariadb_replication_primary_ip: ""
 mariadb_max_binlog_size: 100M
 mariadb_binlog_format: MIXED
 mariadb_expire_logs_days: 10

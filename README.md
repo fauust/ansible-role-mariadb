@@ -8,7 +8,7 @@ Install and configure MariaDB Server on Debian/Ubuntu.
 
 Optionally, this role also permits one to:
 
-- deploy a master/replica cluster;
+- deploy a primary/replica cluster;
 - setup backups and rotation of the dumps.
 
 ## Requirements
@@ -214,19 +214,11 @@ See: <https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html>
 
 ### Replication (optional)
 
-Replication is only enabled if `mariadb_replication_role` has a value (`master` or
+Replication is only enabled if `mariadb_replication_role` has a value (`primary` or
 `replica`).
 
-The replication setup on the replica use the GTID autopositioning
-`master_use_gtid=slave_pos`. See:
+The replication setup on the replica use the GTID autopositioning, see
 <https://mariadb.com/kb/en/library/change-master-to/#master_use_gtid>
-
-For the moment, we use an `SQL` command but in ansible 2.10, we should be able
-to use the
-[`mysql_replication`](https://docs.ansible.com/ansible/latest/modules/mysql_replication_module.html)
-module (see
-[`tasks/replication_replica.yml`](./tasks/replication_replica.yml#L09-L33) and
-<https://github.com/ansible/ansible/pull/62648>).
 
 #### Common vars
 
@@ -236,10 +228,10 @@ module (see
 mariadb_replication_user: []
 ```
 
-#### Master variables
+#### Primary node variables
 
 ```yaml
-mariadb_replication_role: master
+mariadb_replication_role: primary
 mariadb_server_id: 1
 mariadb_max_binlog_size: 100M
 mariadb_binlog_format: MIXED
@@ -251,7 +243,7 @@ mariadb_expire_logs_days: 10
 ```yaml
 mariadb_replication_role: replica
 mariadb_server_id: 1
-mariadb_replication_master_ip: IP
+mariadb_replication_primary_ip: IP
 ```
 
 ### Backups (optional)

@@ -25,13 +25,13 @@
 server-id = {{ mariadb_server_id }}
 log-basename = mariadb
 
-{% if mariadb_replication_role == 'master' %}
+{% if mariadb_replication_role == 'primary' %}
 log_bin
 expire_logs_days = {{ mariadb_expire_logs_days }}
 max_binlog_size = {{ mariadb_max_binlog_size }}
 binlog_format = {{mariadb_binlog_format}}
-# the following permits to simplify the process of moving a replica to a master
-# role by ensuring that replication is not started on master
+# the following permits to simplify the process of moving a replica to a
+# primary node role by ensuring that replication is not started on primary node
 skip-slave-start
 
 {% for db in mariadb_databases %}

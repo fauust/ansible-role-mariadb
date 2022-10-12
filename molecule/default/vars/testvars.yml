@@ -1,7 +1,7 @@
 ---
 mariadb_server_id: 1
 mariadb_bind_address: 0.0.0.0
-mariadb_replication_role: master
+mariadb_replication_role: primary
 
 mariadb_innodb_raw: |
   innodb_buffer_pool_size = 512M

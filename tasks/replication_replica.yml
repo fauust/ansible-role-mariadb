@@ -20,10 +20,10 @@
 - name: Configure replication on the replica
   community.mysql.mysql_replication:
     mode: changeprimary
-    master_host: "{{ mariadb_replication_master_ip }}"
-    master_user: "{{ item.name }}"
-    master_password: "{{ item.password }}"
-    master_use_gtid: "{{ mariadb_replication_gtid | default('replica_pos') }}"
+    primary_host: "{{ mariadb_replication_primary_ip }}"
+    primary_user: "{{ item.name }}"
+    primary_password: "{{ item.password }}"
+    primary_use_gtid: "{{ mariadb_replication_gtid | default('replica_pos') }}"
     login_unix_socket: "{{ mariadb_unix_socket }}"
   loop: "{{ mariadb_replication_user }}"
   when:

@@ -16,7 +16,7 @@
 - name: Verify replication
   hosts: replica
   tasks:
-    - name: Check that test db exist (created only on master)
+    - name: Check that test db exist (created only on primary node)
       ansible.builtin.shell: |
         mariadb -Bse 'SHOW DATABASES' | grep -q '^{{ item }}$'
       loop:

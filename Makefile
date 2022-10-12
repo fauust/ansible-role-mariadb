@@ -30,9 +30,9 @@ install-pre-commit: ## Install pre-commit tool
 	$(info --> Install pre-commit tool via `pip3`)
 	pip3 install pre-commit
 
-pre-commit-run: ## Run pre-commit hooks with $PRE_COMMIT_ARGS default to (diff master...[current_branch])
+pre-commit-run: ## Run pre-commit hooks
 	$(info --> run pre-commit on changed files (pre-commit run))
-	pre-commit run $(PRE_COMMIT_ARGS) --color=always
+	pre-commit run --color=always
 
 pre-commit-run-all: ## Run pre-commit on the whole repository
 	$(info --> run pre-commit on the whole repo (pre-commit run -a))

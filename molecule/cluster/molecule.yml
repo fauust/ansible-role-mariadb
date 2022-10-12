@@ -38,12 +38,12 @@ provisioner:
             state: present
       replica:
         mariadb_replication_role: replica
-        mariadb_replication_master_ip: node1
+        mariadb_replication_primary_ip: node1
     host_vars:
       node1:
         mariadb_server_id: 1
         mariadb_bind_address: 0.0.0.0
-        mariadb_replication_role: master
+        mariadb_replication_role: primary
         mariadb_max_binlog_size: 100M
         mariadb_binlog_format: MIXED
         mariadb_expire_logs_days: 10

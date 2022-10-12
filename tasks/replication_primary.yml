@@ -1,5 +1,5 @@
 ---
-- name: Ensure replication user exists on master
+- name: Ensure replication user exists on primary node
   community.mysql.mysql_user:
     name: "{{ item.name }}"
     host: "{{ item.host | default('%') }}"
