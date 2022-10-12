@@ -1,6 +1,6 @@
 ---
 - name: Ensure replication user exists on master
-  mysql_user:
+  community.mysql.mysql_user:
     name: "{{ item.name }}"
     host: "{{ item.host | default('%') }}"
     password: "{{ item.password }}"

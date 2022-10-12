@@ -84,9 +84,7 @@ variables. This permits more flexibility and a very simple
 
 By default, some common and standard options are deployed based on the MariaDB
 Foundation package. Those default values are only ment as an example and for testing
-deployments and you are encouraged to use your own values. This should be
-facilitated by extensive use of `raw` variables (see
-[`templates/mariadb.cnf.j2`](./templates/mariadb.cnf.j2).
+deployments and you are encouraged to use your own values.
 
 #### Basic settings
 

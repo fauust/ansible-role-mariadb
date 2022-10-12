@@ -9,39 +9,39 @@
       paths:
         - "vars"
 
-- name: include task setup_debian.yml
-  import_tasks: setup_debian.yml
+- name: Include task setup_debian.yml
+  ansible.builtin.import_tasks: setup_debian.yml
   when: ansible_os_family == "Debian"
 
-- name: include task setup_redhat.yml
-  import_tasks: setup_redhat.yml
+- name: Include task setup_redhat.yml
+  ansible.builtin.import_tasks: setup_redhat.yml
   when: ansible_os_family == "RedHat"
 
-- name: include task configure.yml
-  import_tasks: configure.yml
+- name: Include task configure.yml
+  ansible.builtin.import_tasks: configure.yml
 
-- name: include task databases.yml
-  import_tasks: databases.yml
+- name: Include task databases.yml
+  ansible.builtin.import_tasks: databases.yml
   when:
     - mariadb_databases is defined
     - mariadb_replication_role != "replica"
 
-- name: include task users.yml
-  import_tasks: users.yml
+- name: Include task users.yml
+  ansible.builtin.import_tasks: users.yml
   when:
     - mariadb_users is defined
     - mariadb_replication_role != "replica"
 
-- name: include task replication_master.yml
-  import_tasks: replication_master.yml
+- name: Include task replication_master.yml
+  ansible.builtin.import_tasks: replication_master.yml
   when: mariadb_replication_role == "master"
 
-- name: include task replication_replica.yml
-  import_tasks: replication_replica.yml
+- name: Include task replication_replica.yml
+  ansible.builtin.import_tasks: replication_replica.yml
   when:
     - not ansible_check_mode
     - mariadb_replication_role == "replica"
 
-- name: include task backup.yml
-  import_tasks: backup.yml
+- name: Include task backup.yml
+  ansible.builtin.import_tasks: backup.yml
   when: mariadb_backup_db
