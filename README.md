@@ -1,8 +1,9 @@
 # Ansible role: MariaDB
 
 [![pre-commit](https://github.com/fauust/ansible-role-mariadb/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/pre-commit.yml)
-[![default](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_default.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_default.yml)
+[![Default](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_default.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_default.yml)
 [![MDBF](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_mdbf.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_mdbf.yml)
+[![Cluster](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster.yml)
 
 Install and configure MariaDB Server on Debian/Ubuntu.
 
@@ -18,7 +19,7 @@ The role uses
 and
 [`community.mysql.mysql_db`](https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_db_module.html)
 ansible modules that depend on [PyMySQL](https://github.com/PyMySQL/PyMySQL).
-Only Python 3.X versions are supported and tested. Python 2.7 is probalbly
+Only Python 3.X versions are supported and tested. Python 2.7 is probably
 working but not tested.
 
 ### pre-commit
@@ -31,10 +32,10 @@ code will pass the checks, you can execute the pre-commit checks locally before
 Here is how:
 
 ```console
-make venv
-source .venv/bin/activate
-make install-pre-commit
-make pre-commit-run
+❯ make venv
+❯ source .venv/bin/activate
+.venv ❯ make install-pre-commit
+.venv ❯ make pre-commit-run
 ```
 
 You can also [install](https://pre-commit.com/#install) the pre-commit tool so
@@ -57,6 +58,15 @@ packaged by the MariaDB Foundation (MDBF) on `Almalinux 9`:
 .venv ❯ export MOLECULE_PLAYBOOK=converge-mdbf.yml
 .venv ❯ export MARIADB_VERSION="10.6"
 .venv ❯ molecule test
+...
+```
+
+And here is another example how you can test a deployment of a MariaDB Server
+cluster (3 nodes: 1 primary, 2 replica) on `fedora 37`:
+
+```console
+.venv ❯ export MOLECULE_DISTRO=fedora-37
+.venv ❯ molecule test -s cluster
 ...
 ```
 
@@ -102,12 +112,12 @@ variables. This permits more flexibility and a very simple
 [`templates/mariadb.cnf.j2`](./templates/mariadb.cnf.j2) file.
 
 By default, some common and standard options are deployed based on the MariaDB
-Foundation package. Those default values are only ment as an example and for testing
+Foundation package. Those default values are only meant as an example and for testing
 deployments and you are encouraged to use your own values.
 
 #### Basic settings
 
-`default value depends on OS` means that the value is overrided at OS level, see
+`default value depends on OS` means that the value is overridden at OS level, see
 [`vars`](./vars).
 
 ```yaml
@@ -133,7 +143,7 @@ mariadb_basic_settings_raw: |
   bind-address          = {{ mariadb_bind_address }}
 ```
 
-#### Fine tuning
+#### Fine-tuning
 
 ```yaml
 mariadb_fine_tuning_raw: |
@@ -174,7 +184,7 @@ mariadb_character_sets_raw: |
 
 ```yaml
 mariadb_innodb_raw: |
-  # InnoDB is enabled by default with a 10MB datafile in /var/lib/mysql/.
+  # InnoDB is enabled by default with a 10 MB datafile in /var/lib/mysql/.
   # Read the manual for more InnoDB related options. There are many!
 ```
 

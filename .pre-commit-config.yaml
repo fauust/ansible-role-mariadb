@@ -27,6 +27,13 @@ repos:
         # args: ["-x", "602"]
         exclude_types: [markdown, shell]
         types: [yaml]
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.1
+    hooks:
+      - id: codespell
+        name: Checks for common misspellings in text files
+        entry: codespell
+        language: python
   - repo: local
     hooks:
       - id: docker-markdownlint
