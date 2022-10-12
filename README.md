@@ -1,7 +1,8 @@
 # Ansible role: MariaDB
 
 [![pre-commit](https://github.com/fauust/ansible-role-mariadb/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/pre-commit.yml)
-[![molecule](https://github.com/fauust/ansible-role-mariadb/actions/workflows/molecule.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/molecule.yml)
+[![default](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_default.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_default.yml)
+[![MDBF](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_mdbf.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_mdbf.yml)
 
 Install and configure MariaDB Server on Debian/Ubuntu.
 
@@ -13,21 +14,37 @@ Optionally, this role also permits one to:
 ## Requirements
 
 The role uses
-[`mysql_user`](https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html)
+[`community.mysql.mysql_user`](https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_user_module.html)
 and
-[`mysql_db`](https://docs.ansible.com/ansible/latest/modules/mysql_db_module.html)
-ansible modules that depend on [PyMySQL](https://github.com/PyMySQL/PyMySQL) so
-Python 2.7 or Python 3.X versions are needed.
+[`community.mysql.mysql_db`](https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_db_module.html)
+ansible modules that depend on [PyMySQL](https://github.com/PyMySQL/PyMySQL).
+Only Python 3.X versions are supported and tested. Python 2.7 is probalbly
+working but not tested.
 
-For older Python versions, you may use
-[MySQLdb](http://mysql-python.sourceforge.net/MySQLdb.html) but then the role
-may not be idempotent (not tested).
+## Testing (Molecule)
+
+The role is tested with the [Molecule
+project](https://molecule.readthedocs.io/en/latest/index.html). By default this
+role will be tested with the `podman` driver, but you can easily adapt it to use
+`docker` if you prefer.
+
+Here is an example how you can test a deployment of MariaDB Server `10.6`
+packaged by the MariaDB Foundation (MDBF) on `Almalinux 9`:
+
+```console
+❯ make install
+❯ source .venv/bin/activate
+.venv ❯ export MOLECULE_DISTRO=almalinux-9
+.venv ❯ export MOLECULE_PLAYBOOK=converge-mdbf.yml
+.venv ❯ export MARIADB_VERSION="10.6"
+.venv ❯ molecule test
+...
+```
 
 ## Fact gathering (performance)
 
-Unless you want to use the MariaDB official repository (and then need
-`ansible_distribution_version`, see [`tasks/setup.yml`](./tasks/setup.yml#L18))
-this role does not require fact gathering.
+Fact gathering is only needed if you want to use the MariaDB official repository
+(<https://mariadb.org/download/?t=repo-config>)
 
 ## Role variables
 
@@ -39,7 +56,7 @@ Available variables are listed below, along with default values (see
 ```yaml
 mariadb_use_official_repo: false
 mariadb_use_official_repo_url: https://deb.mariadb.org
-mariadb_use_official_repo_version: 10.5
+mariadb_use_official_repo_version: "10.10"
 ```
 
 You may deploy the MariaDB Server version that comes with your distribution
@@ -66,8 +83,10 @@ variables. This permits more flexibility and a very simple
 [`templates/mariadb.cnf.j2`](./templates/mariadb.cnf.j2) file.
 
 By default, some common and standard options are deployed based on the MariaDB
-Foundation package and it should be easy to change them all (see
-[`mariadb.cnf`](./mariadb.cnf)).
+Foundation package. Those default values are only ment as an example and for testing
+deployments and you are encouraged to use your own values. This should be
+facilitated by extensive use of `raw` variables (see
+[`templates/mariadb.cnf.j2`](./templates/mariadb.cnf.j2).
 
 #### Basic settings
 

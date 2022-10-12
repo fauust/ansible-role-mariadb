@@ -1,0 +1,69 @@
+---
+name: Default deployment
+
+on:
+  push:
+    paths:
+      - .github/workflows/test_default.yml
+      - requirements.txt
+      - "files/**"
+      - "handlers/**"
+      - "molecule/**"
+      - "tasks/**"
+      - "templates/**"
+      - "vars/**"
+  pull_request:
+    paths:
+      - .github/workflows/test_default.yml
+      - requirements.txt
+      - "files/**"
+      - "handlers/**"
+      - "molecule/**"
+      - "tasks/**"
+      - "templates/**"
+      - "vars/**"
+  schedule:
+    - cron: "0 5 * * 2"
+
+jobs:
+  molecule-distrib-pkg:
+    name: Default
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - ubuntu-18.04
+          - ubuntu-20.04
+          - ubuntu-22.04
+          - debian-10
+          - debian-11
+          - debian-sid
+          - fedora-36
+          - fedora-37
+          - almalinux-8
+          - almalinux-9
+          - rockylinux-8
+          - rockylinux-9
+        playbook:
+          - converge.yml
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install requirements
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+        # This is necessary on GH Actions to allow running systemd in rootless containers
+        # see: https://github.com/actions/virtual-environments/issues/3536
+        # see: https://github.com/ansible-community/molecule/discussions/3155
+      - name: Start systemd user service
+        run: |
+          loginctl enable-linger $(whoami)
+          sleep 1
+      - name: Run molecule
+        run: molecule test
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
