@@ -1,0 +1,116 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Load OS-specific vars
+      ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
+      vars:
+        params:
+          files:
+            - "{{ ansible_distribution }}.yml"
+            - "{{ ansible_os_family }}.yml"
+          paths:
+            - "vars"
+
+    - name: Gather package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Verify Packages
+      ansible.builtin.assert:
+        that: "'mariadb-server' in ansible_facts.packages|lower"
+
+    - name: Register {{ mariadb_config_file }}
+      ansible.builtin.stat:
+        path: "{{ mariadb_config_file }}"
+      register: conf
+
+    - name: Check {{ mariadb_config_file }}
+      ansible.builtin.assert:
+        that:
+          - conf.stat.exists is true
+          - conf.stat.pw_name == 'root'
+          - conf.stat.gr_name == 'root'
+
+    - name: Register {{ mariadb_data_dir }}
+      ansible.builtin.stat:
+        path: "{{ mariadb_data_dir }}"
+      register: datadir
+
+    - name: Check {{ mariadb_data_dir }}
+      ansible.builtin.assert:
+        that:
+          - datadir.stat.isdir is true
+          - datadir.stat.pw_name == "{{ mariadb_user }}"
+          - datadir.stat.gr_name == "{{ mariadb_user }}"
+
+    - name: Register {{ mariadb_log_dir }}
+      ansible.builtin.stat:
+        path: "{{ mariadb_log_dir }}"
+      register: logdir
+
+    - name: Check {{ mariadb_log_dir }}
+      ansible.builtin.assert:
+        that:
+          - logdir.stat.isdir is true
+          - logdir.stat.pw_name == "{{ mariadb_user }}"
+          - logdir.stat.gr_name == "{{ mariadb_user }}"
+
+    - name: Get mariadb service status
+      ansible.builtin.systemd:
+        name: "mariadb"
+      register: mariadb_service
+
+    - name: Check that mariadb service is active
+      ansible.builtin.assert:
+        that:
+          - mariadb_service.status.ActiveState == 'active'
+
+    - name: Check that 127.0.0.1:3306 is listening
+      ansible.builtin.wait_for:
+        port: 3306
+        timeout: 2
+
+    - name: Get MariaDB version
+      ansible.builtin.shell: |
+        sudo mariadb -Bse 'STATUS' | grep "^Server version:"
+      register: version
+      when: "{{ lookup('env', 'MARIADB_VERSION') }}"
+
+    - name: Check MariaDB version
+      ansible.builtin.assert:
+        that:
+          - "'{{ lookup('env', 'MARIADB_VERSION') }}' in version.stdout"
+        msg: "{{ version.stdout }}"
+      when: "{{ lookup('env', 'MARIADB_VERSION') }}"
+
+    - name: Check that Innodb engine is enabled (and default)
+      ansible.builtin.shell: |
+        sudo mariadb -Bse 'SHOW ENGINES' | grep -qE '^InnoDB.DEFAULT.*YES.YES.YES$'
+
+    - name: Check that default db exist
+      ansible.builtin.shell: |
+        sudo mariadb -Bse 'SHOW DATABASES' | grep -q '^{{ item }}$'
+      loop:
+        - mysql
+        - information_schema
+        - performance_schema
+
+    - name: Check that test db exist
+      ansible.builtin.shell: |
+        sudo mariadb -Bse 'SHOW DATABASES' | grep -q '^{{ item }}$'
+      loop:
+        - db1
+        - db2
+
+    - name: Do some SQL queries
+      ansible.builtin.shell: |
+        sudo mariadb -Bse 'DROP DATABASE IF EXIST db'
+        sudo mariadb -Bse 'CREATE DATABASE db'
+        sudo mariadb -e 'CREATE TABLE db.t_innodb(a1 SERIAL, c1 CHAR(8)) ENGINE=InnoDB; INSERT INTO db.t_innodb VALUES (1,"foo"),(2,"bar")'
+        sudo mariadb -e 'CREATE FUNCTION db.f() RETURNS INT DETERMINISTIC RETURN 1'
+        sudo mariadb -e 'SHOW TABLES IN db'
+        sudo mariadb -e 'SELECT * FROM db.t_innodb; INSERT INTO db.t_innodb VALUES (3,"foo"),(4,"bar")'
+        sudo mariadb -e 'SELECT db.f()'

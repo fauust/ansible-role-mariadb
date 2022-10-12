@@ -1,0 +1,38 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+platforms:
+  - name: node1
+    box: ${TESTBOX:-debian/buster64}
+    interfaces:
+      - network_name: private_network
+        ip: 192.168.56.11
+    memory: 1024
+    cpus: 2
+    provider_options:
+      # using session with network leads to troubles
+      qemu_use_session: false
+    config_options:
+      synced_folder: true
+    instance_raw_config_args:
+      - 'vm.synced_folder ".", "/vagrant", type: "rsync"'
+  - name: node2
+    box: ${TESTBOX:-debian/bullseye64}
+    interfaces:
+      - network_name: private_network
+        ip: 192.168.56.12
+    memory: 1024
+    cpus: 2
+    provider_options:
+      # using session with network leads to troubles
+      qemu_use_session: false
+    instance_raw_config_args:
+      - 'vm.synced_folder ".", "/vagrant", type: "rsync"'
+provisioner:
+  name: ansible
+scenario:
+  name: vagrant

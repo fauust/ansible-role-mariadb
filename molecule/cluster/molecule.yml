@@ -1,0 +1,71 @@
+---
+driver:
+  name: podman
+platforms:
+  - name: node1
+    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    override_command: false
+    pre_build_image: true
+    network: local
+  - name: node2
+    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    override_command: false
+    pre_build_image: true
+    groups:
+      - replica
+    network: local
+  - name: node3
+    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    override_command: false
+    pre_build_image: true
+    groups:
+      - replica
+    network: local
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        mariadb_replication_user:
+          - name: ReplicationUser
+            password: ReplicationPassword
+            state: present
+      replica:
+        mariadb_replication_role: replica
+        mariadb_replication_master_ip: node1
+    host_vars:
+      node1:
+        mariadb_server_id: 1
+        mariadb_bind_address: 0.0.0.0
+        mariadb_replication_role: master
+        mariadb_max_binlog_size: 100M
+        mariadb_binlog_format: MIXED
+        mariadb_expire_logs_days: 10
+        mariadb_databases:
+          - name: db
+            state: present
+            replicate: true
+      node2:
+        mariadb_server_id: 2
+      node3:
+        mariadb_server_id: 3
+  env:
+    ANSIBLE_GATHERING: explicit
+    ANSIBLE_FORCE_COLOR: true
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+verifier:
+  name: ansible
+scenario:
+  name: cluster
+  test_sequence:
+    - create
+    - converge
+    - idempotence
+    - verify

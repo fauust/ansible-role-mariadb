@@ -1,0 +1,34 @@
+---
+- name: Verify setup
+  hosts: all
+
+  tasks:
+    - name: Get mariadb service status
+      ansible.builtin.systemd:
+        name: "mariadb"
+      register: mariadb_service
+
+    - name: Check that mariadb service is active
+      ansible.builtin.assert:
+        that:
+          - mariadb_service.status.ActiveState == 'active'
+
+- name: Verify replication
+  hosts: replica
+  tasks:
+    - name: Check that test db exist (created only on master)
+      ansible.builtin.shell: |
+        mariadb -Bse 'SHOW DATABASES' | grep -q '^{{ item }}$'
+      loop:
+        - db
+
+    - name: Get replica status
+      ansible.builtin.shell: |
+        mariadb -Bse 'SHOW SLAVE STATUS\G'
+      register: replica_status
+
+    - name: Check that replication is working
+      ansible.builtin.assert:
+        that:
+          - "'Waiting for master to send event' in replica_status.stdout"
+        msg: "{{ replica_status.stdout }}"

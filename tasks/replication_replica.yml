@@ -6,31 +6,29 @@
   register: replica
   no_log: true
 
-# For the moment, we have to use a sql command.
-# In ansible 2.10, we should be able to use mysql_replication module.
-# See https://github.com/ansible/ansible/pull/62648 (and below)
+# # Keeping this for the record
+# # See https://github.com/ansible/ansible/pull/62648
+# - name: Configure replication on the replica
+#   ansible.builtin.command: |
+#     /usr/bin/mariadb -e "CHANGE MASTER TO master_host='{{ mariadb_replication_master_ip }}',
+#     master_user='{{ item.name }}', master_password='{{ item.password }}', master_use_gtid=slave_pos"
+#   loop: "{{ mariadb_replication_user }}"
+#   when:
+#     - not replica.Is_Replica
+#   no_log: true
+
 - name: Configure replication on the replica
-  ansible.builtin.command: |
-    /usr/bin/mariadb -e "CHANGE MASTER TO master_host='{{ mariadb_replication_master_ip }}',
-    master_user='{{ item.name }}', master_password='{{ item.password }}', master_use_gtid=slave_pos"
+  community.mysql.mysql_replication:
+    mode: changeprimary
+    master_host: "{{ mariadb_replication_master_ip }}"
+    master_user: "{{ item.name }}"
+    master_password: "{{ item.password }}"
+    master_use_gtid: "{{ mariadb_replication_gtid | default('replica_pos') }}"
+    login_unix_socket: "{{ mariadb_unix_socket }}"
   loop: "{{ mariadb_replication_user }}"
   when:
     - not replica.Is_Replica
   no_log: true
-
-# # Following (not tested) should work on ansible 2.10
-# - name: Configure replication on the replica
-#   mysql_replication:
-#     mode: changemaster
-#     master_host: "{{ mariadb_replication_master_ip }}"
-#     master_user: "{{ item.name }}"
-#     master_password: "{{ item.password }}"
-#     master_use_gtid: "{{ mariadb_replication_gtid | default('slave_pos') }}
-#     login_unix_socket: "{{ mariadb_unix_socket }}"
-#   loop: "{{ mariadb_replication_user }}"
-#   when:
-#     - not replica.Is_Slave
-#   no_log: true
 
 - name: Reset replica replication
   community.mysql.mysql_replication:
