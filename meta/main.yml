@@ -21,13 +21,8 @@ galaxy_info:
         - jammy
     - name: Fedora
       versions:
-        - 36
-        - 37
-    - name: Almalinux
-      versions:
-        - 8
-        - 9
-    - name: Rockylinux
+        - all
+    - name: EL
       versions:
         - 8
         - 9
