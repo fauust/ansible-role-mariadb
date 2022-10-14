@@ -23,7 +23,7 @@ on:
       - "templates/**"
       - "vars/**"
   schedule:
-    - cron: "0 5 * * 2"
+    - cron: "10 5 * * 2"
 
 jobs:
   molecule-mdbf-pkg:
@@ -45,8 +45,6 @@ jobs:
           - almalinux-9
           - rockylinux-8
           - rockylinux-9
-        playbook:
-          - mdbf.yml
         mariadb-version:
           - "10.3"
           - "10.4"
@@ -111,5 +109,5 @@ jobs:
           PY_COLORS: "1"
           ANSIBLE_FORCE_COLOR: "1"
           MOLECULE_DISTRO: ${{ matrix.distro }}
-          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
+          MOLECULE_PLAYBOOK: mdbf.yml
           MARIADB_VERSION: ${{ matrix.mariadb-version }}

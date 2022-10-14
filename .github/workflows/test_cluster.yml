@@ -45,8 +45,6 @@ jobs:
           - almalinux-9
           - rockylinux-8
           # - rockylinux-9
-        playbook:
-          - converge.yml
     steps:
       - uses: actions/checkout@v3
       - name: Install requirements
@@ -66,4 +64,3 @@ jobs:
           PY_COLORS: "1"
           ANSIBLE_FORCE_COLOR: "1"
           MOLECULE_DISTRO: ${{ matrix.distro }}
-          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}

@@ -1,50 +1,49 @@
 ---
-name: Default deployment
+name: Cluster MDBF
 
 on:
   push:
     paths:
-      - .github/workflows/test_default.yml
+      - .github/workflows/test_cluster_mdbf.yml
       - requirements.txt
       - "files/**"
       - "handlers/**"
-      - "molecule/default/**"
+      - "molecule/cluster/**"
       - "tasks/**"
       - "templates/**"
       - "vars/**"
   pull_request:
     paths:
-      - .github/workflows/test_default.yml
+      - .github/workflows/test_cluster_mdbf.yml
       - requirements.txt
       - "files/**"
       - "handlers/**"
-      - "molecule/default/**"
+      - "molecule/cluster/**"
       - "tasks/**"
       - "templates/**"
       - "vars/**"
   schedule:
-    - cron: "0 5 * * 2"
+    - cron: "30 5 * * 2"
 
 jobs:
-  molecule-distrib-pkg:
-    name: Default deployment
+  molecule-cluster-pkg:
+    name: Cluster MDBF
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         distro:
-          - ubuntu-18.04
-          - ubuntu-20.04
           - ubuntu-22.04
-          - debian-10
           - debian-11
-          - debian-sid
           - fedora-36
-          - fedora-37
           - almalinux-8
-          - almalinux-9
-          - rockylinux-8
           - rockylinux-9
+        mariadb-version:
+          - "10.6"
+          - "10.7"
+          - "10.8"
+          - "10.9"
+          - "10.10"
     steps:
       - uses: actions/checkout@v3
       - name: Install requirements
@@ -59,8 +58,10 @@ jobs:
           loginctl enable-linger $(whoami)
           sleep 1
       - name: Run molecule
-        run: molecule test
+        run: molecule test -s cluster
         env:
           PY_COLORS: "1"
           ANSIBLE_FORCE_COLOR: "1"
           MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_PLAYBOOK: mdbf.yml
+          MARIADB_VERSION: ${{ matrix.mariadb-version }}

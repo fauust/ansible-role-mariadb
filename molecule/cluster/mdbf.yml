@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  vars:
+    mariadb_use_official_repo: true
+    mariadb_use_official_repo_url: https://deb.mariadb.org
+    mariadb_use_official_repo_version: "{{ lookup('env', 'MARIADB_VERSION') }}"
+
+  roles:
+    - role: ansible-role-mariadb
