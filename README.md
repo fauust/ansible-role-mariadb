@@ -4,6 +4,7 @@
 [![Default](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_default.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_default.yml)
 [![MDBF](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_mdbf.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_mdbf.yml)
 [![Cluster](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster.yml)
+[![Cluster MDBF](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster_mdbf.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster_mdbf.yml)
 
 Install and configure MariaDB Server on Debian/Ubuntu.
 
