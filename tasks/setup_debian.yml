@@ -1,51 +1,50 @@
 ---
-- name: Install mariadb repo necessary packages
-  ansible.builtin.apt:
-    package:
-      - apt-transport-https
-      - gnupg2
-    state: present
-    update_cache: true
+- name: Install mariadb official repository
   when: mariadb_use_official_repo
+  block:
+    - name: Install mariadb repo necessary packages
+      ansible.builtin.apt:
+        package:
+          - apt-transport-https
+          - gnupg2
+        state: present
+        update_cache: true
 
-- name: Install mariadb repository key
-  ansible.builtin.get_url:
-    url: "https://mariadb.org/mariadb_release_signing_key.asc"
-    dest: "/etc/apt/trusted.gpg.d/mariadb.asc"
-    # //TEMP todo
-    # checksum: sha256:http://example.com/path/sha256sum.txt
-    owner: root
-    group: root
-    mode: "0644"
-  when: mariadb_use_official_repo
+    - name: Install mariadb repository key
+      ansible.builtin.get_url:
+        url: "https://mariadb.org/mariadb_release_signing_key.asc"
+        dest: "/etc/apt/trusted.gpg.d/mariadb.asc"
+        # //TEMP todo
+        # checksum: sha256:http://example.com/path/sha256sum.txt
+        owner: root
+        group: root
+        mode: "0644"
 
-- name: Determine distribution name (Debian sid pb)
-  ansible.builtin.set_fact:
-    distribution: "{% if 'n/a' in ansible_distribution_release %}sid{% else %}{{ ansible_distribution_release }}{% endif %}"
+    - name: Determine distribution name (Debian sid pb)
+      ansible.builtin.set_fact:
+        distribution: "{% if 'n/a' in ansible_distribution_release %}sid{% else %}{{ ansible_distribution_release }}{% endif %}"
 
-- name: Setup mariadb repository sourcelist entry
-  ansible.builtin.copy:
-    dest: /etc/apt/sources.list.d/mariadb.list
-    content: |
-      # Ansible managed
-      deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ distribution }} main
-    owner: root
-    group: root
-    mode: "0644"
-  when: mariadb_use_official_repo
+    - name: Setup mariadb repository sourcelist entry
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/mariadb.list
+        content: |
+          # Ansible managed
+          deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ distribution }} main
+        owner: root
+        group: root
+        mode: "0644"
 
-- name: Prefer MariaDB repo over Debian repo
-  ansible.builtin.copy:
-    dest: /etc/apt/preferences.d/release
-    content: |
-      # Ansible managed
-      Package: *
-      Pin: origin {{ mariadb_use_official_repo_url | urlsplit('hostname') }}
-      Pin-Priority: 1000
-    owner: root
-    group: root
-    mode: "0644"
-  when: mariadb_use_official_repo
+    - name: Prefer MariaDB repo over Debian repo
+      ansible.builtin.copy:
+        dest: /etc/apt/preferences.d/release
+        content: |
+          # Ansible managed
+          Package: *
+          Pin: origin {{ mariadb_use_official_repo_url | urlsplit('hostname') }}
+          Pin-Priority: 1000
+        owner: root
+        group: root
+        mode: "0644"
 
 - name: Install packages
   ansible.builtin.apt:
