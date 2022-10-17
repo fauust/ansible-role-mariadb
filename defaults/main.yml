@@ -7,6 +7,8 @@ ansible_python_interpreter: /usr/bin/python3
 mariadb_use_official_repo: false
 mariadb_use_official_repo_url: https://deb.mariadb.org
 mariadb_use_official_repo_version: 10.6
+# see: https://manpages.debian.org/stable/apt/sources.list.5.en.html#DEB822-STYLE_FORMAT
+mariadb_use_official_repo_format_deb822: false
 
 mariadb_enabled_on_startup: true
 # The following is set to true by default but you may consider setting it to

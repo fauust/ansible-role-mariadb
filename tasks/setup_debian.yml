@@ -52,6 +52,23 @@
         owner: root
         group: root
         mode: "0644"
+      when: not mariadb_use_official_repo_format_deb822
+
+    - name: Setup mariadb repository sources entry
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/mariadb.sources
+        content: |
+          # Ansible managed
+          X-Repolib-Name: MariaDB
+          Types: deb
+          URIs: {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }}
+          Suites: {{ repo_distribution_release }}
+          Components: main
+          Signed-By: /etc/apt/keyrings/mariadb-keyring.gpg
+        owner: root
+        group: root
+        mode: "0644"
+      when: mariadb_use_official_repo_format_deb822
 
     - name: Prefer MariaDB repo over Debian repo
       ansible.builtin.copy:

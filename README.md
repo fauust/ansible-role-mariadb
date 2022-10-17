@@ -92,6 +92,7 @@ Available variables are listed below, along with default values (see
 mariadb_use_official_repo: false
 mariadb_use_official_repo_url: https://deb.mariadb.org
 mariadb_use_official_repo_version: "10.10"
+mariadb_use_official_repo_format_deb822: false
 ```
 
 You may deploy the MariaDB Server version that comes with your distribution
