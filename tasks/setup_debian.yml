@@ -10,17 +10,33 @@
         state: present
         update_cache: true
 
-    - name: Install mariadb repository key
+    - name: Ensure keyrings dir exists
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Fetch mariadb repository key
       ansible.builtin.get_url:
-        url: "https://mariadb.org/mariadb_release_signing_key.asc"
-        dest: "/etc/apt/trusted.gpg.d/mariadb.asc"
+        url: https://mariadb.org/mariadb_release_signing_key.asc
+        dest: /etc/apt/keyrings/mariadb-keyring.asc
         # //TEMP todo
         # checksum: sha256:http://example.com/path/sha256sum.txt
         owner: root
         group: root
         mode: "0644"
+      register: fetch_repository_key
       # change is always triggered in check mode
       when: not ansible_check_mode
+
+    - name: Dearmor mariadb repository key
+      ansible.builtin.command: >
+        gpg --dearmor
+        -o /etc/apt/keyrings/mariadb-keyring.gpg
+        /etc/apt/keyrings/mariadb-keyring.asc
+      when: fetch_repository_key is changed
 
     - name: Determine repo distribution release
       ansible.builtin.set_fact:
@@ -32,7 +48,7 @@
         dest: /etc/apt/sources.list.d/mariadb.list
         content: |
           # Ansible managed
-          deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ repo_distribution_release }} main
+          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.gpg] {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ repo_distribution_release }} main
         owner: root
         group: root
         mode: "0644"
