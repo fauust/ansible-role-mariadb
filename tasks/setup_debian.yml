@@ -19,6 +19,8 @@
         owner: root
         group: root
         mode: "0644"
+      # change is always triggered in check mode
+      when: not ansible_check_mode
 
     - name: Determine distribution name (Debian sid pb)
       ansible.builtin.set_fact:
