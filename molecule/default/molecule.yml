@@ -11,8 +11,10 @@ platforms:
 provisioner:
   name: ansible
   env:
-    ANSIBLE_GATHERING: explicit
+    ANSIBLE_DISPLAY_OK_HOSTS: "false"
+    ANSIBLE_DISPLAY_SKIPPED_HOSTS: false
     ANSIBLE_FORCE_COLOR: true
+    ANSIBLE_GATHERING: explicit
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 verifier:
