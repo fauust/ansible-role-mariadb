@@ -3,14 +3,14 @@ driver:
   name: podman
 platforms:
   - name: node1
-    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     override_command: false
     pre_build_image: true
     network: local
   - name: node2
-    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     override_command: false
@@ -19,7 +19,7 @@ platforms:
       - replica
     network: local
   - name: node3
-    image: "fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     override_command: false
