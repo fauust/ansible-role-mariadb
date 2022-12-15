@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
+    rev: v4.4.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -18,7 +18,7 @@ repos:
       - id: yamllint
         name: Check yaml files (yamllint)
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: v6.8.6
+    rev: v6.10.0
     hooks:
       - id: ansible-lint
         name: Check ansible files (ansible-lint)
