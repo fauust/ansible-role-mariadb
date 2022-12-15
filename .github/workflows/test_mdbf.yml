@@ -54,6 +54,7 @@ jobs:
           - "10.8"
           - "10.9"
           - "10.10"
+          - "10.11"
         exclude:
           - distro: ubuntu-18.04
             mariadb-version: 10.3
