@@ -22,16 +22,17 @@
       # change is always triggered in check mode
       when: not ansible_check_mode
 
-    - name: Determine distribution name (Debian sid pb)
+    - name: Determine repo distribution release
       ansible.builtin.set_fact:
-        distribution: "{% if 'n/a' in ansible_distribution_release %}sid{% else %}{{ ansible_distribution_release }}{% endif %}"
+        repo_distribution_release: >-
+          {{ 'sid' if 'n/a' in ansible_distribution_version else ansible_distribution_release }}
 
     - name: Setup mariadb repository sourcelist entry
       ansible.builtin.copy:
         dest: /etc/apt/sources.list.d/mariadb.list
         content: |
           # Ansible managed
-          deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ distribution }} main
+          deb {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ repo_distribution_release }} main
         owner: root
         group: root
         mode: "0644"
