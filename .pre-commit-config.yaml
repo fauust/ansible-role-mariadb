@@ -55,15 +55,15 @@ repos:
         name: Run prettier with docker
         entry: tmknom/prettier:latest -l
         language: docker_image
-        files: "\\.(\
-          css|less|scss\
-          |graphql|gql\
-          |html\
-          |js|jsx\
-          |json\
-          |md|markdown|mdown|mkdn\
-          |mdx\
-          |ts|tsx\
-          |vue\
-          |yaml|yml\
-          )$"
+        files: |
+          (?x)\.(
+            css|less|scss
+            graphql|gql|
+            html|
+            js|jsx|ts|tsx|
+            json|
+            md|markdown|mdown|mkdn|
+            mdx|
+            vue|
+            yaml|yml
+          )$
