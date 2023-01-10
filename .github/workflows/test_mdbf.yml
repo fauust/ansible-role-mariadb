@@ -76,6 +76,8 @@ jobs:
             mariadb-version: 10.3
           - distro: debian-sid
             mariadb-version: 10.4
+          - distro: debian-sid
+            mariadb-version: 10.5
           - distro: fedora-36
             mariadb-version: 10.3
           - distro: fedora-36
