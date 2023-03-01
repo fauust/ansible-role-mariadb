@@ -1,8 +1,8 @@
 ---
-- name: Install mariadb official repository
+- name: Install MariaDB official repository
   when: mariadb_use_official_repo
   block:
-    - name: Install mariadb repo necessary packages
+    - name: Install MariaDB repo necessary packages
       ansible.builtin.apt:
         package:
           - apt-transport-https
@@ -18,7 +18,7 @@
         group: root
         mode: "0755"
 
-    - name: Fetch mariadb repository key
+    - name: Fetch MariaDB repository key
       ansible.builtin.get_url:
         url: https://mariadb.org/mariadb_release_signing_key.asc
         dest: /etc/apt/keyrings/mariadb-keyring.asc
@@ -31,19 +31,20 @@
       # change is always triggered in check mode
       when: not ansible_check_mode
 
-    - name: Dearmor mariadb repository key
+    - name: Dearmor MariaDB repository key
       ansible.builtin.command: >
         gpg --dearmor
         -o /etc/apt/keyrings/mariadb-keyring.gpg
         /etc/apt/keyrings/mariadb-keyring.asc
       when: fetch_repository_key is changed
+      changed_when: false
 
     - name: Determine repo distribution release
       ansible.builtin.set_fact:
         repo_distribution_release: >-
           {{ 'sid' if 'n/a' in ansible_distribution_version else ansible_distribution_release }}
 
-    - name: Setup mariadb repository sourcelist entry
+    - name: Setup MariaDB repository sourcelist entry
       ansible.builtin.copy:
         dest: /etc/apt/sources.list.d/mariadb.list
         content: |
@@ -54,7 +55,7 @@
         mode: "0644"
       when: not mariadb_use_official_repo_format_deb822
 
-    - name: Setup mariadb repository sources entry
+    - name: Setup MariaDB repository sources entry
       ansible.builtin.copy:
         dest: /etc/apt/sources.list.d/mariadb.sources
         content: |
