@@ -33,18 +33,12 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          # - ubuntu-18.04
-          # - ubuntu-20.04
           - ubuntu-22.04
-          # - debian-10
           - debian-11
-          # - debian-sid
-          # - fedora-36
+          - debian-12
           - fedora-37
-          # - almalinux-8
           - almalinux-9
           - rockylinux-8
-          # - rockylinux-9
     steps:
       - uses: actions/checkout@v3
       - name: Install requirements

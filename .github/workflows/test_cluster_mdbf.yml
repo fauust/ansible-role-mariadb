@@ -45,6 +45,7 @@ jobs:
           - "10.9"
           - "10.10"
           - "10.11"
+          - "11.0"
     steps:
       - uses: actions/checkout@v3
       - name: Install requirements
