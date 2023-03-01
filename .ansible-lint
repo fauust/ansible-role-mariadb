@@ -4,4 +4,5 @@ skip_list:
   - 'yaml'
 
 exclude_paths:
+- meta/
 - molecule/
