@@ -6,7 +6,7 @@
 [![Cluster](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster.yml)
 [![Cluster MDBF](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster_mdbf.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster_mdbf.yml)
 
-Install and configure MariaDB Server on Debian/Ubuntu.
+Install and configure MariaDB Server on Linux (Debian or RHEL based).
 
 Optionally, this role also permits one to:
 
@@ -95,8 +95,8 @@ mariadb_use_official_repo_version: "10.10"
 mariadb_use_official_repo_format_deb822: false
 ```
 
-You may deploy the MariaDB Server version that comes with your distribution
-(Debian/Ubuntu) or deploy the version packaged by the MariaDB Foundation.
+You may deploy the MariaDB Server version that comes with your distribution or
+deploy the version packaged by the MariaDB Foundation.
 You can use the MariaDB Foundation repository configuration tool:
 <https://mariadb.org/download/#mariadb-repositories>
 
