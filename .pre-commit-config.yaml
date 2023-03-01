@@ -18,7 +18,7 @@ repos:
       - id: yamllint
         name: Check yaml files (yamllint)
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: v6.12.1
+    rev: v6.13.1
     hooks:
       - id: ansible-lint
         name: Check ansible files (ansible-lint)
