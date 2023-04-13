@@ -61,8 +61,8 @@ packaged by the MariaDB Foundation (MDBF) on `Almalinux 9`:
 ❯ make install
 ❯ source .venv/bin/activate
 .venv ❯ export MOLECULE_DISTRO=almalinux-9
-.venv ❯ export MOLECULE_PLAYBOOK=converge-mdbf.yml
-.venv ❯ export MARIADB_VERSION="10.6"
+.venv ❯ export MOLECULE_PLAYBOOK=mdbf.yml
+.venv ❯ export MARIADB_VERSION="10.11"
 .venv ❯ molecule test
 ...
 ```
