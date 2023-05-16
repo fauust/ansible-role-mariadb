@@ -20,8 +20,8 @@
 
     - name: Fetch MariaDB repository key
       ansible.builtin.get_url:
-        url: https://mariadb.org/mariadb_release_signing_key.asc
-        dest: /etc/apt/keyrings/mariadb-keyring.asc
+        url: https://mariadb.org/mariadb_release_signing_key.pgp
+        dest: /etc/apt/keyrings/mariadb-keyring.pgp
         # //TEMP todo
         # checksum: sha256:http://example.com/path/sha256sum.txt
         owner: root
@@ -30,14 +30,6 @@
       register: fetch_repository_key
       # change is always triggered in check mode
       when: not ansible_check_mode
-
-    - name: Dearmor MariaDB repository key
-      ansible.builtin.command: >
-        gpg --dearmor
-        -o /etc/apt/keyrings/mariadb-keyring.pgp
-        /etc/apt/keyrings/mariadb-keyring.asc
-      when: fetch_repository_key is changed
-      changed_when: false
 
     - name: Determine repo distribution release
       ansible.builtin.set_fact:
