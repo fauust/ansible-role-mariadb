@@ -5,3 +5,6 @@ ignore: |
 rules:
   line-length: { max: 200, level: warning }
   braces: { min-spaces-inside: 1, max-spaces-inside: 1 }
+  truthy:
+    ignore: |
+      - .github/workflow/*.yml
