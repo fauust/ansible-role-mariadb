@@ -34,7 +34,7 @@
     - name: Dearmor MariaDB repository key
       ansible.builtin.command: >
         gpg --dearmor
-        -o /etc/apt/keyrings/mariadb-keyring.gpg
+        -o /etc/apt/keyrings/mariadb-keyring.pgp
         /etc/apt/keyrings/mariadb-keyring.asc
       when: fetch_repository_key is changed
       changed_when: false
@@ -49,7 +49,7 @@
         dest: /etc/apt/sources.list.d/mariadb.list
         content: |
           # Ansible managed
-          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.gpg] {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ repo_distribution_release }} main
+          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ repo_distribution_release }} main
         owner: root
         group: root
         mode: "0644"
@@ -65,7 +65,7 @@
           URIs: {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }}
           Suites: {{ repo_distribution_release }}
           Components: main
-          Signed-By: /etc/apt/keyrings/mariadb-keyring.gpg
+          Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
         owner: root
         group: root
         mode: "0644"
