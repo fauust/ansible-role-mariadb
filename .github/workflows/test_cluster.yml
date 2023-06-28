@@ -45,9 +45,12 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
-        # This is necessary on GH Actions to allow running systemd in rootless containers
-        # see: https://github.com/actions/virtual-environments/issues/3536
-        # see: https://github.com/ansible-community/molecule/discussions/3155
+      # see: https://github.com/actions/runner-images/issues/7753
+      - name: Downgrade podman
+        run: sudo apt install podman=3.4.4+ds1-1ubuntu1 --allow-downgrades
+      # This is necessary on GH Actions to allow running systemd in rootless containers
+      # see: https://github.com/actions/virtual-environments/issues/3536
+      # see: https://github.com/ansible-community/molecule/discussions/3155
       - name: Start systemd user service
         run: |
           loginctl enable-linger $(whoami)
