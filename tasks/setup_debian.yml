@@ -34,7 +34,7 @@
     - name: Determine repo distribution release
       ansible.builtin.set_fact:
         repo_distribution_release: >-
-          {{ 'sid' if 'bookworm' in ansible_distribution_release else ansible_distribution_release }}
+          {{ 'sid' if 'trixie' in ansible_distribution_release else ansible_distribution_release }}
 
     - name: Setup MariaDB repository sourcelist entry
       ansible.builtin.copy:
