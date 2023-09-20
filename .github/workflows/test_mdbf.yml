@@ -36,17 +36,18 @@ jobs:
           - ubuntu-18.04
           - ubuntu-20.04
           - ubuntu-22.04
+          - ubuntu-23.04
           - debian-10
           - debian-11
+          - debian-12
           - debian-sid
-          - fedora-36
-          # - fedora-37
+          - fedora-37
+          - fedora-38
           - almalinux-8
           - almalinux-9
           - rockylinux-8
           - rockylinux-9
         mariadb-version:
-          - "10.3"
           - "10.4"
           - "10.5"
           - "10.6"
@@ -56,41 +57,59 @@ jobs:
           - "10.10"
           - "10.11"
           - "11.0"
+          - "11.1"
+          - "11.2"
         exclude:
-          - distro: ubuntu-18.04
-            mariadb-version: 10.3
-          - distro: ubuntu-20.04
-            mariadb-version: 10.3
-          - distro: ubuntu-22.04
-            mariadb-version: 10.3
           - distro: ubuntu-22.04
             mariadb-version: 10.4
           - distro: ubuntu-22.04
             mariadb-version: 10.5
-          - distro: debian-10
-            mariadb-version: 10.3
+          - distro: ubuntu-23.04
+            mariadb-version: 10.4
+          - distro: ubuntu-23.04
+            mariadb-version: 10.5
+          - distro: ubuntu-23.04
+            mariadb-version: 10.6
+          - distro: ubuntu-23.04
+            mariadb-version: 10.7
+          - distro: ubuntu-23.04
+            mariadb-version: 10.8
+          - distro: ubuntu-23.04
+            mariadb-version: 10.9
+          - distro: ubuntu-23.04
+            mariadb-version: 10.10
           - distro: debian-11
-            mariadb-version: 10.3
-          - distro: debian-11
             mariadb-version: 10.4
-          - distro: debian-sid
-            mariadb-version: 10.3
+          - distro: debian-12
+            mariadb-version: 10.4
+          - distro: debian-12
+            mariadb-version: 10.5
+          - distro: debian-12
+            mariadb-version: 10.6
+          - distro: debian-12
+            mariadb-version: 10.7
+          - distro: debian-12
+            mariadb-version: 10.8
+          - distro: debian-12
+            mariadb-version: 10.9
+          - distro: debian-12
+            mariadb-version: 10.10
           - distro: debian-sid
             mariadb-version: 10.4
           - distro: debian-sid
             mariadb-version: 10.5
-          - distro: fedora-36
-            mariadb-version: 10.3
-          - distro: fedora-36
+          - distro: fedora-37
             mariadb-version: 10.4
-          - distro: fedora-36
+          - distro: fedora-37
             mariadb-version: 10.5
-          - distro: almalinux-9
-            mariadb-version: 10.3
+          - distro: fedora-38
+            mariadb-version: 10.4
+          - distro: fedora-38
+            mariadb-version: 10.5
+          - distro: fedora-38
+            mariadb-version: 10.7
           - distro: almalinux-9
             mariadb-version: 10.4
-          - distro: rockylinux-9
-            mariadb-version: 10.3
           - distro: rockylinux-9
             mariadb-version: 10.4
 
