@@ -11,21 +11,19 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - buster
-        - bullseye
-        - sid
+        - all
     - name: Ubuntu
       versions:
-        - bionic
-        - focal
-        - jammy
+        - all
     - name: Fedora
       versions:
         - all
     - name: EL
       versions:
-        - 8
-        - 9
+        - all
+    - name: Alpine
+      versions:
+        - all
   galaxy_tags:
     - mariadb
     - mysql

@@ -6,7 +6,7 @@
 [![Cluster](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster.yml)
 [![Cluster MDBF](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster_mdbf.yml/badge.svg)](https://github.com/fauust/ansible-role-mariadb/actions/workflows/test_cluster_mdbf.yml)
 
-Install and configure MariaDB Server on Linux (Debian or RHEL based).
+Install and configure MariaDB Server on Linux (Debian, RHEL or Alpine linux based).
 
 Optionally, this role also permits one to:
 
@@ -128,6 +128,8 @@ deployments and you are encouraged to use your own values.
 [`vars`](./vars).
 
 ```yaml
+mariadb_user: "default value depends on OS"
+mariadb_package: "default value depends on OS"
 mariadb_config_file: "default value depends on OS"
 mariadb_data_dir: "default value depends on OS"
 mariadb_port: 3306

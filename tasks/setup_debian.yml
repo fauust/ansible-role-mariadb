@@ -75,10 +75,10 @@
         group: root
         mode: "0644"
 
-- name: Install packages
+- name: Install packages (apt)
   ansible.builtin.apt:
     package:
-      - mariadb-server
+      - "{{ mariadb_package }}"
       - python3-pymysql
     state: present
     update_cache: true

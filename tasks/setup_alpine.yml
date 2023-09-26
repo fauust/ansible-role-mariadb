@@ -1,0 +1,34 @@
+---
+- name: Install packages (package)
+  ansible.builtin.package:
+    name:
+      - "{{ mariadb_package }}"
+      - mariadb-client
+      - py3-pymysql
+    state: present
+  notify: Setup MariaDB
+
+- name: Check if mariadb command exists
+  ansible.builtin.stat:
+    path: /usr/bin/mariadb
+  register: mariadb_cmd
+
+- name: Make sure that mariadb command exists
+  ansible.builtin.file:
+    src: /usr/bin/mysql
+    dest: /usr/bin/mariadb
+    owner: root
+    group: root
+    state: link
+  when: mariadb_cmd.stat.exists is false
+
+- name: Ensure /run/mysqld
+  ansible.builtin.file:
+    path: /run/mysqld
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: 0755
+
+- name: Immediately setup MariaDB (necessary for configuration)
+  ansible.builtin.meta: flush_handlers
