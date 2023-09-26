@@ -3,15 +3,19 @@
   hosts: all
 
   tasks:
-    - name: Get mariadb service status
-      ansible.builtin.systemd:
-        name: "mariadb"
-      register: mariadb_service
+    - name: Make sure that service is started
+      ansible.builtin.service:
+        name: mariadb
+        state: started
+      register: status
+      failed_when: status.changed
 
-    - name: Check that mariadb service is active
-      ansible.builtin.assert:
-        that:
-          - mariadb_service.status.ActiveState == 'active'
+    - name: Make sure that service is enabled
+      ansible.builtin.service:
+        name: mariadb
+        state: enabled
+      register: status
+      failed_when: status.changed
 
 - name: Verify replication
   hosts: replica

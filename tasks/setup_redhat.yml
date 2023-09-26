@@ -20,10 +20,10 @@
     mode: "0644"
   when: mariadb_use_official_repo
 
-- name: Install packages
+- name: Install packages (dnf)
   ansible.builtin.dnf:
     name:
-      - mariadb-server
+      - "{{ mariadb_package }}"
       - python3-PyMySQL
     state: present
 

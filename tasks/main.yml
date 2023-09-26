@@ -17,6 +17,10 @@
   ansible.builtin.import_tasks: setup_redhat.yml
   when: ansible_os_family == "RedHat"
 
+- name: Include task setup_alpine.yml
+  ansible.builtin.import_tasks: setup_alpine.yml
+  when: ansible_os_family == "Alpine"
+
 - name: Include task configure.yml
   ansible.builtin.import_tasks: configure.yml
 

@@ -41,6 +41,7 @@ jobs:
           - fedora-38
           - almalinux-9
           - rockylinux-8
+          - alpine-3.18
     steps:
       - uses: actions/checkout@v4
       - name: Install requirements

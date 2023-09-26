@@ -6,3 +6,6 @@
   when:
     - mariadb_can_restart
     - not ansible_check_mode
+
+- name: Setup MariaDB
+  ansible.builtin.command: /etc/init.d/mariadb setup
