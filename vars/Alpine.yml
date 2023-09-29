@@ -1,7 +1,7 @@
 ---
 mariadb_user: mysql
 mariadb_package: mariadb
-mariadb_config_file: "/etc/my.cnf"
+mariadb_config_file: "/etc/my.cnf.d/mariadb-server.cnf"
 mariadb_data_dir: "/var/lib/mysql"
 mariadb_pid_file: "/run/mysqld/mariadb.pid"
 mariadb_unix_socket: "/run/mysqld/mysqld.sock"
