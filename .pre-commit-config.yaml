@@ -13,12 +13,12 @@ repos:
         name: Check trailing whitespace
         args: [--markdown-linebreak-ext=md]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.29.0
+    rev: v1.32.0
     hooks:
       - id: yamllint
         name: Check yaml files (yamllint)
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: v6.13.1
+    rev: v6.20.1
     hooks:
       - id: ansible-lint
         name: Check ansible files (ansible-lint)
@@ -28,7 +28,7 @@ repos:
         exclude_types: [markdown, shell]
         types: [yaml]
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.2
+    rev: v2.2.5
     hooks:
       - id: codespell
         name: Checks for common misspellings in text files
