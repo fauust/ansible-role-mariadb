@@ -9,3 +9,4 @@
 
 - name: Setup MariaDB
   ansible.builtin.command: /etc/init.d/mariadb setup
+  changed_when: false
