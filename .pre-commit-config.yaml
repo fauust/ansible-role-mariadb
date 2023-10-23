@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -18,7 +18,7 @@ repos:
       - id: yamllint
         name: Check yaml files (yamllint)
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: v6.20.1
+    rev: v6.21.1
     hooks:
       - id: ansible-lint
         name: Check ansible files (ansible-lint)
@@ -28,7 +28,7 @@ repos:
         exclude_types: [markdown, shell]
         types: [yaml]
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.5
+    rev: v2.2.6
     hooks:
       - id: codespell
         name: Checks for common misspellings in text files
