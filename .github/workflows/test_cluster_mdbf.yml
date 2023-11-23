@@ -41,9 +41,6 @@ jobs:
           - rockylinux-9
         mariadb-version:
           - "10.6"
-          - "10.7"
-          - "10.8"
-          - "10.9"
           - "10.10"
           - "10.11"
           - "11.0"
@@ -53,21 +50,9 @@ jobs:
           - distro: ubuntu-23.04
             mariadb-version: 10.6
           - distro: ubuntu-23.04
-            mariadb-version: 10.7
-          - distro: ubuntu-23.04
-            mariadb-version: 10.8
-          - distro: ubuntu-23.04
-            mariadb-version: 10.9
-          - distro: ubuntu-23.04
             mariadb-version: 10.10
           - distro: debian-12
             mariadb-version: 10.6
-          - distro: debian-12
-            mariadb-version: 10.7
-          - distro: debian-12
-            mariadb-version: 10.8
-          - distro: debian-12
-            mariadb-version: 10.9
           - distro: debian-12
             mariadb-version: 10.10
     steps:
