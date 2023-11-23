@@ -22,7 +22,7 @@
     state: link
   when: mariadb_cmd.stat.exists is false
 
-- name: Ensure /run/mysqld
+- name: Ensure /run/mysqld exists
   ansible.builtin.file:
     path: /run/mysqld
     state: directory
