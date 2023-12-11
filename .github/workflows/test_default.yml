@@ -41,14 +41,15 @@ jobs:
           - debian-11
           - debian-12
           - debian-sid
-          - fedora-37
           - fedora-38
+          - fedora-39
           - almalinux-8
           - almalinux-9
           - rockylinux-8
           - rockylinux-9
           - alpine-3.17
           - alpine-3.18
+          - alpine-3.19
     steps:
       - uses: actions/checkout@v4
       - name: Install requirements
