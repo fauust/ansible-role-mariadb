@@ -78,6 +78,11 @@ mariadb_mysqldump_raw: |
   quote-names
   max_allowed_packet = 16M
 
+# Changes the root password the first time and uses this variable
+# to connect to mariadb for any other operations
+#mariadb_root_password: changeme
+#mariadb_create_root_my_cnf: false
+
 # Databases
 mariadb_databases: []
 #   - name: db1
