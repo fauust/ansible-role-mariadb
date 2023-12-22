@@ -30,5 +30,5 @@
   ansible.builtin.meta: flush_handlers
 
 - name: Root password
-  ansible.builtin.include: root-password.yml
+  ansible.builtin.import_tasks: root-password.yml
   when: mariadb_root_password is defined and mariadb_root_password != ""
