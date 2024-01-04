@@ -50,5 +50,13 @@ relay-log-index = relay-bin.index
 {% endif %}
 {% endif -%}
 
+{% if mariadb_ssl_cert is defined and mariadb_ssl_cert != "" and mariadb_ssl_key is defined and mariadb_ssl_key != "" %}
+ssl_cert = {{ mariadb_ssl_cert }}
+ssl_key = {{ mariadb_ssl_key }}
+{% endif %}
+{% if mariadb_ssl_ca is defined and mariadb_ssl_ca != "" and mariadb_ssl_ca is defined and mariadb_ssl_ca != "" %}
+ssl_ca = {{ mariadb_ssl_ca }}
+{% endif %}
+
 [mysqldump]
 {{ mariadb_mysqldump_raw }}
