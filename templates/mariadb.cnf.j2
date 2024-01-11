@@ -58,5 +58,11 @@ ssl_key = {{ mariadb_ssl_key }}
 ssl_ca = {{ mariadb_ssl_ca }}
 {% endif %}
 
+{% if mariadb_options is defined %}
+{% for key, value in mariadb_options.items() %}
+{{ key }} = {{ value }}
+{% endfor %}
+{% endif %}
+
 [mysqldump]
 {{ mariadb_mysqldump_raw }}

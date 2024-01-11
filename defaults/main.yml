@@ -78,6 +78,14 @@ mariadb_mysqldump_raw: |
   quote-names
   max_allowed_packet = 16M
 
+# additional options to add to mariadb
+#mariadb_options:
+#  key_buffer_size: 100M
+
+# install also these packages
+#mariadb_additional_packages:
+#  - mariadb-pam
+
 # Changes the root password the first time and uses this variable
 # to connect to mariadb for any other operations
 #mariadb_root_password: changeme

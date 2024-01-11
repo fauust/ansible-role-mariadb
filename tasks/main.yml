@@ -32,6 +32,7 @@
 
 - name: Include task users.yml
   ansible.builtin.import_tasks: users.yml
+  tags: mariadb_users
   when:
     - mariadb_users is defined
     - mariadb_replication_role != "replica"
