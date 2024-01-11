@@ -38,6 +38,8 @@ jobs:
           - debian-12
           - fedora-38
           - almalinux-8
+          - almalinux-9
+          - rockylinux-8
           - rockylinux-9
         mariadb-version:
           - "10.6"
