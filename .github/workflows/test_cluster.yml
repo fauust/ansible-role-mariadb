@@ -40,8 +40,10 @@ jobs:
           - debian-12
           - fedora-38
           - fedora-39
-          - rockylinux-8
+          - almalinux-8
           - almalinux-9
+          - rockylinux-8
+          - rockylinux-9
           - alpine-3.18
           - alpine-3.19
     steps:
