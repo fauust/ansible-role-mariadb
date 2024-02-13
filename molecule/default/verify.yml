@@ -47,8 +47,8 @@
       ansible.builtin.assert:
         that:
           - datadir.stat.isdir is true
-          - datadir.stat.pw_name == "{{ mariadb_user }}"
-          - datadir.stat.gr_name == "{{ mariadb_user }}"
+          - datadir.stat.pw_name == mariadb_user
+          - datadir.stat.gr_name == mariadb_user
 
     - name: Register {{ mariadb_log_dir }}
       ansible.builtin.stat:
@@ -59,8 +59,8 @@
       ansible.builtin.assert:
         that:
           - logdir.stat.isdir is true
-          - logdir.stat.pw_name == "{{ mariadb_user }}"
-          - logdir.stat.gr_name == "{{ mariadb_user }}"
+          - logdir.stat.pw_name ==  mariadb_user
+          - logdir.stat.gr_name ==  mariadb_user
 
     - name: Make sure that service is started
       ansible.builtin.service:
