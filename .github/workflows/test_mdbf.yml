@@ -51,7 +51,6 @@ jobs:
           - "10.4"
           - "10.5"
           - "10.6"
-          - "10.10"
           - "10.11"
           - "11.0"
           - "11.1"
@@ -67,8 +66,6 @@ jobs:
             mariadb-version: 10.5
           - distro: ubuntu-23.04
             mariadb-version: 10.6
-          - distro: ubuntu-23.04
-            mariadb-version: 10.10
           - distro: debian-11
             mariadb-version: 10.4
           - distro: debian-12
@@ -77,8 +74,6 @@ jobs:
             mariadb-version: 10.5
           - distro: debian-12
             mariadb-version: 10.6
-          - distro: debian-12
-            mariadb-version: 10.10
           - distro: debian-sid
             mariadb-version: 10.4
           - distro: debian-sid
