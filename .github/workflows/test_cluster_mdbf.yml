@@ -43,7 +43,6 @@ jobs:
           - rockylinux-9
         mariadb-version:
           - "10.6"
-          - "10.10"
           - "10.11"
           - "11.0"
           - "11.1"
@@ -51,8 +50,6 @@ jobs:
         exclude:
           - distro: debian-12
             mariadb-version: 10.6
-          - distro: debian-12
-            mariadb-version: 10.10
     steps:
       - uses: actions/checkout@v4
       - name: Install requirements
