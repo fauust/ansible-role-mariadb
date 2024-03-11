@@ -1,7 +1,6 @@
 ---
 name: Cluster
 
-
 on:
   push:
     paths:
