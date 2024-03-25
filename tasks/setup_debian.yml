@@ -82,3 +82,11 @@
       - python3-pymysql
     state: present
     update_cache: true
+
+- name: Install additional packages (apt)
+  ansible.builtin.apt:
+    name: "{{ mariadb_additional_packages }}"
+    state: present
+  when:
+    - mariadb_additional_packages is defined
+    - mariadb_additional_packages | length > 0
