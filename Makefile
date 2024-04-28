@@ -1,6 +1,5 @@
 VENV_DIR := .venv
 VENDOR_DIR := .vendor
-SHELL := /usr/bin/env bash
 .DEFAULT_GOAL := help
 
 help:
