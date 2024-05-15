@@ -55,6 +55,10 @@ jobs:
           - "11.0"
           - "11.1"
           - "11.2"
+          - "11.3"
+          - "11.4"
+          - "11.rc"
+          - "11.rolling"
         exclude:
           - distro: ubuntu-22.04
             mariadb-version: 10.4
