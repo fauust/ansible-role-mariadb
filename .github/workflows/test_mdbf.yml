@@ -35,7 +35,7 @@ jobs:
         distro:
           - ubuntu-20.04
           - ubuntu-22.04
-          - ubuntu-23.04
+          - ubuntu-24.04
           - debian-10
           - debian-11
           - debian-12
@@ -63,12 +63,6 @@ jobs:
             mariadb-version: 10.4
           - distro: ubuntu-22.04
             mariadb-version: 10.5
-          - distro: ubuntu-23.04
-            mariadb-version: 10.4
-          - distro: ubuntu-23.04
-            mariadb-version: 10.5
-          - distro: ubuntu-23.04
-            mariadb-version: 10.6
           - distro: debian-11
             mariadb-version: 10.4
           - distro: debian-12
