@@ -99,7 +99,9 @@ jobs:
       - name: Setup environment
         uses: ./.github/workflows/composite-action
       - name: Run molecule
-        run: molecule test
+        run: |
+          source .venv/bin/activate
+          molecule test
         env:
           PY_COLORS: "1"
           ANSIBLE_FORCE_COLOR: "1"
