@@ -4,14 +4,14 @@ runs:
   using: "composite"
   steps:
     # See: https://github.com/actions/runner-images/issues/9425
-    - name: Patch crun
-      shell: bash
-      if: >
-        startsWith(matrix.distro, 'debian') ||
-        startsWith(matrix.distro, 'ubuntu')
-      run: |
-        curl -Lo ./crun https://github.com/containers/crun/releases/download/1.14.4/crun-1.14.4-linux-amd64
-        sudo install crun /usr/bin/crun
+    # - name: Patch crun
+    #   shell: bash
+    #   if: >
+    #     startsWith(matrix.distro, 'debian') ||
+    #     startsWith(matrix.distro, 'ubuntu')
+    #   run: |
+    #     curl -Lo ./crun https://github.com/containers/crun/releases/download/1.14.4/crun-1.14.4-linux-amd64
+    #     sudo install crun /usr/bin/crun
     # This is necessary on GH Actions to allow running systemd in rootless containers
     # see: https://github.com/actions/virtual-environments/issues/3536
     # see: https://github.com/ansible-community/molecule/discussions/3155
