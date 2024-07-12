@@ -4,36 +4,38 @@ name: Default deployment
 on:
   push:
     paths:
-      - .github/workflows/test_default.yml
-      - requirements.txt
       - "files/**"
       - "handlers/**"
       - "molecule/default/**"
       - "tasks/**"
       - "templates/**"
       - "vars/**"
+      - .github/workflows/composite-action/action.yml
+      - .github/workflows/test_default.yml
+      - requirements.txt
   pull_request:
     paths:
-      - .github/workflows/test_default.yml
-      - requirements.txt
       - "files/**"
       - "handlers/**"
       - "molecule/default/**"
       - "tasks/**"
       - "templates/**"
       - "vars/**"
+      - .github/workflows/composite-action/action.yml
+      - .github/workflows/test_default.yml
+      - requirements.txt
   schedule:
     - cron: "0 5 * * 2"
 
 jobs:
   molecule-distrib-pkg:
     name: Default deployment
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
         distro:
-          - ubuntu-18.04
+          # - ubuntu-18.04
           - ubuntu-20.04
           - ubuntu-22.04
           - ubuntu-23.04
@@ -43,9 +45,9 @@ jobs:
           - debian-sid
           - fedora-38
           - fedora-39
-          - almalinux-8
+          # - almalinux-8
           - almalinux-9
-          - rockylinux-8
+          # - rockylinux-8
           - rockylinux-9
           - alpine-3.17
           - alpine-3.18

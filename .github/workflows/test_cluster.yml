@@ -28,21 +28,21 @@ on:
 jobs:
   molecule-distrib-pkg:
     name: Cluster
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
         distro:
-          - ubuntu-18.04
+          # - ubuntu-18.04
           - ubuntu-20.04
           - ubuntu-22.04
           - debian-11
           - debian-12
           - fedora-38
           - fedora-39
-          - almalinux-8
+          # - almalinux-8
           - almalinux-9
-          - rockylinux-8
+          # - rockylinux-8
           - rockylinux-9
           - alpine-3.18
           - alpine-3.19

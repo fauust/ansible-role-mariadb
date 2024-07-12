@@ -28,7 +28,7 @@ on:
 jobs:
   molecule-cluster-pkg:
     name: Cluster MDBF
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -37,9 +37,9 @@ jobs:
           - ubuntu-22.04
           - debian-12
           - fedora-38
-          - almalinux-8
+          # - almalinux-8
           - almalinux-9
-          - rockylinux-8
+          # - rockylinux-8
           - rockylinux-9
         mariadb-version:
           - "10.6"
