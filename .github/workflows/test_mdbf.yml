@@ -33,66 +33,46 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - ubuntu-20.04
+          # //TEMP pb with 20.04
+          # - ubuntu-20.04
           - ubuntu-22.04
-          - ubuntu-23.04
-          - debian-10
+          - ubuntu-24.04
           - debian-11
           - debian-12
           - debian-sid
-          - fedora-38
           - fedora-39
+          - fedora-40
           # - almalinux-8
           - almalinux-9
           # - rockylinux-8
           - rockylinux-9
         mariadb-version:
-          - "10.4"
           - "10.5"
           - "10.6"
           - "10.11"
-          - "11.0"
-          - "11.1"
           - "11.2"
-          - "11.3"
           - "11.4"
           - "11.rc"
           - "11.rolling"
         exclude:
           - distro: ubuntu-22.04
-            mariadb-version: 10.4
-          - distro: ubuntu-22.04
             mariadb-version: 10.5
-          - distro: ubuntu-23.04
-            mariadb-version: 10.4
-          - distro: ubuntu-23.04
+          - distro: ubuntu-24.04
             mariadb-version: 10.5
-          - distro: ubuntu-23.04
+          - distro: ubuntu-24.04
             mariadb-version: 10.6
-          - distro: debian-11
-            mariadb-version: 10.4
-          - distro: debian-12
-            mariadb-version: 10.4
           - distro: debian-12
             mariadb-version: 10.5
           - distro: debian-12
             mariadb-version: 10.6
           - distro: debian-sid
-            mariadb-version: 10.4
-          - distro: debian-sid
             mariadb-version: 10.5
-          - distro: fedora-37
-            mariadb-version: 10.4
-          - distro: fedora-37
+          - distro: fedora-40
             mariadb-version: 10.5
-          - distro: fedora-38
-            mariadb-version: 10.4
-          - distro: fedora-38
-            mariadb-version: 10.5
-          - distro: almalinux-9
-            mariadb-version: 10.4
-          - distro: rockylinux-9
-            mariadb-version: 10.4
+          - distro: fedora-40
+            mariadb-version: 10.6
+          - distro: fedora-40
+            mariadb-version: 11.2
 
     steps:
       - uses: actions/checkout@v4
