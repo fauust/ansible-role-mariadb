@@ -6,4 +6,6 @@
     encoding: "{{ item.encoding | default('utf8') }}"
     state: "{{ item.state | default('present') }}"
     login_unix_socket: "{{ mariadb_unix_socket }}"
+    login_user: "{{ mariadb_login_user | default(omit) }}"
+    login_password: "{{ mariadb_login_password | default(omit) }}"
   with_items: "{{ mariadb_databases }}"
