@@ -261,7 +261,7 @@ mariadb_expire_logs_days: 10
 
 ```yaml
 mariadb_replication_role: replica
-mariadb_server_id: 1
+mariadb_server_id: 2
 mariadb_replication_primary_ip: IP
 ```
 
