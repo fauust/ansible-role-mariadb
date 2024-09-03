@@ -9,5 +9,7 @@
     append_privs: "{{ item.append_privs | default('no') }}"
     encrypted: "{{ item.encrypted | default('no') }}"
     login_unix_socket: "{{ mariadb_unix_socket }}"
+    login_user: "{{ mariadb_login_user | default(omit) }}"
+    login_password: "{{ mariadb_login_password | default(omit) }}"
   loop: "{{ mariadb_users }}"
   no_log: true
