@@ -8,6 +8,15 @@
     state: present
   notify: Setup MariaDB
 
+- name: Install additional packages (package)
+  ansible.builtin.package:
+    name: "{{ mariadb_additional_packages }}"
+    state: present
+  when:
+    - mariadb_additional_packages is defined
+    - mariadb_additional_packages | length > 0
+  notify: Setup MariaDB
+
 - name: Check if mariadb command exists
   ansible.builtin.stat:
     path: /usr/bin/mariadb
