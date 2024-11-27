@@ -91,7 +91,7 @@ Available variables are listed below, along with default values (see
 ```yaml
 mariadb_use_official_repo: false
 mariadb_use_official_repo_url: https://deb.mariadb.org
-mariadb_use_official_repo_version: "10.6"
+mariadb_use_official_repo_version: "10.11"
 mariadb_use_official_repo_format_deb822: false
 ```
 
@@ -295,6 +295,6 @@ avoid lengthy locks.
     - fauust.mariadb
 ```
 
-## Lincense
+## License
 
 GNU General Public License v3.0
