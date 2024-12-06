@@ -42,6 +42,7 @@ jobs:
           - debian-sid
           - fedora-39
           - fedora-40
+          - fedora-41
           # - almalinux-8
           - almalinux-9
           # - rockylinux-8
