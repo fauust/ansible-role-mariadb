@@ -8,7 +8,7 @@ help:
 		| awk 'BEGIN { FS = ":.*?## " }; { printf "\033[36m%-30s\033[0m %s\n", $$1, $$2 }'
 
 venv: ## Create python3 venv if it does not exists
-	[[ -d $(VENV_DIR) ]] || $(shell command -v python3) -m venv $(VENV_DIR)
+	[[ -d $(VENV_DIR) ]] || uv venv $(VENV_DIR)
 
 install: ## Install all necessary tools
 	$(MAKE) venv
@@ -21,8 +21,7 @@ install-pip-packages: ## Install python3 requirements
 	$(info --> Install requirements via `pip3`)
 	@( \
 			source $(VENV_DIR)/bin/activate; \
-			pip3 install -U pip; \
-			pip3 install -r requirements.txt; \
+			uv pip install -r requirements.txt; \
 	)
 
 install-galaxy: ## Install galaxy requirements
@@ -34,7 +33,7 @@ upgrade-pip-packages: ## Upgrade python3 requirements
 
 install-pre-commit: ## Install pre-commit tool
 	$(info --> Install pre-commit tool via `pip3`)
-	pip3 install pre-commit
+	uv pip install pre-commit
 
 pre-commit-run: ## Run pre-commit hooks
 	$(info --> run pre-commit on changed files (pre-commit run))
