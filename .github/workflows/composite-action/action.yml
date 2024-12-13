@@ -23,4 +23,5 @@ runs:
     - name: Install requirements
       shell: bash
       run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
         make install
