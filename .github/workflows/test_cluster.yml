@@ -4,24 +4,26 @@ name: Cluster
 on:
   push:
     paths:
-      - .github/workflows/test_cluster.yml
-      - requirements.txt
       - "files/**"
       - "handlers/**"
       - "molecule/cluster/**"
       - "tasks/**"
       - "templates/**"
       - "vars/**"
+      - .github/workflows/composite-action/action.yml
+      - .github/workflows/test_cluster.yml
+      - requirements.txt
   pull_request:
     paths:
-      - .github/workflows/test_cluster.yml
-      - requirements.txt
       - "files/**"
       - "handlers/**"
       - "molecule/cluster/**"
       - "tasks/**"
       - "templates/**"
       - "vars/**"
+      - .github/workflows/composite-action/action.yml
+      - .github/workflows/test_cluster.yml
+      - requirements.txt
   schedule:
     - cron: "30 5 * * 2"
 

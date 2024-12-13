@@ -4,24 +4,26 @@ name: MDBF deployment
 on:
   push:
     paths:
-      - .github/workflows/test_mdbf.yml
-      - requirements.txt
       - "files/**"
       - "handlers/**"
       - "molecule/default/**"
       - "tasks/**"
       - "templates/**"
       - "vars/**"
+      - .github/workflows/composite-action/action.yml
+      - .github/workflows/test_mdbf.yml
+      - requirements.txt
   pull_request:
     paths:
-      - .github/workflows/test_mdbf.yml
-      - requirements.txt
       - "files/**"
       - "handlers/**"
       - "molecule/default/**"
       - "tasks/**"
       - "templates/**"
       - "vars/**"
+      - .github/workflows/composite-action/action.yml
+      - .github/workflows/test_mdbf.yml
+      - requirements.txt
   schedule:
     - cron: "10 5 * * 2"
 
