@@ -42,12 +42,9 @@ jobs:
           - debian-11
           - debian-12
           - debian-sid
-          - fedora-39
           - fedora-40
-          - fedora-41
-          # - almalinux-8
+          # - fedora-41
           - almalinux-9
-          # - rockylinux-8
           - rockylinux-9
         mariadb-version:
           - "10.5"
