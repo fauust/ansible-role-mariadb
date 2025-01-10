@@ -119,6 +119,14 @@
         - db1
         - db2
 
+    - name: Check that test users exist
+      ansible.builtin.shell: |
+        mariadb -Bse 'SELECT user from mysql.user' | grep -q '^{{ item }}$'
+      loop:
+        - user1
+        - user2
+        - user3
+
     - name: Do some SQL queries
       ansible.builtin.shell: |
         mariadb -Bse 'DROP DATABASE IF EXIST db'
