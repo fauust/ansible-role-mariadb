@@ -27,6 +27,14 @@
       - python3-PyMySQL
     state: present
 
+- name: Install additional packages (dnf)
+  ansible.builtin.dnf:
+    name: "{{ mariadb_additional_packages }}"
+    state: present
+  when:
+    - mariadb_additional_packages is defined
+    - mariadb_additional_packages | length > 0
+
 - name: Check if mariadb command exists
   ansible.builtin.stat:
     path: /usr/bin/mariadb
