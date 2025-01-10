@@ -91,6 +91,8 @@ mariadb_users: []
 #     host: 100.64.200.10
 #     password: password
 #     priv: "*.*:USAGE/db1.*:ALL"
+#     resource_limits:
+#       MAX_USER_CONNECTIONS: 20
 #     state: present|absent
 
 # Replication

@@ -28,6 +28,13 @@ mariadb_users:
     password: user2passwd
     priv: "db2.*:ALL"
     state: present
+  - name: user3
+    host: "%"
+    password: user3passwd
+    priv: "db2.*:ALL"
+    resource_limits:
+      MAX_USER_CONNECTIONS: 20
+    state: present
 
 mariadb_replication_user:
   - name: ReplicationUser
