@@ -60,6 +60,7 @@ provisioner:
     ANSIBLE_DISPLAY_SKIPPED_HOSTS: false
     ANSIBLE_FORCE_COLOR: true
     ANSIBLE_GATHERING: explicit
+    ANSIBLE_ROLES_PATH: ../../..
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 verifier:

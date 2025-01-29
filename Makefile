@@ -18,7 +18,7 @@ install: ## Install all necessary tools
 	@echo -e "source $(VENV_DIR)/bin/activate"
 
 install-pip-packages: ## Install python3 requirements
-	$(info --> Install requirements via `pip3`)
+	$(info --> Install requirements via `uv pip`)
 	@( \
 			source $(VENV_DIR)/bin/activate; \
 			uv pip install -r requirements.txt; \
@@ -27,9 +27,6 @@ install-pip-packages: ## Install python3 requirements
 install-galaxy: ## Install galaxy requirements
 	$(info --> Install galaxy requirements)
 	ansible-galaxy collection install -r requirements.yml --force -p $(VENDOR_DIR)/collections
-
-upgrade-pip-packages: ## Upgrade python3 requirements
-	$(shell command -v pip3) install -U -r requirements.txt
 
 install-pre-commit: ## Install pre-commit tool
 	$(info --> Install pre-commit tool via `pip3`)
