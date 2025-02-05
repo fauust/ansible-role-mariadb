@@ -50,11 +50,12 @@ that any commit will be checked automatically.
 ### Testing (Molecule)
 
 The role is tested with the [Molecule
-project](https://molecule.readthedocs.io/en/latest/index.html). By default this
-role will be tested with the `podman` driver, but you can easily adapt it to use
-`docker` if you prefer.
+project](https://ansible.readthedocs.io/projects/molecule/). By default this
+role will be tested with the `podman` driver since it's more "systemd
+friendly", but you can easily adapt it to use `docker` if you prefer (you will
+probably have to run docker containers in privilege mode)
 
-Here is an example how you can test a deployment of MariaDB Server `10.6`
+Here is an example how you can test a deployment of MariaDB Server `10.11`
 packaged by the MariaDB Foundation (MDBF) on `Almalinux 9`:
 
 ```console
