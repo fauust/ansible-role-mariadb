@@ -18,7 +18,7 @@ repos:
       - id: yamllint
         name: Check yaml files (yamllint)
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: v24.9.2
+    rev: v25.1.2
     hooks:
       - id: ansible-lint
         name: Check ansible files (ansible-lint)
@@ -28,7 +28,7 @@ repos:
         exclude_types: [markdown, shell]
         types: [yaml]
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
+    rev: v2.4.1
     hooks:
       - id: codespell
         name: Checks for common misspellings in text files
