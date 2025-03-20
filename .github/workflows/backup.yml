@@ -44,7 +44,7 @@ jobs:
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -o "archive.tgz" "$ARCHIVE_URL"
-      - name: Export backup
+      - name: Save backup (restic)
         run: |
           export RESTIC_REPOSITORY=$RESTIC_REPOSITORY_URL/$REPO_NAME
           # init repository if necessary
