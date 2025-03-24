@@ -2,6 +2,7 @@
 name: backup
 
 on:
+  push:
   schedule:
     - cron: "32 00 * * 0"
 
