@@ -44,6 +44,16 @@ jobs:
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -o "archive.tgz" "$ARCHIVE_URL"
+      - name: Sanity check
+        run: |
+          TITLE_LATEST_PR=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" repos/$REPO/pulls --jq '.[0].title')
+          zgrep -a -B3 "$TITLE_LATEST_PR" archive.tgz || {
+            echo "Latest PR title not found in archive.tgz"
+            exit 1
+          }
       - name: Save backup (restic)
         run: |
           export RESTIC_REPOSITORY=$RESTIC_REPOSITORY_URL/$REPO_NAME
