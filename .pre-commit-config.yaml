@@ -13,7 +13,7 @@ repos:
         name: Check trailing whitespace
         args: [--markdown-linebreak-ext=md]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.36.2
+    rev: v1.37.0
     hooks:
       - id: yamllint
         name: Check yaml files (yamllint)
