@@ -13,17 +13,6 @@ on:
       - .github/workflows/composite-action/action.yml
       - .github/workflows/test_default.yml
       - requirements.txt
-  pull_request:
-    paths:
-      - "files/**"
-      - "handlers/**"
-      - "molecule/default/**"
-      - "tasks/**"
-      - "templates/**"
-      - "vars/**"
-      - .github/workflows/composite-action/action.yml
-      - .github/workflows/test_default.yml
-      - requirements.txt
   schedule:
     - cron: "0 5 * * 2"
 
@@ -41,7 +30,6 @@ jobs:
           - debian-11
           - debian-12
           - debian-sid
-          - fedora-40
           - fedora-41
           - almalinux-9
           - rockylinux-9
