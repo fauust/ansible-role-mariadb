@@ -157,3 +157,4 @@
         $MARIADB_BACKUP --backup \
          --target-dir=/tmp/backup \
          --user=root
+      when: ansible_os_family != "Alpine"
