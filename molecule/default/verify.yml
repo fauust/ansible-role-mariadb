@@ -136,3 +136,24 @@
         mariadb -e 'SHOW TABLES IN db'
         mariadb -e 'SELECT * FROM db.t_innodb; INSERT INTO db.t_innodb VALUES (3,"foo"),(4,"bar")'
         mariadb -e 'SELECT db.f()'
+
+    - name: Check if backup is working (mariadb-dump)
+      ansible.builtin.shell: |
+        if command -v mariadb-dump >/dev/null; then
+          MARIADB_DUMP="mariadb-dump"
+        else
+          MARIADB_DUMP="mysqldump"
+        fi
+        $MARIADB_DUMP -u root -x -A >/tmp/mariadb-dump.sql
+
+    - name: Check if backup is working (mariadb-backup)
+      ansible.builtin.shell: |
+        mkdir /tmp/backup
+        if command -v mariadb-backup >/dev/null; then
+          MARIADB_BACKUP="mariadb-backup"
+        else
+          MARIADB_BACKUP="mariabackup"
+        fi
+        $MARIADB_BACKUP --backup \
+         --target-dir=/tmp/backup \
+         --user=root

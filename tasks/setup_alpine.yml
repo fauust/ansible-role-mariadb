@@ -3,6 +3,7 @@
   ansible.builtin.package:
     name:
       - "{{ mariadb_package }}"
+      - mariadb-backup
       - mariadb-client
       - py3-pymysql
     state: present

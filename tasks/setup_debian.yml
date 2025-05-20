@@ -79,6 +79,7 @@
   ansible.builtin.apt:
     package:
       - "{{ mariadb_package }}"
+      - mariadb-backup
       - python3-pymysql
     state: present
     update_cache: true

@@ -24,6 +24,7 @@
   ansible.builtin.dnf:
     name:
       - "{{ mariadb_package }}"
+      - mariadb-backup
       - python3-PyMySQL
     state: present
 
