@@ -148,12 +148,15 @@
 
     - name: Check if backup is working (mariadb-backup)
       ansible.builtin.shell: |
-        mkdir /tmp/backup
-        if command -v mariadb-backup >/dev/null; then
-          MARIADB_BACKUP="mariadb-backup"
-        else
-          MARIADB_BACKUP="mariabackup"
+        source /etc/os-release
+        if [[ $NAME != "Alpine Linux"]]; then
+          mkdir /tmp/backup
+          if command -v mariadb-backup >/dev/null; then
+            MARIADB_BACKUP="mariadb-backup"
+          else
+            MARIADB_BACKUP="mariabackup"
+          fi
+          $MARIADB_BACKUP --backup \
+           --target-dir=/tmp/backup \
+           --user=root
         fi
-        $MARIADB_BACKUP --backup \
-         --target-dir=/tmp/backup \
-         --user=root
