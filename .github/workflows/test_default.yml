@@ -36,6 +36,7 @@ jobs:
           - alpine-3.19
           - alpine-3.20
           - alpine-3.21
+          - alpine-3.22
     steps:
       - uses: actions/checkout@v4
       - name: Setup environment
