@@ -60,6 +60,8 @@ jobs:
           - distro: fedora-41
             mariadb-version: 10.6
           - distro: fedora-41
+            mariadb-version: 10.11
+          - distro: fedora-41
             mariadb-version: 11.4
 
     steps:

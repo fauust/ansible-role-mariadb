@@ -23,10 +23,20 @@
 - name: Install packages (dnf)
   ansible.builtin.dnf:
     name:
-      - "{{ mariadb_package }}"
+      - "{{ mariadb_server_package }}"
       - mariadb-backup
       - python3-PyMySQL
     state: present
+  when: not mariadb_use_official_repo
+
+- name: Install packages (dnf/mdbf repo)
+  ansible.builtin.dnf:
+    name:
+      - "{{ mariadb_server_package_mdbf }}"
+      - MariaDB-backup
+      - python3-PyMySQL
+    state: present
+  when: mariadb_use_official_repo
 
 - name: Check if mariadb command exists
   ansible.builtin.stat:

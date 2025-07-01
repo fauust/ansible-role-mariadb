@@ -2,7 +2,7 @@
 - name: Install packages (package)
   ansible.builtin.package:
     name:
-      - "{{ mariadb_package }}"
+      - "{{ mariadb_server_package }}"
       - mariadb-backup
       - mariadb-client
       - py3-pymysql

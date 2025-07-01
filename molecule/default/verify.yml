@@ -16,15 +16,15 @@
 
     - name: Verify pkg status
       ansible.builtin.package:
-        name: "{{ mariadb_package }}"
+        name: "{{ mariadb_server_package }}"
         state: present
       check_mode: true
       register: pkg_status
 
-    - name: Check that {{ mariadb_package }} already installed
+    - name: Check that {{ mariadb_server_package }} already installed
       ansible.builtin.assert:
         that: not pkg_status.changed
-        fail_msg: "{{ mariadb_package }} is not installed"
+        fail_msg: "{{ mariadb_server_package }} is not installed"
 
     - name: Register {{ mariadb_config_file }}
       ansible.builtin.stat:
