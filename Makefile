@@ -20,13 +20,16 @@ install: ## Install all necessary tools
 install-pip-packages: ## Install python3 requirements
 	$(info --> Install requirements via `uv pip`)
 	@( \
-			source $(VENV_DIR)/bin/activate; \
-			uv pip install -r requirements.txt; \
+		source $(VENV_DIR)/bin/activate; \
+		uv pip install -r requirements.txt; \
 	)
 
 install-galaxy: ## Install galaxy requirements
 	$(info --> Install galaxy requirements)
-	ansible-galaxy collection install -r requirements.yml --force -p $(VENDOR_DIR)/collections
+	@( \
+		source $(VENV_DIR)/bin/activate; \
+		ansible-galaxy collection install -r requirements.yml --force -p $(VENDOR_DIR)/collections; \
+	)
 
 install-pre-commit: ## Install pre-commit tool
 	$(info --> Install pre-commit tool via `pip3`)
