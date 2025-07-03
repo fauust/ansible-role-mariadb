@@ -1,5 +1,5 @@
 ---
-name: trigger galaxy import
+name: Galaxy-NG Roles Import
 
 on:
   push:
@@ -7,12 +7,18 @@ on:
       - "*"
 
 jobs:
-  trigger:
+  build:
+    name: Galaxy Role Importer
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Galaxy
-        uses: robertdebock/galaxy-action@1.2.1
+      - name: "Checkout git repo"
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: "Release on galaxy"
+        uses: ansible-actions/ansible-galaxy-action@v1.2.0
         with:
           galaxy_api_key: ${{ secrets.galaxy_api_key }}
-          git_branch: main
