@@ -4,7 +4,7 @@ mariadb_server_package: mariadb-server
 mariadb_server_package_mdbf: MariaDB-server
 mariadb_config_file: "/etc/my.cnf.d/mariadb-server.cnf"
 mariadb_data_dir: "/var/lib/mysql"
-mariadb_pid_file: "/run/mysqld.pid"
+mariadb_pid_file: "/run/mariadb/mysqld.pid"
 mariadb_unix_socket: "/var/lib/mysql/mysql.sock"
 mariadb_log_dir: "/var/log/mariadb"
 mariadb_log_error_file: "{{ mariadb_log_dir }}/error.log"

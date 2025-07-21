@@ -38,6 +38,17 @@
     state: present
   when: mariadb_use_official_repo
 
+# the following is needed since MDBF packages server installation doesn't
+# create the run dir directory which should probably be fixed upstream.
+- name: Make sure run dir exist
+  ansible.builtin.file:
+    path: /run/mariadb
+    state: directory
+    owner: "{{ mariadb_user }}"
+    group: "{{ mariadb_user }}"
+    mode: 0755
+  when: mariadb_use_official_repo
+
 - name: Check if mariadb command exists
   ansible.builtin.stat:
     path: /usr/bin/mariadb
