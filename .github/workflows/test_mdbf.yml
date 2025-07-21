@@ -19,7 +19,7 @@ on:
 jobs:
   molecule-mdbf-pkg:
     name: MDBF
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
