@@ -63,7 +63,7 @@ jobs:
             mariadb-version: 11.4
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Setup environment
         uses: ./.github/workflows/composite-action
       - name: Run molecule
