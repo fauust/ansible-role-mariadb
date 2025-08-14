@@ -37,7 +37,7 @@ jobs:
           - alpine-3.21
           - alpine-3.22
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Setup environment
         uses: ./.github/workflows/composite-action
       - name: Run molecule
