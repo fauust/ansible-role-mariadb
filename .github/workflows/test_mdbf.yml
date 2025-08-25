@@ -38,8 +38,8 @@ jobs:
           - "10.11"
           - "11.4"
           - "11.8"
-          - "11.rc"
-          - "11.rolling"
+          - "12.0"
+          - "12.1"
         exclude:
           - distro: debian-13
             mariadb-version: 10.6

@@ -34,9 +34,16 @@ jobs:
           - "10.6"
           - "10.11"
           - "11.4"
+          - "11.8"
+          - "12.0"
+          - "12.1"
         exclude:
           - distro: debian-12
             mariadb-version: 10.6
+          - distro: debian-13
+            mariadb-version: 10.6
+          - distro: debian-13
+            mariadb-version: 10.11
           - distro: ubuntu-24.04
             mariadb-version: 10.6
     steps:
