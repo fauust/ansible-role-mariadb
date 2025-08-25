@@ -28,6 +28,7 @@ jobs:
           - ubuntu-24.04
           - debian-11
           - debian-12
+          - debian-13
           - debian-sid
           - fedora-41
           - almalinux-9
@@ -40,6 +41,12 @@ jobs:
           - "11.rc"
           - "11.rolling"
         exclude:
+          - distro: debian-13
+            mariadb-version: 10.6
+          - distro: debian-13
+            mariadb-version: 10.11
+          - distro: debian-13
+            mariadb-version: 11.4
           - distro: ubuntu-24.04
             mariadb-version: 10.6
           - distro: debian-12

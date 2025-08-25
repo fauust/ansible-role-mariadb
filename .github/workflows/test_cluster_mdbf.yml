@@ -27,6 +27,7 @@ jobs:
           - ubuntu-22.04
           - ubuntu-24.04
           - debian-12
+          - debian-13
           - almalinux-9
           - rockylinux-9
         mariadb-version:
