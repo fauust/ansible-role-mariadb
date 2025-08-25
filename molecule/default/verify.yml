@@ -85,20 +85,14 @@
       ansible.builtin.shell: |
         mariadb -Bse 'STATUS' | grep "^Server version:"
       register: version
-      when:
-        - lookup('env', 'MARIADB_VERSION')
-        - lookup('env', 'MARIADB_VERSION') not in '11.rc'
-        - lookup('env', 'MARIADB_VERSION') not in '11.rolling'
+      when: lookup('env', 'MARIADB_VERSION') is true
 
     - name: Check MariaDB version
       ansible.builtin.assert:
         that:
           - lookup('env', 'MARIADB_VERSION') in version.stdout
         msg: "{{ version.stdout }}"
-      when:
-        - lookup('env', 'MARIADB_VERSION')
-        - lookup('env', 'MARIADB_VERSION') not in '11.rc'
-        - lookup('env', 'MARIADB_VERSION') not in '11.rolling'
+      when: lookup('env', 'MARIADB_VERSION') is true
 
     - name: Check that Innodb engine is enabled (and default)
       ansible.builtin.shell: |
