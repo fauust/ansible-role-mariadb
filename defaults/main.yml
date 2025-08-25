@@ -2,6 +2,8 @@
 # Python interpreter needs to be specified (pb on Fedora 37 that has python
 # 3.11) see: https://github.com/ansible/containmint/issues/9
 ansible_python_interpreter: /usr/bin/python3
+ansible_managed: "Ansible managed"
+
 # Configure the following to use official MariaDB repository
 # see: https://downloads.mariadb.org/mariadb/repositories
 mariadb_use_official_repo: false
