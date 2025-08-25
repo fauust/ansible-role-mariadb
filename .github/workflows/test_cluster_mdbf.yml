@@ -44,6 +44,8 @@ jobs:
             mariadb-version: 10.6
           - distro: debian-13
             mariadb-version: 10.11
+          - distro: debian-13
+            mariadb-version: 11.4
           - distro: ubuntu-24.04
             mariadb-version: 10.6
     steps:
