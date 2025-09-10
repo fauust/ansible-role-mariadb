@@ -142,12 +142,6 @@
 
     - name: Check if backup is working (mariadb-backup)
       ansible.builtin.shell: |
-        # segfault before 3.22 on Alpine Linux, Ansible facts comparison are not
-        # powerful enough so "when" is not used here
-        source /etc/os-release
-        if [ "$ID" == "alpine" ] && [ "${VERSION_ID:2:2}" -lt "22" ]; then
-          exit 0
-        fi
         mkdir /tmp/backup
         if command -v mariadb-backup >/dev/null; then
           MARIADB_BACKUP="mariadb-backup"
