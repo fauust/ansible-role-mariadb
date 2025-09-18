@@ -1,0 +1,56 @@
+---
+# Variable configuration.
+- name: Load OS-specific vars
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+      paths:
+        - "vars"
+
+- name: Define mariadb_user.
+  ansible.builtin.set_fact:
+    mariadb_user: "{{ __mariadb_user }}"
+  when: mariadb_user is not defined
+
+- name: Define mariadb_server_package.
+  ansible.builtin.set_fact:
+    mariadb_server_package: "{{ __mariadb_server_package }}"
+  when: mariadb_server_package is not defined
+
+- name: Define mariadb_config_file.
+  ansible.builtin.set_fact:
+    mariadb_config_file: "{{ __mariadb_config_file }}"
+  when: mariadb_config_file is not defined
+
+- name: Define mariadb_data_dir.
+  ansible.builtin.set_fact:
+    mariadb_data_dir: "{{ __mariadb_data_dir }}"
+  when: mariadb_data_dir is not defined
+
+- name: Define mariadb_pid_file.
+  ansible.builtin.set_fact:
+    mariadb_pid_file: "{{ __mariadb_pid_file }}"
+  when: mariadb_pid_file is not defined
+
+- name: Define mariadb_unix_socket.
+  ansible.builtin.set_fact:
+    mariadb_unix_socket: "{{ __mariadb_unix_socket }}"
+  when: mariadb_unix_socket is not defined
+
+- name: Define mariadb_log_dir.
+  ansible.builtin.set_fact:
+    mariadb_log_dir: "{{ __mariadb_log_dir }}"
+  when: mariadb_log_dir is not defined
+
+- name: Define mariadb_log_error_file.
+  ansible.builtin.set_fact:
+    mariadb_log_error_file: "{{ __mariadb_log_error_file }}"
+  when: mariadb_log_error_file is not defined
+
+- name: Define mariadb_cron_package_name.
+  ansible.builtin.set_fact:
+    mariadb_cron_package_name: "{{ __mariadb_cron_package_name }}"
+  when: mariadb_cron_package_name is not defined

@@ -21,15 +21,9 @@ mariadb_can_restart: true
 mariadb_overwrite_global_config_file: true
 
 # MariaDB configuration file
-mariadb_user: "default value depends on OS"
-mariadb_config_file: "default value depends on OS"
 # Basic settings
-mariadb_data_dir: "default value depends on OS"
 mariadb_port: 3306
 mariadb_bind_address: 127.0.0.1
-mariadb_pid_file: "default value depends on OS"
-mariadb_unix_socket: "default value depends on OS"
-mariadb_log_error_file: "default value depends on OS"
 mariadb_basic_settings_raw: |
   user                  = {{ mariadb_user }}
   pid-file              = {{ mariadb_pid_file }}
