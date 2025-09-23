@@ -217,7 +217,7 @@ mariadb_databases: []
 #     replicate: true|false
 ```
 
-See: <https://docs.ansible.com/ansible/latest/modules/mysql_db_module.html>
+See: <https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_db_module.html>
 
 ### User management
 
@@ -230,7 +230,7 @@ mariadb_users: []
 #     state: present|absent
 ```
 
-See: <https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html>
+See: <https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_user_module.html>
 
 ### Replication (optional)
 
@@ -238,7 +238,7 @@ Replication is only enabled if `mariadb_replication_role` has a value (`primary`
 `replica`).
 
 The replication setup on the replica use the GTID autopositioning, see
-<https://mariadb.com/kb/en/library/change-master-to/#master_use_gtid>
+<https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/replication-statements/change-master-to#master_use_gtid>
 
 #### Common vars
 
