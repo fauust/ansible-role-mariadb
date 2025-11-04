@@ -24,6 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         distro:
+          - ubuntu-18.04
           - ubuntu-22.04
           - ubuntu-24.04
           - debian-11
@@ -32,6 +33,7 @@ jobs:
           - debian-sid
           - fedora-42
           - almalinux-9
+          - rockylinux-8
           - rockylinux-9
           - alpine-3.19
           - alpine-3.20
