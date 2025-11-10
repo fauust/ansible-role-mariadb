@@ -9,17 +9,6 @@
     force: "{{ mariadb_overwrite_global_config_file }}"
   notify: Restart mariadb
 
-- name: Make sure datadir and log dir exist
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ mariadb_user }}"
-    group: "{{ mariadb_user }}"
-    mode: 0755
-  loop:
-    - "{{ mariadb_data_dir }}"
-    - "{{ mariadb_log_dir }}"
-
 - name: Ensure MariaDB is started and enabled on boot
   ansible.builtin.service:
     name: mariadb
