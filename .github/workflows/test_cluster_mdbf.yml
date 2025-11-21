@@ -49,7 +49,7 @@ jobs:
           - distro: ubuntu-24.04
             mariadb-version: 10.6
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/workflows/composite-action
       - name: Run molecule
