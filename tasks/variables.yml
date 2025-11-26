@@ -5,8 +5,8 @@
   vars:
     params:
       files:
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_facts.distribution }}.yml"
+        - "{{ ansible_facts.os_family }}.yml"
       paths:
         - "vars"
 
@@ -24,7 +24,7 @@
   ansible.builtin.set_fact:
     mariadb_server_package_mdbf: "{{ __mariadb_server_package_mdbf }}"
   when:
-    - ansible_os_family == "RedHat"
+    - ansible_facts.os_family == "RedHat"
     - mariadb_server_package_mdbf is not defined
 
 - name: Define mariadb_config_file.

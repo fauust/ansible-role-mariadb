@@ -5,15 +5,15 @@
 
 - name: Include task setup_debian.yml
   ansible.builtin.include_tasks: setup_debian.yml
-  when: ansible_os_family == "Debian"
+  when: ansible_facts.os_family == "Debian"
 
 - name: Include task setup_redhat.yml
   ansible.builtin.include_tasks: setup_redhat.yml
-  when: ansible_os_family == "RedHat"
+  when: ansible_facts.os_family == "RedHat"
 
 - name: Include task setup_alpine.yml
   ansible.builtin.include_tasks: setup_alpine.yml
-  when: ansible_os_family == "Alpine"
+  when: ansible_facts.os_family == "Alpine"
 
 - name: Include task configure.yml
   ansible.builtin.import_tasks: configure.yml

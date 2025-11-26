@@ -7,10 +7,10 @@
       # https://mariadb.org/download/
       [mariadb]
       name = MariaDB
-      {% if ansible_distribution == "Fedora" %}
-      baseurl = https://rpm.mariadb.org/{{ mariadb_use_official_repo_version }}/fedora{{ ansible_distribution_major_version }}-amd64
+      {% if ansible_facts.distribution == "Fedora" %}
+      baseurl = https://rpm.mariadb.org/{{ mariadb_use_official_repo_version }}/fedora{{ ansible_facts.distribution_major_version }}-amd64
       {% else %}
-      baseurl = https://rpm.mariadb.org/{{ mariadb_use_official_repo_version }}/rhel{{ ansible_distribution_major_version }}-amd64
+      baseurl = https://rpm.mariadb.org/{{ mariadb_use_official_repo_version }}/rhel{{ ansible_facts.distribution_major_version }}-amd64
       {% endif %}
       gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
       module_hotfixes = 1

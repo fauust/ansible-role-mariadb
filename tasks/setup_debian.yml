@@ -34,14 +34,14 @@
     - name: Determine repo distribution release
       ansible.builtin.set_fact:
         repo_distribution_release: >-
-          {{ 'sid' if 'forky' in ansible_distribution_release else ansible_distribution_release }}
+          {{ 'sid' if 'forky' in ansible_facts.distribution_release else ansible_facts.distribution_release }}
 
     - name: Setup MariaDB repository sourcelist entry
       ansible.builtin.copy:
         dest: /etc/apt/sources.list.d/mariadb.list
         content: |
           # Ansible managed
-          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }} {{ repo_distribution_release }} main
+          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_facts.distribution | lower() }} {{ repo_distribution_release }} main
         owner: root
         group: root
         mode: "0644"
@@ -54,7 +54,7 @@
           # Ansible managed
           X-Repolib-Name: MariaDB
           Types: deb
-          URIs: {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_distribution | lower() }}
+          URIs: {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_facts.distribution | lower() }}
           Suites: {{ repo_distribution_release }}
           Components: main
           Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
