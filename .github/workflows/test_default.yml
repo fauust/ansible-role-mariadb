@@ -33,10 +33,10 @@ jobs:
           - fedora-42
           - almalinux-9
           - rockylinux-9
-          - alpine-3.19
           - alpine-3.20
           - alpine-3.21
           - alpine-3.22
+          - alpine-3.23
           - alpine-edge
     steps:
       - uses: actions/checkout@v6
