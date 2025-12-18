@@ -18,7 +18,7 @@
     owner: root
     group: root
     mode: "0644"
-  when: mariadb_use_official_repo
+  when: mariadb_use_official_repo | bool
 
 - name: Install packages (dnf)
   ansible.builtin.dnf:
@@ -36,7 +36,7 @@
       - MariaDB-backup
       - python3-PyMySQL
     state: present
-  when: mariadb_use_official_repo
+  when: mariadb_use_official_repo | bool
 
 # the following is needed since MDBF packages server installation doesn't
 # create the run dir directory which should probably be fixed upstream.
@@ -47,7 +47,7 @@
     owner: "{{ mariadb_user }}"
     group: "{{ mariadb_user }}"
     mode: 0755
-  when: mariadb_use_official_repo
+  when: mariadb_use_official_repo | bool
 
 - name: Check if mariadb command exists
   ansible.builtin.stat:
