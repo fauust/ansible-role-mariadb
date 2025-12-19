@@ -9,6 +9,19 @@
     force: "{{ mariadb_overwrite_global_config_file }}"
   notify: Restart mariadb
 
+- name: Ensure data directory is present and accessible
+  ansible.builtin.file:
+    path: "{{ mariadb_data_dir }}"
+    state: directory
+    owner: "{{ mariadb_user }}"
+    group: "{{ mariadb_group }}"
+    mode: "{{ mariadb_data_dir_permissions }}"
+
+- name: Handle DB initialisation for an empty custom directory
+  ansible.builtin.command:
+    cmd: "/usr/bin/mariadb-install-db {% if ansible_facts['os_family'] | lower == 'redhat' %}--rpm {% endif %}--cross-bootstrap --user=mysql --disable-log-bin --skip-test-db"
+    creates: "{{ mariadb_data_dir }}/mysql"
+
 - name: Ensure MariaDB is started and enabled on boot
   ansible.builtin.service:
     name: mariadb
