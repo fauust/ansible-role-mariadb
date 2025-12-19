@@ -15,6 +15,11 @@
     mariadb_user: "{{ __mariadb_user }}"
   when: mariadb_user is not defined
 
+- name: Define mariadb_group.
+  ansible.builtin.set_fact:
+    mariadb_group: "{{ __mariadb_user }}"
+  when: mariadb_group is not defined
+
 - name: Define mariadb_server_package.
   ansible.builtin.set_fact:
     mariadb_server_package: "{{ __mariadb_server_package }}"
@@ -36,6 +41,11 @@
   ansible.builtin.set_fact:
     mariadb_data_dir: "{{ __mariadb_data_dir }}"
   when: mariadb_data_dir is not defined
+
+- name: Define mariadb_data_dir permissions.
+  ansible.builtin.set_fact:
+    mariadb_data_dir_permissions: "{{ __mariadb_data_dir_permissions }}"
+  when: mariadb_data_dir_permissions is not defined
 
 - name: Define mariadb_pid_file.
   ansible.builtin.set_fact:
