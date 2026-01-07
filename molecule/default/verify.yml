@@ -31,6 +31,19 @@
           - conf.stat.pw_name == 'root'
           - conf.stat.gr_name == 'root'
 
+    - name: Register {{ mariadb_data_dir }}
+      ansible.builtin.stat:
+        path: "{{ mariadb_data_dir }}"
+      register: conf
+
+    - name: Check {{ mariadb_data_dir }}
+      ansible.builtin.assert:
+        that:
+          - conf.stat.exists is true
+          - conf.stat.pw_name == '{{ mariadb_user }}'
+          - conf.stat.gr_name == '{{ mariadb_group }}'
+          - conf.stat.mode == '{{ mariadb_data_dir_permissions }}'
+
     - name: Make sure that service is started
       ansible.builtin.service:
         name: mariadb
