@@ -8,9 +8,9 @@
       [mariadb]
       name = MariaDB
       {% if ansible_facts.distribution == "Fedora" %}
-      baseurl = https://rpm.mariadb.org/{{ mariadb_use_official_repo_version }}/fedora{{ ansible_facts.distribution_major_version }}-amd64
+      baseurl = https://ci.mariadb.org/test-faust/yum/fedora/$releasever/$basearch
       {% else %}
-      baseurl = https://rpm.mariadb.org/{{ mariadb_use_official_repo_version }}/rhel{{ ansible_facts.distribution_major_version }}-amd64
+      baseurl = https://ci.mariadb.org/test-faust/yum/rhel/$releasever/$basearch
       {% endif %}
       gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
       module_hotfixes = 1
@@ -26,6 +26,7 @@
       - "{{ mariadb_server_package }}"
       - mariadb-backup
       - python3-PyMySQL
+      - galera-4
     state: present
   when: not mariadb_use_official_repo
 

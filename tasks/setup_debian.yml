@@ -41,7 +41,7 @@
         dest: /etc/apt/sources.list.d/mariadb.list
         content: |
           # Ansible managed
-          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_facts.distribution | lower() }} {{ repo_distribution_release }} main
+          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] https://ci.mariadb.org/test-faust/repo/{{ ansible_facts.distribution | lower() }} {{ repo_distribution_release }} main
         owner: root
         group: root
         mode: "0644"
@@ -81,5 +81,6 @@
       - "{{ mariadb_server_package }}"
       - mariadb-backup
       - python3-pymysql
+      - galera-4
     state: present
     update_cache: true
