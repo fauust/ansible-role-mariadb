@@ -63,6 +63,11 @@
         msg: "{{ version.stdout }}"
       when: lookup('env', 'MARIADB_VERSION') is true
 
+    - name: Show MariaDB version
+      ansible.builtin.debug:
+        msg: "{{ version.stdout }}"
+      when: lookup('env', 'MARIADB_VERSION') is true
+
     - name: Check that Innodb engine is enabled (and default)
       ansible.builtin.shell: |
         mariadb -Bse 'SHOW ENGINES' | grep -qE '^InnoDB.DEFAULT.*YES.YES.YES$'
