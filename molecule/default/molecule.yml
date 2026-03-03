@@ -4,6 +4,8 @@ driver:
 platforms:
   - name: instance
     image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     override_command: false
