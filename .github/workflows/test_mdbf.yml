@@ -33,7 +33,9 @@ jobs:
           - fedora-42
           - fedora-43
           - almalinux-9
+          - almalinux-10
           - rockylinux-9
+          - rockylinux-10
         mariadb-version:
           - "12.3"
         exclude:
