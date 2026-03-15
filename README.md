@@ -130,9 +130,11 @@ deployments and you are encouraged to use your own values.
 
 ```yaml
 mariadb_user: "default value depends on OS"
+mariadb_group: "default value depends on OS"
 mariadb_server_package: "default value depends on OS"
 mariadb_config_file: "default value depends on OS"
 mariadb_data_dir: "default value depends on OS"
+mariadb_data_dir_permissions: "default value depends on OS"
 mariadb_port: 3306
 mariadb_bind_address: 127.0.0.1
 mariadb_unix_socket: "default value depends on OS"
