@@ -1,6 +1,6 @@
 ---
 - name: Install MariaDB official repository
-  when: mariadb_use_official_repo
+  when: mariadb_use_official_repo | bool
   block:
     - name: Install MariaDB repo necessary packages
       ansible.builtin.apt:
@@ -45,7 +45,7 @@
         owner: root
         group: root
         mode: "0644"
-      when: not mariadb_use_official_repo_format_deb822
+      when: not mariadb_use_official_repo_format_deb822 | bool
 
     - name: Setup MariaDB repository sources entry
       ansible.builtin.copy:
@@ -61,7 +61,7 @@
         owner: root
         group: root
         mode: "0644"
-      when: mariadb_use_official_repo_format_deb822
+      when: mariadb_use_official_repo_format_deb822 | bool
 
     - name: Prefer MariaDB repo over Debian repo
       ansible.builtin.copy:
