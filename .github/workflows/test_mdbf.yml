@@ -37,7 +37,7 @@ jobs:
           - rockylinux-9
           - rockylinux-10
         mariadb-version:
-          - "12.3"
+          - "10.6"
         exclude:
           - distro: debian-13
             mariadb-version: 10.6
