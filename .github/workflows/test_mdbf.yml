@@ -30,14 +30,16 @@ jobs:
           - debian-12
           - debian-13
           - debian-sid
-          - fedora-42
           - fedora-43
           - almalinux-9
-          - almalinux-10
           - rockylinux-9
-          - rockylinux-10
         mariadb-version:
           - "10.6"
+          - "10.11"
+          - "11.4"
+          - "11.8"
+          - "12.2"
+          - "12.3"
         exclude:
           - distro: debian-13
             mariadb-version: 10.6
