@@ -79,6 +79,7 @@
   ansible.builtin.apt:
     package:
       - "{{ mariadb_server_package }}"
+      - galera-4
       - mariadb-backup
       - python3-pymysql
     state: present
