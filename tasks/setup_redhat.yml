@@ -8,9 +8,9 @@
       [mariadb]
       name = MariaDB
       {% if ansible_facts.distribution == "Fedora" %}
-      baseurl = {{ mariadb_use_official_repo_url }}/yum/{{ mariadb_use_official_repo_version }}/fedora{{ ansible_facts.distribution_major_version }}-amd64
+      baseurl = {{ mariadb_use_official_repo_url }}/yum/{{ mariadb_use_official_repo_version }}/fedora/$releasever/$basearch
       {% else %}
-      baseurl = {{ mariadb_use_official_repo_url }}/yum/{{ mariadb_use_official_repo_version }}/rhel{{ ansible_facts.distribution_major_version }}-amd64
+      baseurl = {{ mariadb_use_official_repo_url }}/yum/{{ mariadb_use_official_repo_version }}/rhel/$releasever/$basearch
       {% endif %}
       gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
       module_hotfixes = 1
