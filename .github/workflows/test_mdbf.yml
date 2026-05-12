@@ -76,6 +76,10 @@ jobs:
             mariadb-version: 11.4
           - distro: centos-stream10
             mariadb-version: 10.6
+          - distro: almalinux-10
+            mariadb-version: 10.6
+          - distro: rockylinux-10
+            mariadb-version: 10.6
 
     steps:
       - uses: actions/checkout@v6
