@@ -24,6 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         distro:
+          - almalinux-10
           - almalinux-9
           - centos-stream10
           - centos-stream9
@@ -32,6 +33,7 @@ jobs:
           - debian-13
           - debian-sid
           - fedora-43
+          - rockylinux-10
           - rockylinux-9
           - ubuntu-22.04
           - ubuntu-24.04
