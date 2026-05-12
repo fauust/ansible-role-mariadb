@@ -24,16 +24,18 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - ubuntu-22.04
-          - ubuntu-24.04
-          - debian-12
-          - debian-13
-          - fedora-42
           - almalinux-9
-          - rockylinux-9
           - alpine-3.22
           - alpine-3.23
           - alpine-edge
+          - centos-stream10
+          - centos-stream9
+          - debian-12
+          - debian-13
+          - fedora-42
+          - rockylinux-9
+          - ubuntu-22.04
+          - ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - name: Setup environment

@@ -24,15 +24,16 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - ubuntu-22.04
-          - ubuntu-24.04
+          - almalinux-9
+          - centos-stream10
           - debian-11
           - debian-12
           - debian-13
           - debian-sid
           - fedora-43
-          - almalinux-9
           - rockylinux-9
+          - ubuntu-22.04
+          - ubuntu-24.04
         mariadb-version:
           - "10.6"
           - "10.11"
