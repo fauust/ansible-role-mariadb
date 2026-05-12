@@ -68,6 +68,8 @@ jobs:
             mariadb-version: 10.11
           - distro: fedora-43
             mariadb-version: 11.4
+          - distro: centos-stream10
+            mariadb-version: 10.6
 
     steps:
       - uses: actions/checkout@v6
