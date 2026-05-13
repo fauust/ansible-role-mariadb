@@ -50,9 +50,13 @@ jobs:
             mariadb-version: 11.4
           - distro: debian-sid
             mariadb-version: 10.6
+          - distro: debian-sid
+            mariadb-version: 10.11
           - distro: ubuntu-24.04
             mariadb-version: 10.6
           - distro: debian-12
+            mariadb-version: 10.6
+          - distro: centos-stream10
             mariadb-version: 10.6
           - distro: fedora-43
             mariadb-version: 10.6
