@@ -20,8 +20,8 @@
 
     - name: Fetch MariaDB repository key
       ansible.builtin.get_url:
-        url: https://mariadb.org/mariadb_release_signing_key.pgp
-        dest: /etc/apt/keyrings/mariadb-keyring.pgp
+        url: https://mariadb.org/mariadb_release_signing_key.asc
+        dest: /etc/apt/keyrings/mariadb-keyring.asc
         # //TEMP todo
         # checksum: sha256:http://example.com/path/sha256sum.txt
         owner: root
@@ -41,7 +41,7 @@
         dest: /etc/apt/sources.list.d/mariadb.list
         content: |
           # Ansible managed
-          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] {{ mariadb_use_official_repo_url }}/repo/{{ mariadb_use_official_repo_version }}/{{ ansible_facts.distribution | lower() }} {{ repo_distribution_release }} main
+          deb [signed-by=/etc/apt/keyrings/mariadb-keyring.asc] {{ mariadb_use_official_repo_url }}/repo/{{ mariadb_use_official_repo_version }}/{{ ansible_facts.distribution | lower() }} {{ repo_distribution_release }} main
         owner: root
         group: root
         mode: "0644"
@@ -57,7 +57,7 @@
           URIs: {{ mariadb_use_official_repo_url }}/{{ mariadb_use_official_repo_version }}/{{ ansible_facts.distribution | lower() }}
           Suites: {{ repo_distribution_release }}
           Components: main
-          Signed-By: /etc/apt/keyrings/mariadb-keyring.pgp
+          Signed-By: /etc/apt/keyrings/mariadb-keyring.asc
         owner: root
         group: root
         mode: "0644"
