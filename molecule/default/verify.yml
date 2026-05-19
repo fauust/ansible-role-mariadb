@@ -49,19 +49,28 @@
       ansible.builtin.wait_for:
         port: 3306
         timeout: 2
+        msg: "MariaDB is not listening on port 127.0.0.1:3306"
 
     - name: Get MariaDB version
       ansible.builtin.shell: |
+        set -o errexit
+        set -o pipefail
         mariadb -Bse 'STATUS' | grep "^Server version:"
       register: version
-      when: lookup('env', 'MARIADB_VERSION') is true
+      when: lookup('env', 'MARIADB_VERSION') != ""
+
+    - name: Show MariaDB version
+      ansible.builtin.debug:
+        msg: "{{ version.stdout }}"
+      when: lookup('env', 'MARIADB_VERSION') != ""
 
     - name: Check MariaDB version
       ansible.builtin.assert:
         that:
-          - lookup('env', 'MARIADB_VERSION') in version.stdout
-        msg: "{{ version.stdout }}"
-      when: lookup('env', 'MARIADB_VERSION') is true
+          - "lookup('env', 'MARIADB_VERSION') in version.stdout"
+        fail_msg: "{{ version.stdout }}"
+        success_msg: "{{ version.stdout }}"
+      when: lookup('env', 'MARIADB_VERSION') != ""
 
     - name: Show MariaDB version
       ansible.builtin.debug:
@@ -70,10 +79,14 @@
 
     - name: Check that Innodb engine is enabled (and default)
       ansible.builtin.shell: |
+        set -o errexit
+        set -o pipefail
         mariadb -Bse 'SHOW ENGINES' | grep -qE '^InnoDB.DEFAULT.*YES.YES.YES$'
 
     - name: Check that default db exist
       ansible.builtin.shell: |
+        set -o errexit
+        set -o pipefail
         mariadb -Bse 'SHOW DATABASES' | grep -q '^{{ item }}$'
       loop:
         - mysql
@@ -82,6 +95,8 @@
 
     - name: Check that test db exist
       ansible.builtin.shell: |
+        set -o errexit
+        set -o pipefail
         mariadb -Bse 'SHOW DATABASES' | grep -q '^{{ item }}$'
       loop:
         - db1
@@ -89,6 +104,8 @@
 
     - name: Check that test users exist
       ansible.builtin.shell: |
+        set -o errexit
+        set -o pipefail
         mariadb -Bse 'SELECT user from mysql.user' | grep -q '^{{ item }}$'
       loop:
         - user1

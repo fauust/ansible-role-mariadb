@@ -13,7 +13,6 @@ platforms:
 provisioner:
   name: ansible
   env:
-    ANSIBLE_DISPLAY_OK_HOSTS: "false"
     ANSIBLE_DISPLAY_SKIPPED_HOSTS: false
     ANSIBLE_FORCE_COLOR: true
     ANSIBLE_GATHERING: explicit
