@@ -1,0 +1,45 @@
+---
+name: Cluster deployment with custom data directory
+
+on:
+  push:
+    paths:
+      - "files/**"
+      - "handlers/**"
+      - "molecule/default/**"
+      - "tasks/**"
+      - "templates/**"
+      - "vars/**"
+      - .github/workflows/composite-action/action.yml
+      - .github/workflows/test_custom_datadir.yml
+      - requirements.txt
+  schedule:
+    - cron: "0 5 * * 2"
+
+jobs:
+  molecule-distrib-pkg-custom-datadir:
+    name: Default deployment with custom data directory
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - ubuntu-24.04
+          - debian-13
+          - fedora-42
+          - almalinux-9
+          - rockylinux-9
+          - alpine-3.23
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup environment
+        uses: ./.github/workflows/composite-action
+      - name: Run molecule
+        run: |
+          source .venv/bin/activate
+          molecule test -s cluster
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_PLAYBOOK: custom_datadir.yml
