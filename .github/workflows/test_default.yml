@@ -51,7 +51,7 @@ jobs:
             mariadb-datadir: /var/lib/mariadb
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup environment
         uses: ./.github/workflows/composite-action
       - name: Run molecule
