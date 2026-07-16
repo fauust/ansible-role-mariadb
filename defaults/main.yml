@@ -12,6 +12,13 @@ mariadb_use_official_repo_version: 10.6
 # see: https://manpages.debian.org/stable/apt/sources.list.5.en.html#DEB822-STYLE_FORMAT
 mariadb_use_official_repo_format_deb822: false
 
+# Extra distribution packages to install together with the MariaDB server
+# packages (single transaction, before configuration). Useful for packages
+# the server configuration needs at (re)start, e.g. the compression provider
+# plugins (mariadb-plugin-provider-*) that are split out of mariadb-server
+# in the MariaDB repositories since 10.7.
+mariadb_packages_extra: []
+
 mariadb_enabled_on_startup: true
 # The following is set to true by default but you may consider setting it to
 # false on production servers to prevent ansible from restarting mariadb server.

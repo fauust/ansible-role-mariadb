@@ -3,6 +3,9 @@ mariadb_server_id: 1
 mariadb_bind_address: 0.0.0.0
 mariadb_replication_role: primary
 
+mariadb_packages_extra:
+  - rsync
+
 mariadb_innodb_raw: |
   innodb_buffer_pool_size = 512M
   innodb_log_file_size  = 64M
