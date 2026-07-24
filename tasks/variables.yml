@@ -28,6 +28,18 @@
     - ansible_facts.os_family == "RedHat"
     - mariadb_server_package_mdbf is not defined
 
+- name: Define mariadb_packages.
+  ansible.builtin.set_fact:
+    mariadb_packages: "{{ __mariadb_packages }}"
+  when: mariadb_packages is not defined
+
+- name: Define mariadb_packages_mdbf.
+  ansible.builtin.set_fact:
+    mariadb_packages_mdbf: "{{ __mariadb_packages_mdbf }}"
+  when:
+    - ansible_facts.os_family == "RedHat"
+    - mariadb_packages_mdbf is not defined
+
 - name: Define mariadb_config_file.
   ansible.builtin.set_fact:
     mariadb_config_file: "{{ __mariadb_config_file }}"

@@ -3,6 +3,8 @@ mariadb_server_id: 1
 mariadb_bind_address: 0.0.0.0
 mariadb_replication_role: primary
 
+# rsync is an arbitrary, lightweight package available in every target distro's
+# repos; it exercises the mariadb_packages_extra path without pulling in anything heavy.
 mariadb_packages_extra:
   - rsync
 

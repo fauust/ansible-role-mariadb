@@ -77,6 +77,6 @@
 
 - name: Install packages (apt)
   ansible.builtin.apt:
-    package: "{{ [mariadb_server_package, 'mariadb-backup', 'python3-pymysql'] + mariadb_packages_extra }}"
+    package: "{{ mariadb_packages + mariadb_packages_extra }}"
     state: present
     update_cache: true
