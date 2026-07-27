@@ -1,6 +1,6 @@
 ---
 - name: Ensure MariaDB databases are present (or absent)
-  community.mysql.mysql_db:
+  ansible.mariadb.mariadb_db:
     name: "{{ item.name }}"
     collation: "{{ item.collation | default('utf8_general_ci') }}"
     encoding: "{{ item.encoding | default('utf8') }}"

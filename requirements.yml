@@ -1,5 +1,5 @@
 ---
 collections:
   - name: community.general
-  - name: community.mysql
+  - name: ansible.mariadb
   - name: containers.podman

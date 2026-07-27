@@ -1,6 +1,6 @@
 ---
 - name: Ensure replication user exists on primary node
-  community.mysql.mysql_user:
+  ansible.mariadb.mariadb_user:
     name: "{{ item.name }}"
     host: "{{ item.host | default('%') }}"
     password: "{{ item.password }}"
