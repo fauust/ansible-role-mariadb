@@ -138,6 +138,16 @@ mariadb_bind_address: 127.0.0.1
 mariadb_unix_socket: "default value depends on OS"
 ```
 
+Extra distribution packages can be installed together with the MariaDB server
+packages (same transaction, before configuration), e.g. the compression
+provider plugins when the configuration loads them via `plugin_load_add`:
+
+```yaml
+mariadb_packages_extra: []
+# mariadb_packages_extra:
+#   - mariadb-plugin-provider-lz4
+```
+
 ```yaml
 mariadb_basic_settings_raw: |
   user                  = mysql

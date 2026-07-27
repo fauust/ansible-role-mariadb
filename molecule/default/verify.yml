@@ -2,6 +2,7 @@
 - name: Verify
   hosts: all
   gather_facts: true
+  vars_files: vars/testvars.yml
 
   tasks:
     - name: Include OS vars
@@ -18,6 +19,23 @@
       ansible.builtin.assert:
         that: not pkg_status.changed
         fail_msg: "{{ mariadb_server_package }} is not installed"
+
+    # `when: mariadb_packages_extra` relied on a list being implicitly truthy.
+    # ansible-core 2.19 rejects a non-boolean `when:` as an error, so the
+    # "list is non-empty" check must be explicit: `| length > 0`.
+    - name: Verify extra packages status
+      ansible.builtin.package:
+        name: "{{ mariadb_packages_extra }}"
+        state: present
+      check_mode: true
+      register: extra_pkg_status
+      when: mariadb_packages_extra | length > 0
+
+    - name: Check that extra packages are installed
+      ansible.builtin.assert:
+        that: not extra_pkg_status.changed
+        fail_msg: "extra packages {{ mariadb_packages_extra }} are not installed"
+      when: mariadb_packages_extra | length > 0
 
     - name: Register {{ mariadb_config_file }}
       ansible.builtin.stat:
