@@ -2,6 +2,7 @@
 name: Default deployment
 
 on:
+  pull_request:
   push:
     paths:
       - "files/**"

@@ -2,6 +2,7 @@
 name: Cluster
 
 on:
+  pull_request:
   push:
     paths:
       - "files/**"
