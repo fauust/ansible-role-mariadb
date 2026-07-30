@@ -31,6 +31,7 @@ jobs:
           - debian-13
           - debian-sid
           - fedora-43
+          - fedora-44
           - rockylinux-10
           - ubuntu-22.04
           - ubuntu-24.04
@@ -41,6 +42,7 @@ jobs:
           - "11.4"
           - "11.8"
           - "12.3"
+          - "13.0"
         exclude:
           - distro: debian-13
             mariadb-version: 10.6
@@ -73,6 +75,12 @@ jobs:
           - distro: fedora-43
             mariadb-version: 10.11
           - distro: fedora-43
+            mariadb-version: 11.4
+          - distro: fedora-44
+            mariadb-version: 10.6
+          - distro: fedora-44
+            mariadb-version: 10.11
+          - distro: fedora-44
             mariadb-version: 11.4
 
     steps:
