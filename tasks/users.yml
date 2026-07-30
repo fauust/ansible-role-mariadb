@@ -1,6 +1,6 @@
 ---
 - name: Ensure MariaDB users are present (or absent)
-  community.mysql.mysql_user:
+  ansible.mariadb.mariadb_user:
     name: "{{ item.name }}"
     host: "{{ item.host | default('localhost') }}"
     password: "{{ item.password }}"

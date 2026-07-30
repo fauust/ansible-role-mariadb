@@ -1,6 +1,6 @@
 ---
 - name: Check replica replication status
-  community.mysql.mysql_replication:
+  ansible.mariadb.mariadb_replication:
     mode: getreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   register: replica
@@ -18,7 +18,7 @@
 #   no_log: true
 
 - name: Configure replication on the replica
-  community.mysql.mysql_replication:
+  ansible.mariadb.mariadb_replication:
     mode: changeprimary
     primary_host: "{{ mariadb_replication_primary_ip }}"
     primary_user: "{{ item.name }}"
@@ -31,21 +31,21 @@
   no_log: true
 
 - name: Reset replica replication
-  community.mysql.mysql_replication:
+  ansible.mariadb.mariadb_replication:
     mode: resetreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   when:
     - not replica.Is_Replica
 
 - name: Check replica replication status (second time)
-  community.mysql.mysql_replication:
+  ansible.mariadb.mariadb_replication:
     mode: getreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   register: replica2
   no_log: true
 
 - name: Start replica replication
-  community.mysql.mysql_replication:
+  ansible.mariadb.mariadb_replication:
     mode: startreplica
     login_unix_socket: "{{ mariadb_unix_socket }}"
   when:

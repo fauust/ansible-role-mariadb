@@ -16,16 +16,16 @@ Optionally, this role also permits one to:
 ## Requirements
 
 The role uses
-[`community.mysql.mysql_user`](https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_user_module.html)
+[`ansible.mariadb.mariadb_user`](https://github.com/ansible-collections/ansible.mariadb/blob/main/plugins/modules/mariadb_user.py)
 and
-[`community.mysql.mysql_db`](https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_db_module.html)
+[`ansible.mariadb.mariadb_db`](https://github.com/ansible-collections/ansible.mariadb/blob/main/plugins/modules/mariadb_db.py)
 ansible modules that depend on [PyMySQL](https://github.com/PyMySQL/PyMySQL).
 Only Python 3.X versions are supported and tested. Python 2.7 is probably
 working but not tested.
 
 If you need to deploy a cluster then you need Ansible 2.12+ since there was a
 change in the
-[`community.mysql.mysql_replication`](https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_replication_module.html)
+[`ansible.mariadb.mariadb_replication`](https://github.com/ansible-collections/ansible.mariadb/blob/main/plugins/modules/mariadb_replication.py)
 naming for cluster node (primary/replica is now preferred).
 
 ### pre-commit
