@@ -227,8 +227,6 @@ mariadb_databases: []
 #     replicate: true|false
 ```
 
-See: <https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_db_module.html>
-
 ### User management
 
 ```yaml
@@ -239,8 +237,6 @@ mariadb_users: []
 #     priv: "*.*:USAGE/db1.*:ALL"
 #     state: present|absent
 ```
-
-See: <https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_user_module.html>
 
 ### Replication (optional)
 
