@@ -3,7 +3,7 @@ driver:
   name: podman
 platforms:
   - name: node1
-    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-13}"
     capabilities:
       - SYS_ADMIN
     volumes:
@@ -12,7 +12,7 @@ platforms:
     pre_build_image: true
     network: local
   - name: node2
-    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-13}"
     capabilities:
       - SYS_ADMIN
     volumes:
@@ -23,7 +23,7 @@ platforms:
       - replica
     network: local
   - name: node3
-    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-11}"
+    image: "ghcr.io/fauust/docker-ansible:${MOLECULE_DISTRO:-debian-13}"
     capabilities:
       - SYS_ADMIN
     volumes:
