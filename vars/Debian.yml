@@ -11,4 +11,5 @@ __mariadb_cron_package_name: "cron"
 __mariadb_packages:
   - "{{ mariadb_server_package }}"
   - mariadb-backup
+  - mariadb-plugin-tidesdb
   - python3-pymysql
