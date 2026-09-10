@@ -17,7 +17,9 @@ mariadb_use_official_repo_format_deb822: false
 # the server configuration needs at (re)start, e.g. the compression provider
 # plugins (mariadb-plugin-provider-*) that are split out of mariadb-server
 # in the MariaDB repositories since 10.7.
-mariadb_packages_extra: galera-4
+mariadb_packages_extra:
+  - galera-4
+  - mariadb-plugin-tidesdb
 
 mariadb_enabled_on_startup: true
 # The following is set to true by default but you may consider setting it to
