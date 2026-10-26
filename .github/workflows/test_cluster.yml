@@ -39,8 +39,6 @@ jobs:
           - ubuntu-24.04
           - ubuntu-26.04
         include:
-          - distro: debian-sid
-            mariadb-datadir: /var/lib/mariadb
           - distro: ubuntu-26.04
             mariadb-datadir: /var/lib/mariadb
 

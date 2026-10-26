@@ -29,7 +29,6 @@ jobs:
           - centos-stream10
           - debian-12
           - debian-13
-          - debian-sid
           - fedora-43
           - rockylinux-10
           - ubuntu-22.04
@@ -47,12 +46,6 @@ jobs:
           - distro: debian-13
             mariadb-version: 10.11
           - distro: debian-13
-            mariadb-version: 11.4
-          - distro: debian-sid
-            mariadb-version: 10.6
-          - distro: debian-sid
-            mariadb-version: 10.11
-          - distro: debian-sid
             mariadb-version: 11.4
           - distro: ubuntu-24.04
             mariadb-version: 10.6
