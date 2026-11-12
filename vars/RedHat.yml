@@ -16,5 +16,4 @@ __mariadb_packages:
 __mariadb_packages_mdbf:
   - "{{ mariadb_server_package_mdbf }}"
   - MariaDB-backup
-  - MariaDB-plugin-tidesdb
   - python3-PyMySQL
