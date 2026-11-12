@@ -42,9 +42,6 @@ jobs:
           - "11.4"
           - "11.8"
           - "12.3"
-          - "13.0"
-          - "13.1"
-          - "13.2"
         exclude:
           - distro: debian-13
             mariadb-version: 10.11
